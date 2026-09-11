@@ -11,8 +11,13 @@
     "address": "Brimsmore Yard, Yeovil, Somerset BA21 3AA",
     "postcode": "BA21 3AA",
     "company_number": "",
-    "waste_licence": "",
-    "vat_number": ""
+    "waste_licence": "Shown on the live site",
+    "vat_number": "",
+    "crisis_signpost": "Samaritans are on 116 123, free, at any hour",
+    "insurer": "the insurer named on the live site",
+    "guarantee_scheme": "the scheme named on the live site",
+    "policy_number": "Shown on the live site",
+    "street": "Brimsmore Yard"
   },
   "pages": {
     "case-study.html": {},
@@ -20,5 +25,70 @@
     "index.html": {},
     "service.html": {},
     "work.html": {}
+  },
+  "_components_comment": "Client data inside components. null leaves the library's demo value in place and check_project.py keeps naming it. _tools/component-config.json says what each one means.",
+  "components": {
+    "IND-HRS-001": {
+      "TZ": "Europe/London",
+      "HOURS": {
+        "1": [
+          [
+            "07:30",
+            "17:00"
+          ]
+        ],
+        "2": [
+          [
+            "07:30",
+            "17:00"
+          ]
+        ],
+        "3": [
+          [
+            "07:30",
+            "17:00"
+          ]
+        ],
+        "4": [
+          [
+            "07:30",
+            "17:00"
+          ]
+        ],
+        "5": [
+          [
+            "07:30",
+            "16:00"
+          ]
+        ],
+        "6": [
+          [
+            "08:00",
+            "12:00"
+          ]
+        ],
+        "0": []
+      },
+      "OVERRIDES": {
+        "2026-12-25": [],
+        "2026-12-26": [],
+        "2027-01-01": [],
+        "2027-08-30": []
+      },
+      "EMERGENCY": null
+    },
+    "IND-PST-001": {
+      "AREAS": null,
+      "EXCLUDE": null
+    },
+    "IND-GAL-001": {
+      "CATS": null,
+      "PROJECTS": null
+    },
+    "UI-ASK-001": {
+      "ASSIST": null,
+      "SCRIPT": null,
+      "KB": null
+    }
   }
 }

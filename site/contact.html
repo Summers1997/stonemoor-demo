@@ -147,31 +147,60 @@
    * CONFIG                                                              *
    * ------------------------------------------------------------------ */
 
-  var TZ = 'Europe/London';        /* the BUSINESS's timezone, never the visitor's */
+  var TZ = "Europe/London";        /* the BUSINESS's timezone, never the visitor's */
 
   /* Each day is a list of [open, close] spans. Empty means closed.
      Two spans is a lunch closure. A close earlier than its open crosses
      midnight, so ['22:00','06:00'] is a genuine overnight shift.        */
   var HOURS = {
-    1: [['08:00','17:30']],                  /* Monday */
-    2: [['08:00','17:30']],
-    3: [['08:00','17:30']],
-    4: [['08:00','17:30']],
-    5: [['08:00','16:30']],
-    6: [['09:00','13:00']],                  /* Saturday */
-    0: []                                    /* Sunday   */
-  };
+  "1": [
+    [
+      "07:30",
+      "17:00"
+    ]
+  ],
+  "2": [
+    [
+      "07:30",
+      "17:00"
+    ]
+  ],
+  "3": [
+    [
+      "07:30",
+      "17:00"
+    ]
+  ],
+  "4": [
+    [
+      "07:30",
+      "17:00"
+    ]
+  ],
+  "5": [
+    [
+      "07:30",
+      "16:00"
+    ]
+  ],
+  "6": [
+    [
+      "08:00",
+      "12:00"
+    ]
+  ],
+  "0": []
+};
 
   /* Dated overrides beat the table above. An empty array is "closed all day".
      Keep these current - an out-of-date list is worse than none, because it
      is trusted. Dates are YYYY-MM-DD in the business's own timezone.       */
   var OVERRIDES = {
-    '2026-12-24': [['08:00','12:00']],
-    '2026-12-25': [],
-    '2026-12-26': [],
-    '2027-01-01': [],
-    '2027-08-30': []                         /* summer bank holiday */
-  };
+  "2026-12-25": [],
+  "2026-12-26": [],
+  "2027-01-01": [],
+  "2027-08-30": []
+};
 
   /* Set to null if there is no out-of-hours cover. Do not invent one:
      an emergency number that rings out is worse than no number at all. */
@@ -599,9 +628,9 @@ form.gone{display:none}
            on 21 Aug 2026. Holding out an unauthorised business as regulated
            is a misrepresentation, not a styling slip.
 
-      <p class="fine">Stonemoor Groundworks is authorised and
+      <p class="fine">[FIRM NAME] is authorised and
         regulated by the Financial Conduct Authority, number
-        000000.</p>
+        [FRN].</p>
       -->
     </form>
 
