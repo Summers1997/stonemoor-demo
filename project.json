@@ -43,6 +43,18 @@
       ],
       "library_commit": "96eb271ebbf889e8c2347dfd129799fa1c7509e7",
       "from_project_commit": "a0d69c9"
+    },
+    {
+      "date": "2026-09-11",
+      "components": [],
+      "library_commit": "5355e7bfdc3927625123fa7592e7b412abeab689",
+      "from_project_commit": "3063bb2"
     }
-  ]
+  ],
+  "assets": {
+    "assets/site.css": "1fbc92d9b258e630",
+    "assets/site.js": "6eb03c1b9a3396ea",
+    "assets/tokens.css": "50d71ccf900ddaa8",
+    "trade.css": "9e8aa8aee639cb92"
+  }
 }

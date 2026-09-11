@@ -14,7 +14,11 @@
 :root{
   /* The whole re-brand. A dug-earth ochre against slate - warm, and nothing
      like the blue an advisory firm uses. */
-  --brand:#B4610F;
+  /* #B4610F measured 4.39:1 on --paper - just under the 4.5:1 AA floor
+     for normal text, found by axe-core on the active nav link. Darkened
+     2% to clear it. The other five templates' accents were checked at
+     the same time and all pass. */
+  --brand:#B05F0F;
   --brand-light:#E8913F;
   --brand-wash:#FDF3E9;
   --ink:#1C1A17;
