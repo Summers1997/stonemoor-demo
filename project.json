@@ -14,15 +14,15 @@
   ],
   "components": {
     "IND-ACT-001": "3409f3e2c837ed2b",
-    "IND-GAL-001": "10856297c54e1447",
-    "IND-HRS-001": "420bb8850c78ce70",
-    "IND-PST-001": "4db58233b6727311",
-    "IND-WIZ-001": "e12ab9fc4c1b5e86",
-    "UI-ACR-001": "e83a83326fbf13a4",
-    "UI-ASK-001": "9a0dfe227586429d",
-    "UI-CAS-001": "13b87a3b387b550e",
-    "UI-CBK-001": "f09814c12bb81151",
-    "UI-GTD-001": "b6aa89b71d64ed5b"
+    "IND-GAL-001": "ae22d11f23e3b5fd",
+    "IND-HRS-001": "69447ad7ec191d8d",
+    "IND-PST-001": "f1143eaaaa08a095",
+    "IND-WIZ-001": "93cc129b68d22a3a",
+    "UI-ACR-001": "90e2319b701ff5a6",
+    "UI-ASK-001": "9fa618fd9aad5471",
+    "UI-CAS-001": "73bec623fd6d14b4",
+    "UI-CBK-001": "f73bc2baed22198a",
+    "UI-GTD-001": "7a04b3091afc3caa"
   },
   "allow_past_dates": [
     "2026-05-14"
@@ -49,12 +49,28 @@
       "components": [],
       "library_commit": "5355e7bfdc3927625123fa7592e7b412abeab689",
       "from_project_commit": "3063bb2"
+    },
+    {
+      "date": "2026-09-11",
+      "components": [
+        "IND-GAL-001",
+        "IND-HRS-001",
+        "IND-PST-001",
+        "IND-WIZ-001",
+        "UI-ACR-001",
+        "UI-ASK-001",
+        "UI-CAS-001",
+        "UI-CBK-001",
+        "UI-GTD-001"
+      ],
+      "library_commit": "5355e7bfdc3927625123fa7592e7b412abeab689",
+      "from_project_commit": "be51893"
     }
   ],
   "assets": {
-    "assets/site.css": "1fbc92d9b258e630",
+    "assets/site.css": "ac942d4419852977",
     "assets/site.js": "6eb03c1b9a3396ea",
-    "assets/tokens.css": "50d71ccf900ddaa8",
+    "assets/tokens.css": "aca63590f2bf70bc",
     "trade.css": "9e8aa8aee639cb92"
   }
 }

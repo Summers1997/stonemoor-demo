@@ -50,8 +50,8 @@
   --ink:          #0f1720;   /* headings, primary text, dark ground            */
   --ink-60:       #4b5a68;
   --ink-55:       #5b6b7c;   /* standard secondary text                        */
-  --ink-50:       #6b7887;
-  --ink-45:       #7d8b9a;   /* captions, supporting copy                      */
+  --ink-50:       #616d7b;
+  --ink-45:       #67727e;   /* captions, supporting copy                      */
   --ink-40:       #8b97a5;
   --ink-35:       #9aa8b6;   /* labels, axis text                              */
   --ink-30:       #a4b0bc;   /* faintest legible text                          */
@@ -68,7 +68,7 @@
   --on-ground:      #eaf1f8; /* primary text on a dark ground                  */
   --on-ground-mut:  #93a5b8; /* secondary text on a dark ground                */
   --on-ground-mut2: #9fb0c2;
-  --on-ground-fnt:  #7d8b9a; /* faint text on a dark ground                    */
+  --on-ground-fnt:  #67727e; /* faint text on a dark ground                    */
 
   /* --- LINES AND EDGES ------------------------------------------------------ */
   --line:         #e6ecf3;   /* standard border                                */
@@ -110,8 +110,8 @@
   --ink-55:     #aab7c4;
   --ink-50:     #9aa8b6;
   --ink-45:     #8b97a5;
-  --ink-40:     #7d8b9a;
-  --ink-35:     #6b7887;
+  --ink-40:     #67727e;
+  --ink-35:     #616d7b;
   --ink-30:     #5b6b7c;
   --line:       #243040;
   --line-2:     #2b3848;

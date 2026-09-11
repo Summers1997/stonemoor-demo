@@ -281,7 +281,7 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
 .field textarea{min-height:120px;resize:vertical}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand);
   box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 13%,transparent)}
-.field label{position:absolute;left:14px;top:15px;color:var(--ink-40);font-size:15px;pointer-events:none;
+.field label{position:absolute;left:14px;top:15px;color:var(--ink-55);font-size:15px;pointer-events:none;
   transform-origin:left top;transition:transform .28s var(--ease-out),color .28s}
 .field input:focus+label,.field input:not(:placeholder-shown)+label,
 .field textarea:focus+label,.field textarea:not(:placeholder-shown)+label{
@@ -358,7 +358,7 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
 
 .quote{font-size:clamp(19px,2.8vw,27px);line-height:1.45;letter-spacing:-.02em;
   color:var(--ink);max-width:26ch;font-weight:500;margin:0}
-.attrib{margin-top:14px;font-size:13.5px;color:var(--ink-45,#7d8b9a)}
+.attrib{margin-top:14px;font-size:13.5px;color:var(--ink-45,#67727e)}
 
 .btn-lg{padding:15px 30px;font-size:16px}
 .btn-sm{padding:8px 15px;font-size:13.5px}
@@ -366,7 +366,7 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
 .section-tight{padding-block:clamp(34px,5vw,54px)}
 .narrow{max-width:760px}
 
-.crumbs{padding-block:18px;font-size:13.5px;color:var(--ink-45,#7d8b9a);
+.crumbs{padding-block:18px;font-size:13.5px;color:var(--ink-45,#67727e);
   display:flex;gap:8px;flex-wrap:wrap}
 .crumbs a{color:var(--ink-60,#5b6a79);text-decoration:none}
 .crumbs a:hover{color:var(--brand);text-decoration:underline}
@@ -398,7 +398,7 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
    print inside a card - which is where small print lives - was rendering at
    14.5px, and had been since the rule was written. Specificity, not file
    order: moving the rule between files could never have fixed it. */
-.fine,.card .fine{font-size:12.5px;line-height:1.6;color:var(--ink-45,#7d8b9a);margin:12px 0 0}
+.fine,.card .fine{font-size:12.5px;line-height:1.6;color:var(--ink-45,#67727e);margin:12px 0 0}
 .big-link{margin:0 0 6px;font-size:clamp(21px,3vw,27px);font-weight:650;letter-spacing:-.02em}
 .big-link a{color:var(--brand);text-decoration:none}
 .big-link a:hover{text-decoration:underline}
