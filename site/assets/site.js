@@ -126,24 +126,72 @@
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
   }
 
-  /* ---- 3. mobile menu ----------------------------------------------------- */
+  /* ---- 3. mobile menu -----------------------------------------------------
+     The closed menu has to be parked with `inert`, not just hidden with CSS.
+
+     Below 820px the nav is a fixed, full-screen panel hidden by
+     `clip-path:circle(0%)`. That hides it from EYES ONLY. It stays
+     display:flex, visibility:visible and in the accessibility tree, so with
+     the menu shut a keyboard user tabbing out of the burger fell into five
+     invisible links, and a screen reader announced a navigation the sighted
+     user had just closed. `inert` is the one thing that removes an element
+     from both the tab order and the accessibility tree while leaving it
+     painted and measurable, which is exactly what a clip-path transition
+     needs.
+
+     Found on 11 Sep 2026, the first time the check harness was pointed at
+     real pages rather than at component demos. The library's keyboard check
+     walks the component list, and no component has a burger - so this had
+     never been tested in any template, on any page, ever.
+
+     sync() also runs on resize because the breakpoint decides whether this is
+     a disclosure at all: above 820px the nav is an ordinary visible row and
+     must never be inert. Crossing the breakpoint with the menu open is the
+     case that gets forgotten, and it leaves the nav inert and unreachable on
+     a desktop-width screen. */
   var burger = document.querySelector('.burger');
+  var navEl  = document.querySelector('.nav');
   if (burger) {
+    var isMobile = function () {
+      return getComputedStyle(burger).display !== 'none';
+    };
+    var sync = function () {
+      var open = document.body.classList.contains('menu-open');
+      var mob  = isMobile();
+      burger.setAttribute('aria-expanded', String(mob ? open : true));
+      if (navEl) navEl.inert = mob && !open;
+      document.body.style.overflow = (mob && open) ? 'hidden' : '';
+    };
+
     burger.addEventListener('click', function () {
-      var open = document.body.classList.toggle('menu-open');
-      burger.setAttribute('aria-expanded', open);
-      document.body.style.overflow = open ? 'hidden' : '';
+      document.body.classList.toggle('menu-open');
+      sync();
+      /* Moving focus into the panel is what makes the menu usable from a
+         keyboard at all - without it, focus is still on a button behind an
+         inert region that just became live. */
+      if (document.body.classList.contains('menu-open') && navEl) {
+        var first = navEl.querySelector('a');
+        if (first) first.focus();
+      }
     });
+
     document.querySelectorAll('.nav a').forEach(function (a) {
       a.addEventListener('click', function () {
         document.body.classList.remove('menu-open');
-        document.body.style.overflow = '';
-        burger.setAttribute('aria-expanded', 'false');
+        sync();
       });
     });
+
     addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) burger.click();
+      if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+        document.body.classList.remove('menu-open');
+        sync();
+        burger.focus();
+      }
     });
+
+    addEventListener('resize', sync);
+    sync();
   }
 
   /* ---- 3b. scroll-spy for an in-page nav ----------------------------------

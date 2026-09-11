@@ -1,0 +1,690 @@
+<!doctype html><html lang="en-GB"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Library Checks</title>
+<style>
+  *{box-sizing:border-box}
+  body{margin:0;padding:26px 26px 340px;background:#0e1317;color:#e8edf0;
+    font:14px/1.5 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif}
+  h1{font-size:21px;margin:0 0 6px;font-weight:600}
+  p.sub{margin:0 0 20px;color:#8593a0;max-width:80ch;font-size:13.5px}
+  .bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
+  button{height:38px;padding:0 16px;border:0;border-radius:8px;cursor:pointer;
+    background:#232c35;color:#e8edf0;font:600 13.5px/1 inherit}
+  button.go{background:#7fa9ee;color:#0e1317}
+  button:disabled{opacity:.45;cursor:default}
+  #verdict{margin:18px 0 6px;font:600 17px/1.4 ui-monospace,Consolas,monospace}
+  h2{font:600 11px/1 ui-monospace,Consolas,monospace;letter-spacing:.14em;
+    text-transform:uppercase;color:#8593a0;margin:26px 0 8px}
+  table{border-collapse:collapse;width:100%;font-size:12.5px}
+  th,td{text-align:left;padding:7px 10px;border-bottom:1px solid #2a333b;vertical-align:top}
+  th{font:600 10.5px/1 ui-monospace,Consolas,monospace;letter-spacing:.09em;
+    text-transform:uppercase;color:#8593a0}
+  td.id{font-family:ui-monospace,Consolas,monospace;color:#7fa9ee;white-space:nowrap}
+  .pass{color:#6fcfa5;font-weight:600}
+  .fail{color:#e58c8c;font-weight:600}
+  .skip{color:#8593a0}
+  /* On screen, always. Chrome render-throttles off-screen and hidden iframes:
+     layout and rAF are deferred, so anything measured inside one is fiction. */
+  #stage{position:fixed;right:14px;bottom:14px;width:400px;height:300px;
+    border:1px solid #2a333b;border-radius:8px;overflow:hidden;background:#fff;
+    box-shadow:0 10px 40px rgba(0,0,0,.5);z-index:9}
+  iframe{width:100%;height:100%;border:0;display:block}
+</style>
+</head><body>
+
+<h1>Library Checks</h1>
+<p class="sub">Four checks over the whole library. Each one exists because it caught something a
+manual pass did not: content that never reveals after a jump, a snippet that restyles the page it
+is pasted into, a component that throws in silence, and a component that renders blank when its
+CDN is unavailable. Serve this over HTTP — <code>python _tools/serve.py</code> — not from
+<code>file://</code>.</p>
+
+<div class="bar">
+  <button class="go" id="all">Run everything</button>
+  <button id="r-reveal">Reveal only</button>
+  <button id="r-snip">Snippets only</button>
+  <button id="r-console">Console only</button>
+  <button id="r-cdn">CDN failure only</button>
+  <button id="r-mobile">Mobile only</button>
+  <button id="r-kbd">Keyboard only</button>
+</div>
+<div id="stage"></div>
+<div id="verdict"></div>
+<div id="out"></div>
+
+<script src="snippets.js"></script>
+<script src="targets.js"></script>
+<script>
+var STAGE = document.getElementById('stage');
+var OUT   = document.getElementById('out');
+var VERDICT = document.getElementById('verdict');
+
+/* ---------------------------------------------------------------- helpers */
+function stageSize(w, h){
+  STAGE.style.width  = w + 'px';
+  STAGE.style.height = h + 'px';
+}
+
+function frame(src, srcdoc){
+  return new Promise(function(resolve){
+    STAGE.innerHTML = '';
+    var f = document.createElement('iframe');
+    if (srcdoc !== undefined) f.srcdoc = srcdoc; else f.src = src;
+    f.onload = function(){ resolve(f); };
+    STAGE.appendChild(f);
+  });
+}
+
+function section(title, head){
+  var h = document.createElement('h2'); h.textContent = title; OUT.appendChild(h);
+  var t = document.createElement('table');
+  t.innerHTML = '<thead><tr>' + head.map(function(x){ return '<th>' + x + '</th>'; }).join('') +
+                '</tr></thead><tbody></tbody>';
+  OUT.appendChild(t);
+  return t.querySelector('tbody');
+}
+
+function row(tb, cells, state){
+  var tr = document.createElement('tr');
+  tr.innerHTML = cells.map(function(c, i){
+    var cls = i === 0 ? 'id' : '';
+    return '<td class="' + cls + '">' + c + '</td>';
+  }).join('') +
+  '<td class="' + (state === 'pass' ? 'pass' : state === 'fail' ? 'fail' : 'skip') + '">' +
+  state.toUpperCase() + '</td>';
+  tb.appendChild(tr);
+}
+
+var TALLY = {pass:0, fail:0, skip:0};
+function tally(state){ TALLY[state === 'pass' ? 'pass' : state === 'fail' ? 'fail' : 'skip']++; }
+// 'warn' counts as skip in the tally but is shown in its own colour
+
+/* ---------------------------------------------------------------- 1. reveal */
+async function checkReveal(){
+  var tb = section('Reveal after a jump to the foot of the page',
+                   ['ID','Watched','Active','Settled','Result']);
+  for (var i = 0; i < REVEAL_TARGETS.length; i++){
+    var t = REVEAL_TARGETS[i];
+    var r = await revealOne(t);
+    tally(r.state);
+    row(tb, [t.id, r.watched, r.revealed, r.waited + 'ms'], r.state);
+  }
+}
+
+function revealOne(t){
+  /* Hard ceiling. Any single target that wedges - a page that never fires load,
+     an exception inside the tick loop - must not be able to stall the whole
+     suite. Whatever happens, this settles. */
+  var guard = new Promise(function(res){
+    setTimeout(function(){
+      res({watched:0, revealed:0, waited:12000, state:'skip', note:'timed out'});
+    }, 12000);
+  });
+  return Promise.race([guard, revealInner(t)]);
+}
+
+function revealInner(t){
+  return frame(t.p).then(function(f){
+    return new Promise(function(resolve){
+      var w = f.contentWindow, d = f.contentDocument;
+      var cls = t.cls || 'in', mode = t.mode || 'all';
+
+      /* Jump ONCE, then only again if the document height actually changed
+         (fonts, images and late CSS all move it after load).
+
+         Re-jumping every tick looks harmless and is not: a scroll event resets
+         the settle timer inside the component's own catch-up sweep, so a
+         harness that keeps scrolling starves the very code it is testing. That
+         produced different pass/fail results on identical code - which is worse
+         than no test at all. */
+      var lastH = 0;
+      function jumpIfNeeded(){
+        var h = d.documentElement.scrollHeight;
+        if (h === lastH) return;
+        lastH = h;
+        w.scrollTo(0, h);
+        /* scrollTo() called on an iframe from its parent does not reliably fire
+           the scroll listeners registered INSIDE that iframe - the position
+           changes but the component never hears about it, so it looks broken
+           when it is not. A real scroll always fires the event, so dispatch it
+           to match. This restores fidelity; it does not manufacture a pass -
+           the component still has to do the right thing when it hears. */
+        try { w.dispatchEvent(new w.Event('scroll')); } catch (e) {}
+      }
+      function atBottom(){
+        return w.pageYOffset + w.innerHeight >= d.documentElement.scrollHeight - 4;
+      }
+      /* FLOOR: never conclude "finished" before this, because staggered reveals
+         legitimately pause between batches. */
+      var POLL = 100, MAX = 9000, STABLE = 12, FLOOR = 700, waited = 0, last = -1, stable = 0;
+      function measure(){
+        var els = d.querySelectorAll(t.sel);
+        return {watched: els.length,
+                revealed: [].filter.call(els, function(e){ return e.classList.contains(cls); }).length};
+      }
+      (function tick(){
+        try {
+        jumpIfNeeded();
+        var m = measure();
+        var hit = mode === 'one' ? m.revealed === 1 : (m.watched > 0 && m.revealed === m.watched);
+        if (hit) return done(m);
+        if (atBottom()){
+          if (m.revealed === last) stable++; else { stable = 0; last = m.revealed; }
+          if (stable >= STABLE && waited >= FLOOR) return done(m);
+        }
+        if (waited >= MAX) return done(m);
+        waited += POLL; setTimeout(tick, POLL);
+        } catch (err){
+          resolve({watched:0, revealed:0, waited:waited, state:'fail', note:err.message});
+        }
+      })();
+      function done(m){
+        var scrolled = w.pageYOffset > 0;
+        resolve({watched:m.watched, revealed:m.revealed, waited:waited,
+          state: m.watched === 0 ? 'skip'
+               : !scrolled       ? 'skip'
+               : mode === 'one'  ? (m.revealed === 1 ? 'pass' : 'fail')
+                                 : (m.revealed === m.watched ? 'pass' : 'fail')});
+      }
+    });
+  });
+}
+
+/* ---------------------------------------------------------------- 2. snippets */
+async function checkSnippets(){
+  var tb = section('Snippets: render, stay quiet, and keep to themselves',
+                   ['ID','Height','Nodes','Problem','Result']);
+  for (var i = 0; i < SNIPPETS.length; i++){
+    var r = await oneDoc(SNIPPETS[i], true);
+    tally(r.state);
+    row(tb, [r.id, r.h, r.nodes, r.problem || ''], r.state);
+  }
+}
+
+/* ---------------------------------------------------------------- 3. console */
+async function checkConsole(){
+  var tb = section('Demos: does anything throw', ['ID','Height','Nodes','Error','Result']);
+  for (var i = 0; i < DEMOS.length; i++){
+    var r = await oneDoc(DEMOS[i], false);
+    tally(r.state);
+    row(tb, [r.id, r.h, r.nodes, r.problem || ''], r.state);
+  }
+}
+
+function oneDoc(p, checkBody){
+  var errors = [];
+  return frame(p).then(function(f){
+    var w = f.contentWindow, d = f.contentDocument;
+    w.onerror = function(m){ errors.push(String(m).slice(0, 90)); return false; };
+    w.addEventListener('unhandledrejection', function(e){ errors.push('promise: ' + e.reason); });
+    return new Promise(function(resolve){
+      setTimeout(function(){
+        var h = 0, nodes = 0, problem = '';
+        try {
+          /* scrollHeight alone under-reports a component that is fixed or
+             absolutely positioned - a sticky action bar is real, visible and
+             contributes nothing to flow height. Take the furthest bottom edge
+             of anything actually painted as well, so "renders nothing" means
+             nothing rendered rather than nothing in normal flow. */
+          h = d.body.scrollHeight;
+          var kids = d.body.querySelectorAll('*');
+          for (var q = 0; q < kids.length; q++){
+            var kr = kids[q].getBoundingClientRect();
+            if (kr.width > 0 && kr.height > 0 && kr.bottom > h) h = Math.round(kr.bottom);
+          }
+          nodes = kids.length;
+          if (checkBody){
+            var bg = w.getComputedStyle(d.body).backgroundColor;
+            if (!(bg === 'rgba(0, 0, 0, 0)' || bg === 'transparent')) problem = 'sets a page background';
+          }
+        } catch (e){ errors.push(e.message); }
+        if (errors.length) problem = errors[0];
+        if (!problem && h < 20) problem = 'renders nothing';
+        resolve({id: p.split('/').slice(-2)[0], h: h, nodes: nodes, problem: problem,
+                 state: problem ? 'fail' : 'pass'});
+      }, 500);
+    });
+  });
+}
+
+/* ---------------------------------------------------------------- 4. cdn failure */
+async function checkCDN(){
+  var tb = section('With the CDN blocked: does content survive',
+                   ['ID','Library','Invisible','Text','Result']);
+  for (var i = 0; i < DEMOS.length; i++){
+    var p = DEMOS[i];
+    var src = await fetch(p).then(function(r){ return r.text(); });
+    var libs = src.match(/<script src="https?:\/\/[^"]+"/g);
+    if (!libs) continue;                         // nothing to block
+
+    // Point the CDN at a dead path, and give the document a base so its own
+    // relative links (tokens.css) still resolve inside srcdoc.
+    var base = new URL(p, location.href).href.replace(/[^/]+$/, '');
+    var doc = src.replace(/https?:\/\/[^"]+?\/([^\/"]+\.js)/g, './__blocked__/$1')
+                 .replace(/<meta charset="utf-8">/i, '<meta charset="utf-8"><base href="' + base + '">');
+
+    var f = await frame(null, doc);
+    var w = f.contentWindow, d = f.contentDocument;
+    await new Promise(function(r){ setTimeout(r, 700); });
+
+    var invisible = [].filter.call(
+      d.querySelectorAll('section *, .step, .panel, .slide, [class*=item]'),
+      function(e){ return e.children.length === 0 || e.className ?
+                          parseFloat(w.getComputedStyle(e).opacity) < 0.05 : false; }
+    ).length;
+    var text = (d.body.innerText || '').replace(/\s+/g, ' ').trim().length;
+    var lib = libs[0].split('/')[2] || 'cdn';
+    var state = (invisible === 0 && text > 60) ? 'pass' : 'fail';
+    tally(state);
+    row(tb, [p.split('/').slice(-2)[0], lib, invisible, text + ' chars'], state);
+  }
+}
+
+/* ---------------------------------------------------------------- 5. mobile */
+/* Most traffic is a phone. An iframe 375px wide is a real 375px viewport to the
+   document inside it - media queries, vw units and layout all respond to it -
+   so this is a genuine narrow-screen render, not a simulation. */
+var MOBILE_W = 375, MOBILE_H = 667, TAP_MIN = 24, TEXT_MIN = 12;
+// TAP_MIN is 24 because that is WCAG 2.2 AA SC 2.5.8, which is the level
+// DOC-ACC-001 states this library conforms to. 40-44px is the Apple and
+// Google guideline: worth aiming for, not a standard, and asserting it as
+// one flagged deliberate decisions as defects.
+
+/* A desktop iframe shows a classic scrollbar, which eats ~17px of the viewport
+   inside it. Left uncorrected, every page whose content is exactly viewport-wide
+   reports a 17px overflow that would never happen on a phone, where scrollbars
+   are overlaid and take no space. So widen the frame by the scrollbar width and
+   the document inside really is 375px across. */
+function scrollbarWidth(){
+  var o = document.createElement('div');
+  o.style.cssText = 'position:absolute;top:-9999px;width:100px;height:100px;overflow:scroll';
+  document.body.appendChild(o);
+  var w = o.offsetWidth - o.clientWidth;
+  o.remove();
+  return w;
+}
+
+async function checkMobile(){
+  var sbw = scrollbarWidth();
+  var tb = section('At 375px: the width most visitors actually use' +
+                   (sbw ? ' (frame widened ' + sbw + 'px for the scrollbar)' : ''),
+                   ['ID','Overflow','Tiny text','Small taps','Problem','Result']);
+  stageSize(MOBILE_W + sbw, MOBILE_H);
+  /* The page templates are the thing that actually ships to a phone, and they
+     were missing from this check until it was noticed by hand. */
+  var targets = DEMOS.concat(REVEAL_TARGETS
+    .filter(function(t){ return t.id.indexOf('tpl:') === 0; })
+    .map(function(t){ return t.p; }));
+  for (var i = 0; i < targets.length; i++){
+    var r = await mobileOne(targets[i]);
+    tally(r.state);
+    row(tb, [r.id, r.overflow ? r.overflow + 'px' : '-', r.tiny, r.taps, r.problem || ''], r.state);
+  }
+  stageSize(400, 300);
+}
+
+function mobileOne(p){
+  return frame(p).then(function(f){
+    var w = f.contentWindow, d = f.contentDocument;
+    return new Promise(function(resolve){
+      setTimeout(function(){
+        var overflow = 0, tiny = 0, taps = 0, problem = '';
+        try {
+          /* Ask whether the page ACTUALLY scrolls sideways, rather than comparing
+             scrollWidth to clientWidth. Those two differ by the scrollbar gutter
+             on any desktop viewport, and by SVG path bounding boxes that are
+             clipped by their own viewBox - neither of which a visitor can scroll
+             to. Trying to scroll and seeing whether anything moved is the only
+             measure that matches what a person experiences. */
+          w.scrollTo(1000, w.pageYOffset);
+          var moved = w.pageXOffset || d.documentElement.scrollLeft || 0;
+          w.scrollTo(0, w.pageYOffset);
+          overflow = moved > 0
+            ? Math.max(0, d.documentElement.scrollWidth - d.documentElement.clientWidth)
+            : 0;
+
+          // How large this element's text actually RENDERS.
+          //
+          // For HTML that is simply the computed font-size. For SVG it is not:
+          // getComputedStyle returns the value in user-space units, and the
+          // viewBox then scales it. A 10px axis label inside an SVG scaled 2.4x
+          // is 24px on screen. Measuring the declared value called that
+          // unreadable, which is how a readable chart got a warning.
+          function renderedSize(el, cs){
+            var size = parseFloat(cs.fontSize);
+            var svg = el.ownerSVGElement;
+            if (!svg) return size;
+
+            // NOT getScreenCTM. That maps to screen coordinates and so folds in
+            // page and device zoom - it reported 0.2 for an SVG rendering 1:1
+            // in a scaled preview pane, which would have called readable text
+            // 2px. The factor that matters is user units to CSS pixels: the
+            // rendered width over the viewBox width. Zoom is irrelevant,
+            // because zooming does not change whether a design is legible.
+            try {
+              var vb = svg.viewBox && svg.viewBox.baseVal;
+              if (vb && vb.width > 0){
+                var k = svg.getBoundingClientRect().width / vb.width;
+                if (k > 0) return size * k;
+              }
+            } catch (e) {}
+            return size;
+          }
+
+          // WCAG 2.2 SC 2.5.8 exempts a target that is "in a sentence or block
+          // of text". A cross-reference inside a paragraph of a privacy notice
+          // is exactly that, and inflating it to 24px would wreck the
+          // typography of every document in the library to satisfy a rule that
+          // does not apply to it.
+          function inRunningText(el){
+            var pa = el.parentElement;
+            if (!pa) return false;
+            if (!/^(P|LI|TD|DD|BLOCKQUOTE|FIGCAPTION|SPAN|EM|STRONG|SMALL|ADDRESS|H[1-6])$/
+                  .test(pa.tagName)) return false;
+            // it is only "in a block of text" if there IS text around it
+            var own = (el.textContent || '').length,
+                whole = (pa.textContent || '').length;
+            return whole - own > 20;
+          }
+
+          var all = d.body.querySelectorAll('*');
+          [].forEach.call(all, function(el){
+            var cs = w.getComputedStyle(el);
+            if (cs.display === 'none' || cs.visibility === 'hidden') return;
+
+            // body text below 12px is unreadable on a phone
+            var txt = el.children.length === 0 && (el.textContent || '').trim().length > 12;
+            // Half a pixel of tolerance. An SVG rendering 1:1 computes its scale as
+            // 239.99../240, so exactly-12px text lands at 11.9999 and a bare < test
+            // reports a defect that is not there. Half a pixel is below anything a
+            // reader could perceive, so it cannot hide a real one either.
+            if (txt && renderedSize(el, cs) < TEXT_MIN - 0.5) tiny++;
+
+            if (/^(A|BUTTON|SUMMARY)$/.test(el.tagName) ||
+                (el.tagName === 'INPUT' && !/hidden/.test(el.type))){
+              if (el.tagName === 'A' && inRunningText(el)) return;   // 2.5.8 exception
+              var r2 = el.getBoundingClientRect();
+              if (r2.width > 0 && r2.height > 0 &&
+                  (r2.height < TAP_MIN || r2.width < TAP_MIN)) taps++;
+            }
+          });
+        } catch (e){ problem = e.message; }
+
+        if (overflow > 2) problem = 'scrolls sideways by ' + overflow + 'px';
+        resolve({id: p.split('/').slice(-2)[0], overflow: overflow, tiny: tiny, taps: taps,
+                 problem: problem,
+                 state: overflow > 2 ? 'fail' : (tiny > 0 ? 'warn' : 'pass')});
+      }, 550);
+    });
+  });
+}
+
+/* ---------------------------------------------------------------- runner */
+/* ---------------------------------------------------------------- 6. keyboard
+   Added after UI-DRP-001 shipped a disclosure control that told assistive
+   technology the submenu was collapsed while it was plainly on screen, and
+   after the Escape-reopen bug was fixed by hand in three components with
+   nothing to stop a fourth reintroducing it.
+
+   The library now has a lot of components whose entire value is keyboard
+   correctness, and every one of them was verified once, by hand, in a console
+   session that was then thrown away. This is that session, kept.
+
+   Three assertions, and the distinction between them is deliberate:
+
+     FAIL  aria-expanded is neither "true" nor "false", or points at an
+           element that does not exist. Unambiguous.
+
+     FAIL  THE HONESTY CHECK. aria-expanded="false" while the panel it
+           controls is visible, or "true" while it is not. This is a statement
+           made only to assistive technology, so it is the one kind of bug
+           that is invisible to everybody who tests by looking.
+
+     FAIL  It reopens when focus returns after Escape. A control that opens on
+           focus and returns focus to itself on Escape cannot be closed from
+           the keyboard at all, and it passes every test done with a mouse.
+
+     WARN  A floating panel that does not answer Escape. Only floating ones:
+           an in-flow accordion has no business closing on Escape, and asking
+           it to would be the checker inventing a rule. Position is the test
+           because it is the thing that decides whether the panel is covering
+           something the visitor may want to get back to.
+   ---------------------------------------------------------------------- */
+async function checkKeyboard(){
+  var tb = section('Disclosure controls: do they tell the truth, and can Escape close them',
+                   ['ID','Controls','Problem','Result']);
+  for (var i = 0; i < DEMOS.length; i++){
+    var r = await keyboardOne(DEMOS[i]);
+    if (r.n === 0) continue;                 /* nothing to say about it */
+    tally(r.state);
+    row(tb, [r.id, r.n, r.problem || ''], r.state);
+  }
+}
+
+function keyboardOne(p){
+  return frame(p).then(function(f){
+    var w = f.contentWindow, d = f.contentDocument;
+    return new Promise(function(resolve){
+      setTimeout(async function(){
+        var id = p.split('/').slice(-2)[0], problems = [], warns = [], ctrls = [], skipped = '', unexposed = 0;
+        try {
+          /* TRANSITIONS OFF BEFORE ANYTHING IS MEASURED.
+             This check is about state, not about animation, and a panel
+             caught mid-fade reads as opacity 0 - indistinguishable from a
+             panel that never opened. Worse, a browser that is not painting
+             the page at all does not advance a transition, so the value stays
+             at its start for ever: the first run of this check reported
+             UI-CAL-001 and UI-ACC-001 as broken for that reason and both were
+             fine. Killing the transitions makes the reading the same in a
+             visible tab, a background tab and a headless run, which is the
+             only way a checker is worth trusting. */
+          var kill = d.createElement('style');
+          kill.textContent = '*,*::before,*::after{transition:none!important;animation:none!important}';
+          d.head.appendChild(kill);
+
+          /* CAN THIS BROWSER DELIVER A FOCUS EVENT AT ALL?
+             In a document that does not have focus - a background tab, a
+             hidden pane, a headless run - element.focus() still moves
+             activeElement but fires NO focus event. Every assertion below
+             that depends on a focus handler is therefore untestable, and the
+             first version of this check reported those components as passing.
+             A check that cannot run must say so; saying PASS is the one
+             outcome that is worse than saying nothing. */
+          var probe = d.createElement('button'), gotFocus = false;
+          probe.addEventListener('focus', function(){ gotFocus = true; });
+          d.body.appendChild(probe); probe.focus(); probe.remove();
+          var focusWorks = gotFocus;
+
+          ctrls = [].slice.call(d.querySelectorAll('[aria-expanded]'));
+
+          /* "Available to the visitor", which is not the same as "has a box".
+             Three ways a panel can have a perfectly ordinary box and still be
+             unavailable, and the first two were missed by the first draft:
+
+               inert - removed from the tab order and the accessibility tree
+                 while still painted and still measurable. This is the correct
+                 way to park an off-canvas drawer, so a checker that ignores
+                 it calls every well-built drawer a liar.
+
+               parked off-screen - a fixed drawer at translateX(100%) has full
+                 width and height, just not on the screen. Only tested for
+                 fixed elements: for anything in normal flow, being outside
+                 the viewport means the page is scrolled, not that the element
+                 is hidden, and treating those the same would break every
+                 accordion below the fold.
+
+               the ordinary three - hidden, display, visibility, opacity. */
+          var shown = function(el){
+            if (!el || el.hidden) return false;
+            if (el.inert || (el.closest && el.closest('[inert]'))) return false;
+
+            var r = el.getBoundingClientRect(), cs = w.getComputedStyle(el);
+            if (!(r.width > 0 && r.height > 0)) return false;
+            if (cs.visibility === 'hidden' || cs.display === 'none') return false;
+            if (parseFloat(cs.opacity) <= 0.01) return false;
+
+            if (cs.position === 'fixed'){
+              var vw = w.innerWidth, vh = w.innerHeight;
+              if (r.right <= 0 || r.bottom <= 0 || r.left >= vw || r.top >= vh) return false;
+            }
+            return true;
+          };
+          /* IS THE CONTROL ITSELF EXPOSED TO ASSISTIVE TECHNOLOGY?
+             This check exists because aria-expanded is a statement made only
+             to assistive technology - so a control that is not in the
+             accessibility tree makes no statement, to anybody, and cannot be
+             lying. Every page template proved the point at once: the header
+             burger is display:none above 820px while the nav it nominally
+             controls is a perfectly ordinary visible row of links. Five
+             pages, five identical FAILs, and not one user on either side of
+             the breakpoint could have been misled.
+
+             DELIBERATELY NARROWER THAN shown(). A screen-reader-only control
+             is a clipped one-pixel box and is fully exposed; skipping it
+             would be the checker ignoring the very users it exists for. So
+             size, opacity and off-screen position are NOT disqualifying here.
+             Only the things that genuinely remove an element from the
+             accessibility tree are.
+
+             AND NOTE WHAT THIS IS NOT FOR. The stage iframe is 400px wide, so
+             this check has always run BELOW the mobile breakpoint, where the
+             burger is displayed and is examined normally. The first version of
+             this comment claimed the opposite and was wrong.
+
+             That matters, because the failure it then found was real. A panel
+             hidden only by clip-path is hidden from EYES ONLY: still
+             display:flex, still in the accessibility tree, still tabbable. The
+             fix was inert on the panel, which shown() already understands -
+             not a loosening here. If a panel ever trips this check, suspect
+             the panel first. */
+          var exposed = function(el){
+            if (!el || el.hidden) return false;
+            if (el.inert || (el.closest && el.closest('[inert]'))) return false;
+            if (el.closest && el.closest('[aria-hidden="true"]')) return false;
+            if (!el.getClientRects().length) return false;   /* display:none, here or above */
+            if (w.getComputedStyle(el).visibility === 'hidden') return false;
+            return true;
+          };
+          var wait = function(ms){ return new Promise(function(r){ setTimeout(r, ms || 60); }); };
+          var esc  = function(el){
+            el.dispatchEvent(new w.KeyboardEvent('keydown',
+              {key:'Escape', code:'Escape', keyCode:27, bubbles:true, cancelable:true}));
+          };
+
+          for (var c = 0; c < ctrls.length && problems.length < 3; c++){
+            var ctrl = ctrls[c], val = ctrl.getAttribute('aria-expanded');
+
+            /* Counted, not silently dropped. A checker that quietly ignores
+               things is how you end up trusting a number that means less than
+               you think it does. */
+            if (!exposed(ctrl)){ unexposed++; continue; }
+
+            if (val !== 'true' && val !== 'false'){
+              problems.push('aria-expanded="' + val + '"'); continue;
+            }
+
+            var target = ctrl.getAttribute('aria-controls'),
+                panel  = target ? d.getElementById(target) : null;
+
+            if (target && !panel){ problems.push('aria-controls="' + target + '" matches nothing'); continue; }
+            if (!panel) continue;                    /* nothing to compare against */
+
+            if (shown(panel) !== (val === 'true')){
+              problems.push('says ' + val + ' while its panel is ' +
+                            (shown(panel) ? 'visible' : 'hidden'));
+              continue;
+            }
+
+            /* Open it. */
+            ctrl.click(); await wait();
+            if (ctrl.getAttribute('aria-expanded') === val) continue;   /* not a toggle; leave it alone */
+
+            if (shown(panel) !== true){
+              problems.push('aria-expanded became true but the panel did not appear');
+              continue;
+            }
+
+            /* Escape only matters for a panel that floats over the page. */
+            var pos = w.getComputedStyle(panel).position;
+            if (pos !== 'absolute' && pos !== 'fixed'){ ctrl.click(); await wait(); continue; }
+
+            esc(panel); esc(ctrl);
+
+            /* THE MOMENT THIS CHECK EXISTS FOR, and it is a synchronous one.
+               A correct component closes on Escape and hands focus back to
+               its trigger; a broken one also opens on focus, so handing focus
+               back reopens it and it can never be closed from the keyboard.
+               That all happens INSIDE the Escape handler, so the state to
+               read is the state immediately after - not after a later blur
+               and refocus, which is a different question with the opposite
+               correct answer (tabbing to a trigger SHOULD open it, and an
+               earlier draft of this check failed every correct component for
+               doing exactly that).
+
+               Where the document has no focus the browser drops the focus
+               event the component's own focus() call would have produced, so
+               it is replayed here, synchronously, only when the component did
+               move focus to the trigger. That makes the reading identical in
+               a focused tab, a background tab and a headless run. */
+            if (!focusWorks && d.activeElement === ctrl){
+              ctrl.dispatchEvent(new w.FocusEvent('focus', {bubbles:false}));
+            }
+            await wait();
+
+            if (ctrl.getAttribute('aria-expanded') === 'true'){
+              /* Two different bugs wear the same face here, and which one it
+                 is depends on where focus ended up. If the component put
+                 focus back on its own trigger and the panel is open again, it
+                 closed and reopened - the keyboard trap. If focus is
+                 elsewhere it simply ignored Escape, a lesser sin and not one
+                 an in-flow disclosure commits at all. */
+              if (d.activeElement === ctrl) problems.push('reopens when focus returns after Escape');
+              else warns.push('floating panel does not close on Escape');
+              ctrl.click(); await wait();
+              continue;
+            }
+
+
+          }
+        } catch (e){ problems.push('threw: ' + e.message); }
+
+        var state = problems.length ? 'fail' : warns.length ? 'warn' : skipped ? 'skip' : 'pass';
+        var note  = problems.concat(warns);
+        if (skipped) note.push('not fully checked: ' + skipped);
+        if (unexposed) note.push(unexposed + ' not in the accessibility tree, skipped');
+        /* n is what was actually examined, not what was found. Reporting the
+           raw count while silently skipping some of it is how a number stops
+           meaning what a reader assumes it means. */
+        resolve({id: id, n: (ctrls.length - unexposed), problem: note.join('; '), state: state});
+      }, 500);
+    });
+  });
+}
+
+function reset(){ OUT.innerHTML = ''; TALLY = {pass:0, fail:0, skip:0}; VERDICT.textContent = 'running…'; }
+function finish(){
+  VERDICT.textContent = TALLY.pass + ' pass · ' + TALLY.fail + ' FAIL · ' + TALLY.skip + ' skipped';
+  VERDICT.className = TALLY.fail ? 'fail' : 'pass';
+  window.__result = Object.assign({}, TALLY);
+  [].forEach.call(document.querySelectorAll('button'), function(b){ b.disabled = false; });
+}
+function lock(){ [].forEach.call(document.querySelectorAll('button'), function(b){ b.disabled = true; }); }
+
+function wire(id, fn){
+  document.getElementById(id).addEventListener('click', async function(){
+    lock(); reset(); window.__result = null; await fn(); finish();
+  });
+}
+wire('r-reveal', checkReveal);
+wire('r-snip',   checkSnippets);
+wire('r-console',checkConsole);
+wire('r-cdn',    checkCDN);
+wire('r-mobile', checkMobile);
+wire('r-kbd',    checkKeyboard);
+wire('all', async function(){
+  await checkReveal(); await checkCDN(); await checkConsole(); await checkSnippets();
+  await checkKeyboard(); await checkMobile();
+});
+</script>
+</body></html>
