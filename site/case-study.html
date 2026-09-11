@@ -1,0 +1,1353 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Resin driveway in Sherborne — Stonemoor Groundworks</title>
+<meta name="description" content="A 96 m² resin driveway in Sherborne, relaid over a failed base with new drainage. What was wrong, what it cost, how long it took and how it has held up.">
+<link rel="stylesheet" href="assets/tokens.css">
+<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="trade.css">
+<link rel="stylesheet" href="assets/brand.css">
+</head>
+<body>
+<div style="background:#1A1418;color:#fff;padding:10px 16px;font:600 14px/1.45 system-ui,sans-serif;text-align:center">Demonstration site. <span style="font-weight:400;opacity:.85">Stonemoor Groundworks is not a real business &mdash; the name, the work, the prices and the contact details are all illustrative. This is what your site would look like.</span></div>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="hdr" id="hdr">
+  <div class="wrap row">
+    <a class="brand" href="index.html">Stonemoor<span>Groundworks</span></a>
+    <nav class="nav" id="nav" aria-label="Main">
+      <a href="index.html">Home</a>
+      <a href="work.html" aria-current="page">Our work</a>
+      <a href="service.html">Driveways</a>
+      <a href="contact.html">Contact</a>
+      <a class="btn btn-sm" href="service.html#quote">Get a quote</a>
+    </nav>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="nav">
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+  <nav class="crumbs wrap" aria-label="Breadcrumb">
+    <a href="index.html">Home</a> <span aria-hidden="true">/</span>
+    <a href="work.html">Our work</a> <span aria-hidden="true">/</span>
+    <span aria-current="page">Resin driveway, Sherborne</span>
+  </nav>
+
+  <!-- ==================================================================
+       The fifth page, and the one a serious buyer actually reads.
+
+       work.html is the index of finished jobs; this is one of them opened
+       up. Until it existed the gallery tiles were anchors pointing nowhere,
+       and the site could show that work had been done without ever saying
+       what it cost, how long it took or what went wrong in the middle.
+
+       The whole page is UI-CAS-001 - there is deliberately no page-specific
+       CSS here. If this page needs a rule, the component needs it.
+       ================================================================== -->
+  <section class="section section-tight">
+    <div class="wrap">
+      <!--BEGIN UI-CAS-001-->
+<style>
+/* UI-CAS-001  Case study / completed job
+   ---------------------------------------------------------------------------
+   A repeatable composition, not a one-off page. For construction, groundworks
+   and engineering this is very often the only content a serious buyer reads
+   all the way through, and it is the page that decides a five-figure job.
+
+   IND-GAL-001 is the index of work; this is one entry in it, opened up.
+
+   The decisions that make it work:
+
+     - IT ANSWERS THE FIVE QUESTIONS IN ORDER: what was wrong, what was done,
+       what it cost, how long it took, and what happened afterwards. A trades
+       "case study" that is four photographs and the word "Driveway" answers
+       none of them. The cost band and the duration are the two most-skipped
+       and the two most-wanted;
+     - THE JOB TYPE AND THE PLACE ARE REAL TEXT IN THE HEADING. "Resin
+       driveway in Sherborne" as an h1 is the local SEO; the same words in an
+       alt attribute are a caption for a picture. This is the same reasoning
+       the gallery is built on, and it matters more here because this page can
+       rank on its own;
+     - THE BEFORE/AFTER IS A SLOT, NOT A REIMPLEMENTATION. DIAG-003 already
+       does the comparison slider. Building a second one here is how a library
+       ends up with two of everything - which has already happened once in
+       this one, and is why the builder now refuses to catalogue near-
+       duplicate names;
+     - THE STRUCTURED DATA IS STATIC IN THE MARKUP, AND CHECKED AGAINST THE
+       PAGE. Generating it from the DOM would guarantee they agree but leaves
+       nothing for a crawler that does not run scripts. So the JSON-LD ships as
+       real markup, and a small script compares it against what is visible and
+       complains in the console when they drift - which they always eventually
+       do, because someone edits the heading and not the schema;
+     - THE CUSTOMER IS NOT NAMED BY DEFAULT. "A customer in Sherborne" needs no
+       permission; "Mrs Hall, 14 Brimsmore Yard" is personal data, and a
+       photograph of an identifiable house alongside it is more of the same.
+       Naming people is fine WITH THEIR CONSENT, recorded. The default here is
+       the version that cannot go wrong.
+
+   BEFORE IT GOES LIVE: the duration, the cost band and the result must be
+   true of this job. A case study is the most quotable thing on a website and
+   an invented figure in one is a misleading action under CPUT.                */
+
+.cas{--cas-accent:var(--brand,#1f6feb);max-width:760px}
+
+.cas-eyebrow{margin:0 0 10px;font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--cas-accent)}
+.cas h1{margin:0 0 12px;font-size:clamp(26px,4.4vw,40px);letter-spacing:-.03em;
+  line-height:1.12;text-wrap:balance}
+.cas-lede{margin:0 0 clamp(22px,3vw,30px);font-size:clamp(16px,1.9vw,18px);
+  line-height:1.6;color:var(--ink-60,#5b6a79);max-width:56ch}
+
+/* The facts, above everything else. A buyer scanning three of these pages in
+   a browser tab each reads this strip and little else on the first pass. */
+.cas-facts{display:grid;gap:1px;background:var(--line,#e6ecf3);
+  border:1px solid var(--line,#e6ecf3);border-radius:var(--r-lg,16px);overflow:hidden;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));
+  margin-bottom:clamp(22px,3vw,32px)}
+.cas-fact{background:var(--surface,#fff);padding:14px 16px;min-width:0}
+.cas-fact dt{margin:0 0 4px;font-size:12px;letter-spacing:.02em;color:var(--ink-45,#7d8b9a)}
+.cas-fact dd{margin:0;font-size:15px;font-weight:650;letter-spacing:-.01em;
+  overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+
+/* ------------------------------------------------------------------
+   The before/after slot. DIAG-003 goes here - drop its style, markup
+   and script in between the markers and delete the placeholder.
+   The placeholder holds a real 3:2 so nothing moves when it does.
+   ------------------------------------------------------------------ */
+.cas-media{margin:0 0 clamp(22px,3vw,32px)}
+.cas-ph{aspect-ratio:3/2;border-radius:var(--r-lg,16px);display:grid;place-items:center;
+  background:
+    repeating-linear-gradient(38deg,rgba(255,255,255,.04) 0 14px,transparent 14px 34px),
+    linear-gradient(150deg,color-mix(in srgb,var(--cas-accent) 26%,#2a2f36),#1a1d21);
+  /* 12px is this library's floor for readable text on a phone, placeholder
+     labels included. */
+  color:rgba(255,255,255,.36);font:600 12px/1.5 ui-monospace,Consolas,monospace;
+  letter-spacing:.14em;text-transform:uppercase;text-align:center;padding:0 20px}
+.cas-cap{margin:9px 0 0;font-size:12.5px;color:var(--ink-45,#7d8b9a)}
+
+.cas-body h2{margin:clamp(26px,3.4vw,34px) 0 10px;font-size:clamp(19px,2.4vw,23px);
+  letter-spacing:-.02em;line-height:1.25}
+.cas-body h2:first-child{margin-top:0}
+.cas-body p{margin:0 0 14px;line-height:1.7;color:var(--ink-60,#5b6a79);max-width:66ch}
+.cas-body strong{color:var(--ink,#0f1720)}
+.cas-body ul{margin:0 0 14px;padding-left:20px;line-height:1.7;color:var(--ink-60,#5b6a79)}
+.cas-body li{margin-bottom:5px}
+
+/* The customer's words. A pull quote, not a testimonial widget: one voice
+   about one job, sitting where it is relevant. UI-QUO-001 and UI-QUO-002
+   handle rotating sets of quotes and are the wrong tool here. */
+.cas-quote{margin:clamp(26px,3.4vw,34px) 0;padding:clamp(20px,2.8vw,26px);
+  background:var(--brand-wash,#f2f7ff);border-radius:var(--r-lg,16px)}
+.cas-quote blockquote{margin:0;font-size:clamp(17px,2.2vw,20px);line-height:1.5;
+  letter-spacing:-.015em;font-weight:500;color:var(--ink,#0f1720);max-width:34ch}
+.cas-quote figcaption{margin-top:12px;font-size:13.5px;color:var(--ink-45,#7d8b9a)}
+
+.cas-next{margin-top:clamp(26px,3.4vw,34px);padding-top:20px;
+  border-top:1px solid var(--line,#e6ecf3);display:flex;gap:12px;flex-wrap:wrap;
+  align-items:center}
+.cas-btn{display:inline-flex;align-items:center;min-height:44px;padding:11px 22px;
+  border-radius:var(--r-pill,999px);background:var(--cas-accent);color:#fff;
+  text-decoration:none;font-weight:650;font-size:15px}
+.cas-btn:focus-visible{outline:2px solid var(--cas-accent);outline-offset:3px}
+.cas-back{min-height:24px;padding-block:3px;font-size:14px;font-weight:600;
+  color:var(--ink-60,#5b6a79)}
+</style>
+
+<!-- =====================================================================
+     Structured data. Article, because that is what this page is: a piece
+     of writing about a completed job. It is real markup rather than
+     script-generated output so a crawler that does not execute JavaScript
+     still gets it; the script at the foot only checks it still agrees with
+     the visible page.
+     ===================================================================== -->
+<script type="application/ld+json" id="cas-ld">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Resin driveway in Sherborne, on a base that had already failed once",
+  "datePublished": "2026-05-14",
+  "author": { "@type": "Organization", "name": "Stonemoor Groundworks" },
+  "publisher": { "@type": "Organization", "name": "Stonemoor Groundworks" },
+  "contentLocation": { "@type": "Place", "name": "Sherborne, Dorset" },
+  "about": { "@type": "Service", "name": "Resin bound driveway installation" }
+}
+</script>
+
+<article class="cas">
+
+  <p class="cas-eyebrow">Completed job &middot; Resin driveway</p>
+
+  <h1 id="cas-h1">Resin driveway in Sherborne, on a base that had already failed once</h1>
+
+  <p class="cas-lede">A 96&nbsp;m&sup2; driveway laid over a sub-base that was never
+     deep enough, relaid properly with drainage that works. Eleven days, and it
+     has been through two winters since.</p>
+
+  <dl class="cas-facts">
+    <div class="cas-fact"><dt>Where</dt><dd data-cas-place>Sherborne, Dorset</dd></div>
+    <div class="cas-fact"><dt>Completed</dt>
+      <dd><time datetime="2026-05-14" data-cas-date>May 2026</time></dd></div>
+    <div class="cas-fact"><dt>On site</dt><dd>11 days</dd></div>
+    <div class="cas-fact"><dt>Area</dt><dd>96 m&sup2;</dd></div>
+    <div class="cas-fact"><dt>Cost band</dt><dd>&pound;9k&ndash;&pound;12k</dd></div>
+    <div class="cas-fact"><dt>Guarantee</dt><dd>10 years</dd></div>
+  </dl>
+
+  <figure class="cas-media">
+    <!--BEGIN DIAG-003 SLOT-->
+    <div class="cas-ph">Before / after &mdash; DIAG-003 goes here</div>
+    <!--END DIAG-003 SLOT-->
+    <figcaption class="cas-cap">Left, the surface as we found it. Right, the same
+      view in April.</figcaption>
+  </figure>
+
+  <div class="cas-body">
+
+    <h2>What was wrong</h2>
+    <p>The driveway had been resurfaced three years earlier by somebody else and
+       was already breaking up along the line where cars turn. Two things were
+       going on, and only one of them was visible.</p>
+    <p>The sub-base was <strong>about 80&nbsp;mm of crushed concrete where it
+       needed 150&nbsp;mm of properly compacted MOT Type 1</strong>, so it was
+       moving under load. And the fall ran towards the house rather than away
+       from it, which meant every heavy shower put water against the wall and
+       under the surface, where it froze.</p>
+
+    <h2>What we did</h2>
+    <ul>
+      <li>Took up the existing surface and the failed sub-base &mdash; 14 tonnes
+          away, with transfer notes.</li>
+      <li>Dug out and recompacted to 150&nbsp;mm in two layers, whacked in lifts
+          rather than in one pass.</li>
+      <li>Reset the falls away from the house and put in a linear drain across
+          the threshold, connected to a soakaway at the far corner.</li>
+      <li>Laid 18&nbsp;mm resin bound aggregate over a permeable base course, with
+          an aluminium edge along the lawn side.</li>
+    </ul>
+    <p>The drainage was the part not in the original quote. We found the fall
+       problem on day two, stopped, and rang the customer before doing anything
+       about it &mdash; it added <strong>&pound;1,400 and two days</strong>, and
+       relaying a surface over the same problem would have been a waste of both
+       of our time.</p>
+
+    <h2>How it has held up</h2>
+    <p>Two winters, including the freeze in January. No movement along the turn,
+       no standing water at the threshold, no weed growth through the surface.
+       We went back at twelve months to look at it, which is part of the
+       ten-year guarantee rather than a favour.</p>
+
+  </div>
+
+  <!-- The customer, unnamed. "A customer in Sherborne" needs no permission;
+       a full name and address is personal data, and pairing it with a
+       photograph of an identifiable house is more of the same. Name people
+       only where consent has actually been given and recorded. -->
+  <figure class="cas-quote">
+    <blockquote>They found a problem that wasn&rsquo;t theirs, stopped, and
+      explained it before spending any of our money on it.</blockquote>
+    <figcaption>The customer, Sherborne &mdash; May 2026</figcaption>
+  </figure>
+
+  <div class="cas-next">
+    <a class="cas-btn" href="#quote">Get a quote for yours</a>
+    <a class="cas-back" href="#work">All completed work</a>
+  </div>
+
+</article>
+
+<script>
+/* UI-CAS-001 - structured-data drift check.
+
+   Not a feature. This exists because of one specific, universal failure: the
+   heading gets rewritten, the date gets corrected, and the JSON-LD above them
+   keeps saying what it said in March. Nobody notices, because nothing on the
+   page looks wrong - the schema is invisible, and search engines quietly index
+   the stale version.
+
+   It only warns. It never edits the page and it never edits the schema:
+   deciding WHICH of the two is right is a human job, and a script that
+   silently "fixed" one would eventually overwrite the correct one.
+
+   Safe to delete before handing a site over, and worth keeping while anyone
+   is still editing the copy.                                                 */
+(function () {
+  var tag = document.getElementById('cas-ld');
+  if (!tag) return;
+
+  var ld;
+  try {
+    ld = JSON.parse(tag.textContent);
+  } catch (e) {
+    console.warn('UI-CAS-001: the JSON-LD block does not parse (' + e.message +
+                 '), so search engines are ignoring it entirely.');
+    return;
+  }
+
+  var norm = function (s) { return (s || '').replace(/\s+/g, ' ').trim(); };
+  var textOf = function (sel) {
+    var el = document.querySelector(sel);
+    return el ? norm(el.textContent) : null;
+  };
+
+  // The date is compared on the <time> element's machine-readable datetime,
+  // not on what it prints: "May 2026" and "2026-05-14" are both correct and
+  // comparing them would report a drift on every well-formed page.
+  var timeEl = document.querySelector('[data-cas-date]');
+
+  var checks = [
+    ['headline', norm(ld.headline), textOf('#cas-h1')],
+    ['datePublished', norm(ld.datePublished),
+      timeEl ? timeEl.getAttribute('datetime') : null],
+    ['contentLocation.name', norm(ld.contentLocation && ld.contentLocation.name),
+      textOf('[data-cas-place]')]
+  ];
+
+  checks.forEach(function (c) {
+    var field = c[0], inSchema = c[1], onPage = c[2];
+    if (onPage === null) {
+      console.warn('UI-CAS-001: nothing on the page to check "' + field +
+                   '" against - the marker element has been removed.');
+      return;
+    }
+    if (inSchema !== onPage) {
+      console.warn('UI-CAS-001: "' + field + '" has drifted.' +
+                   '\n  schema: ' + inSchema +
+                   '\n  page  : ' + onPage +
+                   '\n  Decide which is right and correct the other.');
+    }
+  });
+})();
+</script>
+
+</div>
+<!--END UI-CAS-001-->
+    </div>
+  </section>
+
+</main>
+
+<footer class="ftr">
+  <div class="wrap grid">
+    <div>
+      <a class="brand" href="index.html">Stonemoor<span>Groundworks</span></a>
+      <p>Driveways, patios and landscaping across South Somerset and North Dorset.</p>
+    </div>
+    <div>
+      <h3>Pages</h3>
+      <a href="index.html">Home</a><a href="work.html">Our work</a>
+      <a href="service.html">Driveways</a><a href="contact.html">Contact</a>
+    </div>
+    <div>
+      <h3>Get in touch</h3>
+      <a href="tel:+441632960421">01632 960421</a>
+      <a href="mailto:hello@example.co.uk">hello@example.co.uk</a>
+      <p>Brimsmore Yard, Yeovil, Somerset BA21 3AA</p>
+    </div>
+  </div>
+  <div class="wrap rule">
+    <p>&copy; 2026 Stonemoor Groundworks. A demonstration site - not a trading business.</p>
+  </div>
+</footer>
+
+<!-- The assistant. It sits beside the sticky call bar on purpose and
+     measures it, rather than guessing at its height - both own the bottom-right
+     corner and the call button is the one control this site cannot cover. -->
+<!--BEGIN UI-ASK-001-->
+<style>
+/* UI-ASK-001  Site assistant
+   ---------------------------------------------------------------------------
+   One shell at three power levels. Sell the first to everybody; sell the third
+   to whoever will pay for it.
+
+     MODE 1  SCRIPTED. A decision tree of buttons. No API, no backend, no
+             request leaves the page, nothing to go wrong and nothing to bill.
+             It answers the eight questions every trade is asked and hands off
+             to IND-WIZ-001. This is what most clients should get, and saying
+             so out loud is a large part of why they trust the rest of it.
+     MODE 2  RETRIEVAL. Free text, answered from a local knowledge base by
+             keyword overlap. Still no API and still no running cost. It knows
+             what it does not know, which is the entire difference between
+             useful and embarrassing.
+     MODE 3  LLM ADAPTER. A documented seam where the client's own model goes.
+             We ship the socket. We never ship the key.
+
+   THE KEY, BECAUSE THIS IS WHERE THESE GO WRONG: there is no safe way to put
+   an API key in a website. Anything the browser can read, a visitor can read -
+   devtools, view-source, the network tab - and a leaked key is billed to the
+   client until somebody notices. So the adapter posts to an endpoint the
+   CLIENT owns, and the key lives on that server. If a client wants mode 3
+   without a backend, the honest answer is that they want mode 2.
+
+   The rest of the decisions:
+
+     - THE BOT SAYS IT IS A BOT, in the header, permanently, not in a greeting
+       that scrolls away. Under the CPUT Regulations a trader must not create
+       the false impression of dealing with a person, and a support bot with a
+       human name and a photograph is doing exactly that;
+     - NOTHING IS STORED. A transcript is personal data under the UK GDPR the
+       moment somebody types "my drive at 14 Brimsmore Yard is cracking" - and
+       they do. The default here keeps the conversation in a variable that dies
+       with the tab: no localStorage, no cookie, no analytics event. Wiring
+       mode 3 to a server changes that, so the privacy link and the retention
+       line are part of the component rather than something to remember later;
+     - THERE IS A HARD FENCE around regulated advice. The refusal check runs
+       BEFORE the knowledge base and before the model, so no amount of
+       configuration or prompting can route around it. A chatbot on a financial
+       adviser's site that answers "should I move my pension" has committed the
+       firm to a personal recommendation;
+     - MESSAGES ARE BUILT WITH textContent, NEVER innerHTML. In mode 3 the text
+       comes from a model, which can be talked into emitting markup, and in
+       mode 2 part of it comes from the visitor. One innerHTML here is a
+       cross-site scripting hole on every page of the site;
+     - IT KNOWS ABOUT IND-ACT-001. Both live in the bottom-right corner, and on
+       a phone the sticky call bar owns the bottom of the screen. The launcher
+       lifts itself clear rather than landing on top of the call button, which
+       is the one control the site cannot afford to cover.                     */
+
+.ask{--ask-accent:var(--brand,#1f6feb);
+  /* Cleared by JS when IND-ACT-001 is on the page. Not a guess at its height:
+     the bar is measured, because it is 56px on one breakpoint and 64px on
+     another and a hardcoded number is wrong on one of them. */
+  --ask-lift:0px}
+
+/* ---- launcher ------------------------------------------------------- */
+.ask-open{position:fixed;z-index:70;right:16px;
+  bottom:calc(16px + var(--ask-lift) + env(safe-area-inset-bottom, 0px));
+  display:inline-flex;align-items:center;gap:9px;min-height:48px;padding:12px 20px;
+  border:0;border-radius:var(--r-pill,999px);cursor:pointer;
+  background:var(--ask-accent);color:#fff;font:650 15px/1 inherit;
+  box-shadow:0 6px 22px rgba(15,23,32,.22);
+  transition:transform var(--dur-fast,.16s) var(--ease-out,ease)}
+.ask-open:hover{transform:translateY(-2px)}
+.ask-open:focus-visible{outline:3px solid var(--ask-accent);outline-offset:3px}
+.ask-open svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+
+/* ---- panel ---------------------------------------------------------- */
+.ask-panel{position:fixed;z-index:71;right:16px;
+  bottom:calc(16px + var(--ask-lift) + env(safe-area-inset-bottom, 0px));
+  width:min(380px,calc(100vw - 32px));
+  /* dvh, not vh: on a phone with the browser chrome showing, 100vh is taller
+     than the visible viewport and the foot of the panel - which is the input -
+     sits under the address bar. */
+  max-height:min(560px,calc(100dvh - 32px));
+  display:flex;flex-direction:column;overflow:hidden;
+  background:var(--surface,#fff);border:1px solid var(--line,#e6ecf3);
+  border-radius:var(--r-lg,16px);box-shadow:0 18px 48px rgba(15,23,32,.2)}
+.ask-panel[hidden]{display:none}
+
+.ask-hd{display:flex;align-items:flex-start;gap:12px;padding:14px 14px 12px;
+  border-bottom:1px solid var(--line,#e6ecf3);flex:0 0 auto}
+.ask-hd-t{min-width:0;flex:1 1 auto}
+.ask-hd-t b{display:block;font-size:15px;letter-spacing:-.01em}
+/* The disclosure. Permanent, in the header, and not a greeting that scrolls
+   away after four messages. */
+.ask-bot{display:block;font-size:12px;color:var(--ink-45,#7d8b9a);margin-top:2px}
+.ask-x{flex:0 0 auto;width:32px;height:32px;border:0;background:0;cursor:pointer;
+  border-radius:8px;color:var(--ink-45,#7d8b9a);font-size:18px;line-height:1}
+.ask-x:hover{background:var(--paper-alt,#f4f6f9);color:var(--ink,#0f1720)}
+.ask-x:focus-visible{outline:2px solid var(--ask-accent);outline-offset:2px}
+
+.ask-log{flex:1 1 auto;overflow-y:auto;padding:14px;display:flex;
+  flex-direction:column;gap:10px;min-height:0}
+
+.ask-m{max-width:86%;padding:10px 13px;border-radius:14px;font-size:14.5px;
+  line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
+.ask-m.bot{align-self:flex-start;background:var(--paper-alt,#f4f6f9);
+  border-bottom-left-radius:5px}
+.ask-m.you{align-self:flex-end;background:var(--ask-accent);color:#fff;
+  border-bottom-right-radius:5px}
+.ask-m.sys{align-self:stretch;max-width:100%;background:var(--warn-tint,#fdf4e7);
+  color:var(--ink,#0f1720);font-size:13px;border-radius:10px}
+
+.ask-more{display:inline-block;margin-top:7px;font-weight:650;font-size:13.5px;
+  color:var(--ask-accent);min-height:24px;padding-block:3px}
+
+.ask-chips{display:flex;flex-wrap:wrap;gap:7px;padding:0 14px 12px;flex:0 0 auto}
+.ask-chip{font:600 13.5px/1 inherit;padding:9px 13px;min-height:24px;cursor:pointer;
+  border:1px solid var(--line-2,#dbe4ee);background:var(--surface,#fff);
+  color:var(--ink,#0f1720);border-radius:var(--r-pill,999px);text-align:left}
+.ask-chip:hover{border-color:var(--ask-accent);color:var(--ask-accent)}
+.ask-chip:focus-visible{outline:2px solid var(--ask-accent);outline-offset:2px}
+
+.ask-form{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line,#e6ecf3);
+  flex:0 0 auto}
+.ask-form[hidden]{display:none}
+.ask-in{flex:1 1 auto;min-width:0;font:15px/1.4 inherit;padding:11px 13px;
+  border:1px solid var(--line-2,#dbe4ee);border-radius:var(--r,10px);
+  background:var(--paper,#fbfcfd);color:var(--ink,#0f1720)}
+.ask-in:focus-visible{outline:2px solid var(--ask-accent);outline-offset:1px;border-color:transparent}
+.ask-send{flex:0 0 auto;min-width:44px;min-height:44px;border:0;cursor:pointer;
+  border-radius:var(--r,10px);background:var(--ask-accent);color:#fff;font:650 14px/1 inherit}
+.ask-send:focus-visible{outline:2px solid var(--ask-accent);outline-offset:2px}
+
+.ask-ft{padding:0 14px 12px;font-size:11.5px;line-height:1.5;color:var(--ink-45,#7d8b9a);
+  flex:0 0 auto}
+.ask-ft a{color:inherit}
+
+/* Three dots while a real request is in flight. Modes 1 and 2 never show it:
+   they answer instantly, and faking a delay to seem thoughtful is a small lie
+   told to somebody in a hurry. */
+.ask-wait{display:flex;gap:4px;align-self:flex-start;padding:12px 13px}
+.ask-wait i{width:6px;height:6px;border-radius:50%;background:var(--ink-35,#9aa8b6);
+  animation:ask-b 1.1s ease-in-out infinite}
+.ask-wait i:nth-child(2){animation-delay:.15s}
+.ask-wait i:nth-child(3){animation-delay:.3s}
+@keyframes ask-b{0%,60%,100%{opacity:.35;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+
+.ask-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip-path:inset(50%);white-space:nowrap;border:0}
+
+@media (prefers-reduced-motion:reduce){
+  .ask-open,.ask-open:hover{transition:none;transform:none}
+  .ask-wait i{animation:none}
+}
+</style>
+
+<!-- The launcher is created by the script, not written here: with scripting
+     off there is nothing behind it, and a button that does nothing is worse
+     than no button. The panel's markup is real, so it can be read and styled
+     without running anything. -->
+<div class="ask" id="ask">
+
+  <div class="ask-panel" id="askPanel" role="dialog" aria-modal="false"
+       aria-labelledby="askTitle" hidden>
+
+    <div class="ask-hd">
+      <div class="ask-hd-t">
+        <b id="askTitle">Stonemoor assistant</b>
+        <span class="ask-bot">Automated &mdash; you are not talking to a person</span>
+      </div>
+      <button type="button" class="ask-x" id="askX" aria-label="Close assistant">&#10005;</button>
+    </div>
+
+    <!-- role="log" with aria-live="polite": a screen reader hears each new
+         message as it arrives without losing the visitor's place, which is
+         what "log" means and what a transcript is. -->
+    <div class="ask-log" id="askLog" role="log" aria-live="polite" aria-relevant="additions"></div>
+
+    <div class="ask-chips" id="askChips"></div>
+
+    <form class="ask-form" id="askForm" hidden>
+      <label class="ask-sr" for="askIn">Ask a question</label>
+      <input class="ask-in" id="askIn" type="text" autocomplete="off"
+             placeholder="Ask about prices, areas, timings&hellip;">
+      <button class="ask-send" type="submit">Send</button>
+    </form>
+
+    <p class="ask-ft" id="askFt"></p>
+  </div>
+</div>
+
+<script>
+/* UI-ASK-001 --------------------------------------------------------------
+   Configuration first. Everything a client needs to change is in this block;
+   nothing below it should need editing to ship a site.                      */
+
+var ASSIST = {
+  mode: 1,                       // 1 scripted | 2 retrieval | 3 LLM adapter
+  title: 'Stonemoor assistant',
+  intro: 'Hello. I can answer the common questions about driveways, ' +
+         'coverage and timings. What would you like to know?',
+
+  // Where a conversation ends up. Every branch of the script leads to one of
+  // these, because an assistant that answers questions and then leaves the
+  // visitor on their own has done half a job.
+  handoff: {
+    tel:   '+441632960421',
+    telLabel: '01632 960421',
+    quote: '#quote',
+    quoteLabel: 'Get a written quote'
+  },
+
+  privacy: '#privacy',
+
+  /* MODE 3 ONLY. The URL of an endpoint THE CLIENT OWNS, which holds the API
+     key server-side and talks to the model. Null means unwired, and the
+     component says so plainly rather than failing silently.
+
+     Do not put a provider's URL here and do not put a key anywhere in this
+     file. A key in client-side code is public: devtools, view-source and the
+     network tab all show it, and it is billed to the client until somebody
+     notices the invoice. */
+  endpoint: null,
+
+  /* Retention, shown in the footer. The default is the honest one for modes
+     1 and 2, where nothing leaves the page at all. Change it the moment an
+     endpoint is wired, because then it stops being true. */
+  retention: 'Nothing you type here is stored or sent anywhere.'
+};
+
+/* ---- the fence ----------------------------------------------------------
+   Checked BEFORE the knowledge base and before any model, so no amount of
+   configuration or prompting reaches past it. Each entry is a topic the
+   business must not be answering through a chat window.
+
+   The trade set below is about liability. On a financial adviser's site the
+   set is about the FCA perimeter - pension transfers, "should I invest in",
+   tax planning - and answering one of those through a bot commits the firm
+   to a personal recommendation it has no fact-find behind. Same mechanism,
+   different list.                                                           */
+/* ---- THE SENSITIVE ROUTE, AND IT RUNS BEFORE EVERYTHING ---------------
+   REFUSE below stops the assistant answering things it must not answer.
+   This is a different problem and a worse one: somebody has told it
+   something that needs a person, and answering at all is the failure.
+
+   "my husband died last week". "I cannot pay my mortgage". "I think I have
+   been scammed". "I want to complain." A keyword-matched FAQ answer to any
+   of those is close to the worst thing a small business website can do, and
+   it is what every assistant without this list does - because the words
+   overlap with ordinary entries. "died" hits an estate page. "cannot pay"
+   hits a pricing page. The better the knowledge base, the more confidently
+   it gets this wrong.
+
+   Generalised from a regulated-sector chat governance pack, but there is
+   nothing regulated about the problem: a builder is told "I have lost my job
+   and I cannot pay you", and a florist is told about a funeral. Every
+   vertical in this library needs this list, which is why the component now
+   ships one rather than leaving it to be invented per client.
+
+   FOUR RULES, none of them negotiable:
+
+   1. IT RUNS FIRST. Before REFUSE, before the knowledge base, before any
+      model. No configuration and no prompt routes around it.
+   2. IT ENDS THE CONVERSATION. No follow-up chips, no "anything else?", no
+      returning to the menu. The offer is a person and nothing else.
+   3. IT DOES NOT COUNSEL. One sentence of acknowledgement, then the handover.
+      An assistant attempting sympathy at length reads as a machine
+      performing sympathy, which is worse than being brief.
+   4. NOTHING IS STORED OR MEASURED. The transcript already dies with the tab.
+      If analytics are added later this is the one path that must never carry
+      what was typed - record that a sensitive route fired and its id if you
+      must, never the words.
+
+   The crisis entry deliberately carries no charity name. Signposting is a
+   content decision with a duty attached: a wrong or dead number is worse
+   than none, and the right service differs by nation and by year. Put the
+   client's chosen route in before launch, or delete the entry. Do not ship
+   the placeholder. */
+var SENSITIVE = [
+  { id: 'bereavement',
+    on: ['died', 'passed away', 'my wife died', 'my husband died', 'bereaved',
+         'bereavement', 'funeral', 'he died', 'she died', 'lost my wife',
+         'lost my husband', 'lost my mum', 'lost my dad', 'probate'],
+    say: 'I am very sorry. This is not something to work through with an ' +
+         'assistant, and I would rather not give you a stock answer. Please ' +
+         'ring us and speak to somebody - we will take it at whatever pace ' +
+         'suits you, and there is no rush from our side.' },
+
+  { id: 'hardship',
+    on: ['cannot pay', 'can not pay', 'cant pay', 'struggling to pay', 'behind on',
+         'in arrears', 'arrears', 'debt', 'in debt', 'repossession', 'bailiff',
+         'lost my job', 'made redundant', 'cannot afford', 'cant afford'],
+    say: 'Thank you for telling me. I cannot help with that here, and it is ' +
+         'worth speaking to a person sooner rather than later - these things ' +
+         'almost always have more options early on than later. Please ring ' +
+         'us, and if free independent help would be more use we will say so.' },
+
+  { id: 'fraud',
+    on: ['scam', 'scammed', 'fraud', 'defrauded', 'been conned',
+         'took my money', 'cloned firm', 'phishing'],
+    say: 'Please stop and speak to a person before doing anything else. Do ' +
+         'not send any further money, and do not act on instructions from ' +
+         'whoever contacted you. Ring us on the number below - and if money ' +
+         'has already left your account, tell your bank first, then us.' },
+
+  { id: 'complaint',
+    on: ['complain', 'complaint', 'unhappy with', 'want to complain',
+         'made a mistake', 'negligent', 'mis-sold', 'mis sold', 'missold'],
+    say: 'I am sorry, and a complaint should go to a person rather than ' +
+         'through a chat window. We take them seriously and there is a proper ' +
+         'process for it. Ring us, or ask for the complaints procedure in ' +
+         'writing and we will send it.' },
+
+  { id: 'crisis',
+    /* PLACEHOLDER - REPLACE OR DELETE BEFORE LAUNCH. See the note above. */
+    on: ['kill myself', 'end my life', 'suicidal', 'suicide', 'self harm',
+         'want to die', 'no reason to carry on'],
+    say: 'I am sorry you are going through this, and I am not the right thing ' +
+         'to be talking to. Please speak to someone who can help properly - ' +
+         'Samaritans are on 116 123, free, at any hour. If you are in immediate danger, please call 999.' }
+];
+
+var REFUSE = [
+  { on: ['structural', 'subsidence', 'crack in my wall', 'wall is cracking',
+         'load bearing', 'retaining wall failing'],
+    say: 'That one needs eyes on it rather than a chat window — movement in a ' +
+         'wall or a foundation can have several causes and guessing at it from a ' +
+         'description would not be fair to you. Ring us and we will come and look.' },
+  { on: ['asbestos'],
+    say: 'Anything involving asbestos has to go to a licensed contractor, and we ' +
+         'will not advise on it here. Please speak to us before disturbing it.' },
+  { on: ['legal', 'sue', 'solicitor', 'dispute with my neighbour', 'planning permission'],
+    say: 'I cannot help with legal or planning questions. For planning, your local ' +
+         'authority is the right first call — they will tell you free of charge.' }
+];
+
+/* ---- MODE 1: the script -------------------------------------------------
+   A decision tree. Every node either says something and offers choices, or
+   hands off. Eight questions, which is roughly all a trade is ever asked.  */
+var SCRIPT = {
+  start: {
+    options: [
+      { label: 'What does a driveway cost?',  go: 'cost' },
+      { label: 'Do you cover my area?',       go: 'area' },
+      { label: 'How long does it take?',      go: 'time' },
+      { label: 'What guarantee do I get?',    go: 'guarantee' },
+      { label: 'Can you fix an existing drive?', go: 'repair' },
+      { label: 'I would rather speak to someone', go: 'human' }
+    ]
+  },
+  cost: {
+    say: 'It depends on the surface and on what is under it. As a guide, per ' +
+         'square metre:\n\n• Resin bound  £70–£110\n' +
+         '• Block paving  £60–£95\n• Tarmac  £45–£70\n\n' +
+         'A typical two-car drive is 25–60 m². Those are indicative and not a ' +
+         'quotation — ground conditions and drainage move the number, sometimes a lot.',
+    options: [
+      { label: 'Why would the price change?', go: 'costwhy' },
+      { label: 'Get a written quote',         go: 'quote' },
+      { label: 'Something else',              go: 'start' }
+    ]
+  },
+  costwhy: {
+    say: 'Almost always the base. If the existing sub-base is sound we lay over ' +
+         'it; if it is breaking up it has to come out, and that is digging, ' +
+         'disposal and new stone before anything visible happens. Drainage is the ' +
+         'other one — if water runs towards the house it has to be dealt with, ' +
+         'and we will tell you that before we start rather than after.',
+    options: [
+      { label: 'Get a written quote', go: 'quote' },
+      { label: 'Something else',      go: 'start' }
+    ]
+  },
+  area: {
+    say: 'We work across South Somerset and North Dorset as standard — Yeovil, ' +
+         'Sherborne, Crewkerne, Chard, Martock and around. Further out we still ' +
+         'come, with a travel charge on smaller jobs. The postcode checker on this ' +
+         'page will tell you exactly which of those you are in.',
+    options: [
+      { label: 'Check my postcode', go: 'areacheck' },
+      { label: 'Something else',    go: 'start' }
+    ]
+  },
+  areacheck: {
+    say: 'The checker is in the Coverage section of this page — it only needs the ' +
+         'first half of your postcode, so BA20 rather than the whole thing.',
+    options: [{ label: 'Something else', go: 'start' }]
+  },
+  time: {
+    say: 'A typical two-car drive is three to five working days: a day to dig out, ' +
+         'a day for the sub-base, a day to lay, and a day either side for weather. ' +
+         'We do not start a job we cannot finish, so if the forecast is against us ' +
+         'we will move you rather than leave you with a hole.',
+    options: [
+      { label: 'Get a written quote', go: 'quote' },
+      { label: 'Something else',      go: 'start' }
+    ]
+  },
+  guarantee: {
+    say: 'Two of them. Ten years on the base, the sub-base and the drainage, and ' +
+         'that one is insurance-backed — it stands whether or not we are still ' +
+         'trading. Two years on workmanship above the base, and that one is backed ' +
+         'by us rather than by an insurer. Both have their exclusions written down ' +
+         'on the driveways page.',
+    options: [
+      { label: 'Get a written quote', go: 'quote' },
+      { label: 'Something else',      go: 'start' }
+    ]
+  },
+  repair: {
+    say: 'Often, yes — if the base is sound. If a drive has sunk or is cracking ' +
+         'along the line where cars turn, that is usually the base moving, and ' +
+         'resurfacing over it buys you two or three years at most. We would rather ' +
+         'tell you that at the quote than after.',
+    options: [
+      { label: 'Get a written quote', go: 'quote' },
+      { label: 'Speak to someone',    go: 'human' }
+    ]
+  },
+  quote:  { handoff: 'quote' },
+  human:  { handoff: 'tel' }
+};
+
+/* ---- MODE 2: the knowledge base -----------------------------------------
+   Each entry is the words a real person would use, not the words the business
+   would use. "How much" and "cost" and "price" are three ways of asking one
+   question and all three have to be in here.                                */
+var KB = [
+  { on: ['cost', 'price', 'how much', 'expensive', 'quote', 'm2', 'per metre', 'budget'],
+    say: 'As a guide: resin bound £70–£110 per m², block paving ' +
+         '£60–£95, tarmac £45–£70. A two-car drive is usually ' +
+         '25–60 m². Indicative only — the base and the drainage move it.',
+    more: { label: 'See the full pricing page', href: '#pricing' } },
+  { on: ['area', 'cover', 'come to', 'postcode', 'travel', 'far', 'yeovil',
+         'sherborne', 'crewkerne', 'chard', 'taunton'],
+    say: 'South Somerset and North Dorset as standard, further out with a travel ' +
+         'charge on smaller jobs. The coverage checker takes the first half of a ' +
+         'postcode and tells you which.',
+    more: { label: 'Check your postcode', href: '#area' } },
+  { on: ['how long', 'time', 'days', 'weeks', 'when can you', 'lead time', 'wait'],
+    say: 'Three to five working days on site for a typical two-car drive, plus ' +
+         'weather. Current lead time to start is around four weeks.' },
+  { on: ['guarantee', 'warranty', 'insured', 'insurance', 'covered', 'claim'],
+    say: 'Ten years on the base and drainage, insurance-backed. Two years on ' +
+         'workmanship, backed by us. Exclusions for both are written down rather ' +
+         'than implied.',
+    more: { label: 'Read the guarantees', href: '#guarantee' } },
+  { on: ['weed', 'moss', 'maintain', 'clean', 'jet wash', 'sealing', 'looking after'],
+    say: 'Resin needs almost nothing beyond a brush and the occasional wash. Block ' +
+         'paving wants its joints re-sanded every few years, which is a ten-minute ' +
+         'job and is what keeps weeds out. Avoid a jet wash on the joints.' },
+  { on: ['drainage', 'water', 'puddle', 'flood', 'soakaway', 'permeable', 'suds'],
+    say: 'Resin bound over a permeable base drains through, which usually avoids ' +
+         'needing planning permission for a front drive. Where the fall runs towards ' +
+         'a house we put in a linear drain to a soakaway.' },
+  { on: ['accredit', 'checkatrade', 'waste', 'licence', 'license', 'registered', 'cscs'],
+    say: 'Registered waste carrier with the Environment Agency, CSCS-carded team, ' +
+         '£5m public liability, Checkatrade member since 2011. Every number is ' +
+         'on the site and every one of them is checkable.',
+    more: { label: 'See the registrations', href: '#credentials' } },
+  { on: ['finance', 'pay monthly', 'instalments', 'credit', 'spread the cost'],
+    // Deliberate: consumer credit broking is a regulated activity, and a firm
+    // that is not authorised must not be arranging it - not even in a chat
+    // window, and not even by saying "yes we can sort that".
+    say: 'We do not offer finance and we are not authorised to arrange it, so I ' +
+         'cannot help there. We can stage payments across the job — that is ' +
+         'something to agree in writing at the quote.' }
+];
+
+/* ======================================================================== */
+/* Nothing below here should need editing to ship a site.                    */
+(function () {
+  var root  = document.getElementById('ask');
+  var panel = document.getElementById('askPanel');
+  var log   = document.getElementById('askLog');
+  var chips = document.getElementById('askChips');
+  var form  = document.getElementById('askForm');
+  var input = document.getElementById('askIn');
+  var ft    = document.getElementById('askFt');
+  if (!root || !panel) return;
+
+  document.getElementById('askTitle').textContent = ASSIST.title;
+
+  /* The launcher is built here rather than written in the markup: with
+     scripting off there is nothing behind it, and a button that opens
+     nothing is worse than no button at all. */
+  var opener = document.createElement('button');
+  opener.type = 'button';
+  opener.className = 'ask-open';
+  opener.setAttribute('aria-expanded', 'false');
+  opener.setAttribute('aria-controls', 'askPanel');
+  opener.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true">' +
+    '<path d="M21 12a8 8 0 0 1-8 8H7l-4 3 1.2-4.2A8 8 0 1 1 21 12Z"/></svg>';
+  opener.appendChild(document.createTextNode('Ask a question'));
+  root.appendChild(opener);
+
+  /* ---- living beside IND-ACT-001 ---------------------------------------
+     Both components own the bottom-right corner, and on a phone the sticky
+     call bar owns the whole bottom edge. Measure it rather than guessing:
+     it is one height under 768px and a floating pill above it, so any
+     hardcoded number is wrong at one of the two. */
+  var watched = null;
+
+  function lift() {
+    /* Look the bar up EVERY time rather than caching it at init. On a real
+       page the assistant is inlined above the call bar, so at the moment this
+       script first runs the bar is not in the DOM yet - a cached null meant
+       a lift of zero and a launcher sitting directly on the call button,
+       which is the one control the site cannot afford to cover. Measured on
+       both templates before this was caught. */
+    var bar = document.querySelector('.iab');
+    var h = 0;
+    if (bar) {
+      var cs = getComputedStyle(bar);
+      // The bar is a full-width strip under 768px and a floating pill above
+      // it, and it is 58px at one size and 74px at another. Measure it.
+      if (cs.display !== 'none' && cs.position === 'fixed') h = bar.offsetHeight + 8;
+
+      if (window.ResizeObserver && watched !== bar) {
+        watched = bar;
+        new ResizeObserver(lift).observe(bar);
+      }
+    }
+    root.style.setProperty('--ask-lift', h + 'px');
+  }
+
+  lift();
+  window.addEventListener('resize', lift);
+  // Both, and neither is redundant: DOMContentLoaded catches the bar that was
+  // still below this script in the document, and load catches a layout that
+  // settles late. lift() is idempotent, so running it three times costs
+  // nothing and missing it once costs the call button.
+  document.addEventListener('DOMContentLoaded', lift);
+  window.addEventListener('load', lift);
+
+  /* ---- rendering -------------------------------------------------------
+     textContent throughout. In mode 3 this text comes from a model, which
+     can be talked into emitting markup; in mode 2 the visitor's own words
+     are echoed back. One innerHTML here would be a cross-site scripting
+     hole on every page of the site. The single exception is the launcher
+     icon above, which is a literal in this file and contains no data. */
+  function say(text, who, more) {
+    var m = document.createElement('div');
+    m.className = 'ask-m ' + (who || 'bot');
+    m.appendChild(document.createTextNode(text));
+    if (more && more.href) {
+      var a = document.createElement('a');
+      a.className = 'ask-more';
+      a.href = more.href;
+      a.textContent = more.label || 'Read more';
+      m.appendChild(document.createElement('br'));
+      m.appendChild(a);
+    }
+    log.appendChild(m);
+    log.scrollTop = log.scrollHeight;
+    return m;
+  }
+
+  function offer(options) {
+    chips.textContent = '';
+    (options || []).forEach(function (o) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'ask-chip';
+      b.textContent = o.label;
+      b.addEventListener('click', function () {
+        say(o.label, 'you');
+        chips.textContent = '';
+        go(o.go);
+      });
+      chips.appendChild(b);
+    });
+  }
+
+  function handoff(kind) {
+    var h = ASSIST.handoff;
+    if (kind === 'tel') {
+      say('Ring the office on ' + h.telLabel + ' — somebody who does the work ' +
+          'answers it, not a call centre.', 'bot', { label: h.telLabel, href: 'tel:' + h.tel });
+    } else {
+      say('The quote form takes about a minute and we come and measure it either way.',
+          'bot', { label: h.quoteLabel, href: h.quote });
+    }
+    offer([{ label: 'Ask something else', go: 'start' }]);
+  }
+
+  function go(id) {
+    var node = SCRIPT[id];
+    if (!node) { go('start'); return; }
+    if (node.handoff) { handoff(node.handoff); return; }
+    if (node.say) say(node.say, 'bot');
+    offer(node.options);
+  }
+
+  /* ---- the fence, and the matcher --------------------------------------
+     Scoring is deliberately dull: how many of an entry's phrases appear in
+     what was typed, longer phrases counting for more so that "how much"
+     beats a stray "much". A cleverer scorer would be harder to predict, and
+     the failure that matters here is not a slightly worse answer - it is a
+     confident answer to a question the entry was not about. */
+  function normalise(s) {
+    return ' ' + String(s).toLowerCase().replace(/[^a-z0-9£\s]/g, ' ')
+      .replace(/\s+/g, ' ').trim() + ' ';
+  }
+
+  function score(text, phrases) {
+    var t = normalise(text), n = 0;
+    phrases.forEach(function (p) {
+      if (t.indexOf(' ' + p + ' ') > -1 || t.indexOf(normalise(p).slice(1)) > -1) {
+        n += p.indexOf(' ') > -1 ? 3 : 1;
+      }
+    });
+    return n;
+  }
+
+  /* Scored the same way as everything else, but checked first and satisfied
+     by a single match. Everywhere else here a low score means "probably not
+     about that" and the cost of being wrong is a slightly off answer. These
+     costs are not symmetric: offering a person to somebody who did not need
+     one is a small irritation, and answering a bereavement with a pricing
+     page is not. */
+  function sensitive(text) {
+    for (var i = 0; i < SENSITIVE.length; i++) {
+      if (score(text, SENSITIVE[i].on) > 0) return SENSITIVE[i];
+    }
+    return null;
+  }
+
+  function refused(text) {
+    for (var i = 0; i < REFUSE.length; i++) {
+      if (score(text, REFUSE[i].on) > 0) return REFUSE[i].say;
+    }
+    return null;
+  }
+
+  function lookup(text) {
+    var best = null, bestScore = 0;
+    KB.forEach(function (e) {
+      var s = score(text, e.on);
+      if (s > bestScore) { bestScore = s; best = e; }
+    });
+    return bestScore >= 1 ? best : null;
+  }
+
+  function dunno() {
+    say('I do not know that one, and I would rather say so than guess. ' +
+        'Ring the office on ' + ASSIST.handoff.telLabel + ' and somebody will tell ' +
+        'you properly.', 'bot',
+        { label: ASSIST.handoff.telLabel, href: 'tel:' + ASSIST.handoff.tel });
+  }
+
+  /* ---- mode 3 ----------------------------------------------------------
+     A socket. The request goes to the CLIENT's endpoint, which holds the key
+     and talks to the model; nothing about a provider is known here. With no
+     endpoint configured it says so and drops to mode 2, which is also what
+     it does when a wired endpoint is down - the visitor gets the knowledge
+     base rather than a dead window. */
+  function waiting(on) {
+    var w = document.getElementById('askWait');
+    if (on && !w) {
+      w = document.createElement('div');
+      w.className = 'ask-wait'; w.id = 'askWait';
+      for (var i = 0; i < 3; i++) w.appendChild(document.createElement('i'));
+      w.setAttribute('aria-label', 'Thinking');
+      log.appendChild(w); log.scrollTop = log.scrollHeight;
+    } else if (!on && w) { w.remove(); }
+  }
+
+  function ask3(text) {
+    if (!ASSIST.endpoint) {
+      say('Mode 3 has no endpoint configured, so there is nothing to ask. ' +
+          'Answering from the local knowledge base instead — which is exactly ' +
+          'what this does on a real site when the backend is down.', 'sys');
+      return ask2(text);
+    }
+    waiting(true);
+    fetch(ASSIST.endpoint, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question: text })
+    }).then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    }).then(function (data) {
+      waiting(false);
+      var answer = data && typeof data.answer === 'string' ? data.answer : '';
+      if (!answer) throw new Error('empty answer');
+      say(answer, 'bot');
+    })['catch'](function (e) {
+      waiting(false);
+      say('The assistant is not reachable at the moment (' + e.message +
+          '). Falling back to what this page knows.', 'sys');
+      ask2(text);
+    });
+  }
+
+  function ask2(text) {
+    var hit = lookup(text);
+    if (hit) say(hit.say, 'bot', hit.more); else dunno();
+  }
+
+  function ask(text) {
+    /* FIRST - before the fence, before the knowledge base, before the model.
+       It clears the chips as well as answering, so the conversation actually
+       stops instead of offering "anything else?" under a bereavement. */
+    var care = sensitive(text);
+    if (care) {
+      chips.textContent = '';
+      say(care.say, 'bot',
+          { label: ASSIST.handoff.telLabel, href: 'tel:' + ASSIST.handoff.tel });
+      return;
+    }
+
+    var stop = refused(text);
+    if (stop) { say(stop, 'bot'); return; }        // before the KB, before the model
+    if (ASSIST.mode === 3) ask3(text); else ask2(text);
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = input.value.trim();
+    if (!v) return;
+    say(v, 'you');
+    input.value = '';
+    ask(v);
+  });
+
+  /* ---- open, close, and where focus goes ------------------------------- */
+  function start() {
+    log.textContent = '';
+    chips.textContent = '';
+    say(ASSIST.intro, 'bot');
+    if (ASSIST.mode === 1) { form.hidden = true; offer(SCRIPT.start.options); }
+    else { form.hidden = false; }
+    ft.textContent = '';
+    ft.appendChild(document.createTextNode(ASSIST.retention + ' '));
+    var a = document.createElement('a');
+    a.href = ASSIST.privacy; a.textContent = 'Privacy notice';
+    ft.appendChild(a);
+  }
+
+  function open() {
+    panel.hidden = false;
+    opener.setAttribute('aria-expanded', 'true');
+    opener.style.display = 'none';
+    if (!log.childNodes.length) start();
+    (ASSIST.mode === 1 ? (chips.querySelector('button') || panel) : input).focus();
+  }
+
+  function close() {
+    panel.hidden = true;
+    opener.style.display = '';
+    opener.setAttribute('aria-expanded', 'false');
+    opener.focus();                 // never leave focus on a hidden element
+  }
+
+  opener.addEventListener('click', open);
+  document.getElementById('askX').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !panel.hidden) close();
+  });
+
+  // Demo only - the mode buttons above the component. Delete with them.
+  var btns = document.querySelectorAll('.demo-btns button[data-mode]');
+  Array.prototype.forEach.call(btns, function (b) {
+    b.addEventListener('click', function () {
+      Array.prototype.forEach.call(btns, function (o) {
+        o.setAttribute('aria-pressed', o === b ? 'true' : 'false');
+      });
+      ASSIST.mode = parseInt(b.getAttribute('data-mode'), 10);
+      if (!panel.hidden) start(); else log.textContent = '';
+    });
+  });
+})();
+</script>
+
+</div>
+<!--END UI-ASK-001-->
+
+<!--BEGIN IND-ACT-001-->
+<style>
+/* IND-ACT-001  Sticky action bar
+   Call, WhatsApp and Quote permanently within thumb reach on a phone.
+
+   The decisions that make it work:
+
+     - TWO PRESENTATIONS, ONE COMPONENT. Under 768px it is a full-width bar
+       across the foot of the screen, which is where a thumb rests. Above
+       768px that would be an intrusion, so it becomes a compact pill in the
+       bottom-right corner instead - still there, no longer in the way;
+     - THREE ACTIONS, NEVER FOUR. A fourth turns a decision into a toolbar,
+       and toolbars get ignored;
+     - IT DOES NOT HIDE ON SCROLL. Hiding a call button to reclaim thirty
+       pixels defeats the only reason it exists;
+     - IT DOES HIDE WHEN A FIELD IS FOCUSED. This is the bug almost every
+       version of this component ships with: on Android the keyboard pushes
+       the viewport up and a bottom-fixed bar lands directly on top of the
+       input being typed into. Focus in, bar out;
+     - IT GIVES BACK THE SPACE IT TAKES. A fixed bar covers the foot of the
+       page, so the script adds its own height to the body as padding - plus
+       env(safe-area-inset-bottom), which is what clears the iPhone home
+       indicator. Without that inset the bottom row of a bar sits under the
+       gesture area and is genuinely hard to press.
+
+   WhatsApp here is an ordinary wa.me link, not an embed. No script, no pixel,
+   nothing loaded from Meta - it is user-initiated outbound navigation like
+   any other link, so there is no consent question to answer. Do not swap it
+   for the official chat widget without asking; that one does set cookies.
+
+   Targets are 48px. WCAG 2.2 SC 2.5.8 asks for 24; this is a phone, and the
+   whole component is a bet on it being pressed. */
+
+.iab{position:fixed;z-index:60;left:0;right:0;bottom:0;
+  display:flex;gap:8px;padding:8px 10px;
+  padding-bottom:calc(8px + env(safe-area-inset-bottom, 0px));
+  background:color-mix(in srgb, var(--surface,#fff) 92%, transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--line,#e6ecf3);
+  transform:translateY(0);
+  transition:transform var(--dur,.26s) var(--ease-out,cubic-bezier(.2,.7,.3,1));
+  font:16px/1.4 inherit}
+.iab[data-hidden="1"]{transform:translateY(110%)}
+
+.iab a{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:3px;min-height:48px;padding:6px 4px;
+  border-radius:var(--r,10px);text-decoration:none;font-size:12.5px;font-weight:600;
+  letter-spacing:.005em;border:1px solid transparent}
+.iab a svg{width:20px;height:20px;fill:none;stroke-width:1.9;
+  stroke-linecap:round;stroke-linejoin:round}
+.iab a:focus-visible{outline:2px solid var(--ink,#0f1720);outline-offset:2px}
+
+.iab .a-call{background:var(--brand,#1f6feb);color:#fff}
+.iab .a-call svg{stroke:#fff}
+.iab .a-wa{background:var(--ground-2,#f2f5f8);color:var(--ink,#0f1720);
+  border-color:var(--line,#e6ecf3)}
+.iab .a-wa svg{stroke:currentColor}
+.iab .a-quote{background:var(--ground-2,#f2f5f8);color:var(--ink,#0f1720);
+  border-color:var(--line,#e6ecf3)}
+.iab .a-quote svg{stroke:currentColor}
+
+/* Desktop: the same markup, re-laid out as an unobtrusive pill. Labels sit
+   beside the icons here because there is room, and the whole thing shrinks
+   out of the reading column. */
+@media (min-width:768px){
+  .iab{left:auto;right:22px;bottom:22px;gap:6px;padding:7px;
+    border:1px solid var(--line,#e6ecf3);border-radius:var(--r-pill,999px);
+    box-shadow:0 10px 30px -12px rgba(16,32,48,.35)}
+  .iab a{flex:0 0 auto;flex-direction:row;gap:8px;padding:0 16px;min-height:42px;
+    border-radius:var(--r-pill,999px);font-size:13.5px}
+  .iab a svg{width:17px;height:17px}
+  .iab[data-hidden="1"]{transform:translateY(0)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .iab{transition:none}
+}
+</style>
+
+<div class="iab" id="iab" role="group" aria-label="Contact us">
+  <a class="a-call" href="tel:+441632960422">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.3a12 12 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z"/></svg>
+    <span>Call us</span>
+  </a>
+  <a class="a-wa" href="https://wa.me/441935123456" rel="noopener nofollow" target="_blank">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.6a8 8 0 0 1-11.9 7L4 20l1.5-4A8 8 0 1 1 20 11.6Z"/><path d="M9 9.4c.5 2.3 2.3 4.1 4.6 4.6l1-1.3 1.8.8v1.4c-2.9.4-6.4-2.6-6.9-5.6h1.4l.8 1.8Z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+  <a class="a-quote" href="#quote">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"/><path d="M8.5 11h7M8.5 15h4.5"/></svg>
+    <span>Get a quote</span>
+  </a>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var bar = document.getElementById('iab');
+  if (!bar) return;
+
+  var MOBILE = '(max-width: 767px)';
+  var mq = window.matchMedia ? window.matchMedia(MOBILE) : null;
+
+  /* Give back the space the bar takes, but only in the full-width mobile
+     layout - the desktop pill floats in the corner and occludes nothing
+     worth reserving a strip for. The safe-area inset is added on top,
+     because on a notched iPhone the bar's own padding sits INSIDE the
+     gesture area and the page still needs clearing past it. */
+  /* Give back the space the bar takes, but only in the full-width mobile
+     layout - the desktop pill floats in the corner and occludes nothing
+     worth reserving a strip for.
+
+     The page's own bottom padding is re-read every time rather than cached.
+     Caching it looks tidier and is quietly wrong: whatever value happened to
+     be in force when the component first ran gets treated as the truth for
+     the rest of the session, so a layout whose padding changes at a
+     breakpoint ends up composed against a stale base. Clearing our own
+     inline value first exposes the stylesheet's real number, every time, in
+     the same frame - so there is no flash and nothing to go out of date. */
+  function reserve(){
+    var body = document.body;
+    if (!body) return;
+    body.style.paddingBottom = '';
+    var want = (!mq || mq.matches) ? bar.offsetHeight : 0;
+    if (!want) return;                 /* desktop: the page keeps its own padding */
+    var base = parseFloat(getComputedStyle(body).paddingBottom) || 0;
+    /* env() again on top, because the bar's own padding sits INSIDE the
+       iPhone gesture area - the page still needs clearing past it. */
+    body.style.paddingBottom = 'calc(' + (base + want) +
+      'px + env(safe-area-inset-bottom, 0px))';
+  }
+
+  /* The Android keyboard case. When a field takes focus the on-screen
+     keyboard raises the visual viewport and a bottom-fixed element lands on
+     the field being typed into.
+
+     Focus alone is not proof a keyboard opened - a hardware keyboard, a
+     stylus, or a desktop browser all move focus without taking any space -
+     so where visualViewport exists we require the viewport to have ACTUALLY
+     shrunk. Without that API we fall back to inferring from focus, which is
+     the safe way round: hiding a bar that did not need hiding costs nothing,
+     leaving it sitting over the field costs the enquiry.
+
+     Hiding is not only a transform. A bar slid off the bottom of the screen
+     is still in the tab order and still read aloud, so a keyboard user tabs
+     into three links they cannot see. inert removes it from both at once,
+     with a tabindex fallback for engines that do not have it yet. */
+  function isField(el){
+    if (!el || !el.tagName) return false;
+    var t = el.tagName.toLowerCase();
+    return t === 'input' || t === 'textarea' || t === 'select' || el.isContentEditable;
+  }
+
+  function keyboardOpen(){
+    if (!isField(document.activeElement)) return false;
+    /* The desktop pill sits in a corner and covers no field, so it never
+       hides - and must never be made inert, or it becomes unreachable. */
+    if (mq && !mq.matches) return false;
+    var vv = window.visualViewport;
+    if (!vv) return true;
+    return vv.height < window.innerHeight * 0.82;
+  }
+
+  var links = bar.querySelectorAll('a');
+  function sync(){
+    var hide = keyboardOpen();
+    if (hide) bar.setAttribute('data-hidden', '1');
+    else bar.removeAttribute('data-hidden');
+    bar.setAttribute('aria-hidden', hide ? 'true' : 'false');
+    if ('inert' in bar){
+      bar.inert = hide;
+    } else {
+      for (var i = 0; i < links.length; i++){
+        if (hide) links[i].setAttribute('tabindex', '-1');
+        else links[i].removeAttribute('tabindex');
+      }
+    }
+  }
+
+  document.addEventListener('focusin', sync);
+  document.addEventListener('focusout', function(){
+    /* A tick, so moving between two fields does not flash the bar back. */
+    setTimeout(sync, 60);
+  });
+  if (window.visualViewport){
+    window.visualViewport.addEventListener('resize', sync, { passive: true });
+    window.visualViewport.addEventListener('scroll', sync, { passive: true });
+  }
+  sync();
+
+  /* Window resize is registered ALWAYS, not merely as a fallback for a
+     missing ResizeObserver. Crossing the 768px breakpoint - a tablet turned
+     on its side - changes which layout applies without necessarily
+     delivering a ResizeObserver entry in time, and the reserved mobile strip
+     would then stay behind as a band of dead space under a desktop pill.
+     reserve() is idempotent, so having three routes into it is free. */
+  window.addEventListener('resize', reserve);
+  if (window.ResizeObserver) new ResizeObserver(reserve).observe(bar);
+  if (mq){
+    if (mq.addEventListener) mq.addEventListener('change', reserve);
+    else if (mq.addListener) mq.addListener(reserve);
+  }
+  /* Measured at three points, because any one of them can be the first
+     moment the bar has a real height: now, after the next paint, and once
+     webfonts and stylesheets have settled. reserve() is idempotent, so
+     running it three times costs nothing. */
+  reserve();
+  if (window.requestAnimationFrame) requestAnimationFrame(reserve);
+  window.addEventListener('load', reserve);
+})();
+</script>
+
+</div>
+<!--END IND-ACT-001-->
+
+<script src="assets/site.js"></script>
+</body>
+</html>

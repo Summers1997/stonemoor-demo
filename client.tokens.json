@@ -1,0 +1,11 @@
+{
+  "_comment": "Override only what the brand actually changes. Re-run new_project.py --force, or just regenerate assets/brand.css from this.",
+  "tokens": {
+    "--brand": "#B4610F",
+    "--brand-2": "#3f8ef0",
+    "--brand-light": "#E8913F",
+    "--brand-pale": "#8fb8f5",
+    "--brand-wash": "#FDF3E9",
+    "--ink": "#1C1A17"
+  }
+}

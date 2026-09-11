@@ -1,0 +1,433 @@
+/* ============================================================================
+   SITE SYSTEM  -  layout, typography and chrome for the page templates
+   ----------------------------------------------------------------------------
+   Built entirely on _theme/tokens.css. This file adds no colours of its own,
+   so a client rebrand still means changing --brand in one place.
+
+   Load order on every page:
+       _theme/tokens.css      palette, easing, radii
+       _templates/site.css    this file
+       (page-specific <style>) only what is genuinely unique to that page
+
+   Structure:
+       1. Reset and base
+       2. Layout primitives      .wrap .section .grid
+       3. Typography             .eyebrow h1-h4 .lede
+       4. Buttons and links
+       5. Cards
+       6. Header and navigation
+       7. Footer
+       8. Forms
+       9. Reveal system          data-reveal (SCR-REV-001)
+      10. Utilities
+   ========================================================================== */
+
+/* ---------- 1. reset and base --------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;
+  /* The viewport scroll is governed by <html>, not <body>, so the clip has to
+     sit here too - otherwise a reveal's starting translate can still drag the
+     page sideways before it animates in. */
+  overflow-x:clip;
+
+  /* EVERY IN-PAGE ANCHOR, ON EVERY PAGE, LANDS UNDER THE STICKY HEADER
+     WITHOUT THIS. The header is position:sticky at top:0, so the browser
+     scrolls the target to y=0 and the header is already sitting there. The
+     heading you just asked for is the one thing you cannot see.
+
+     Measured across the template set on 11 Sep 2026 before this line existed:
+     six pages affected, worst case 83px of a header 82px tall - the target
+     completely covered. insight.html was the worst of them, because its
+     table of contents means EVERY section link in a long article lands
+     underneath.
+
+     scroll-padding on the scroll container, not scroll-margin on each target:
+     one declaration covers every anchor on every page, including ones nobody
+     has written yet, the skip link, and the browser's own jump when a URL
+     arrives with a #hash already in it.
+
+     --hdr-h is the CONDENSED header height, because by the time anything is
+     scrolling the header is condensed. site.js measures the real one and
+     overwrites this; the value here is the safe fallback with JavaScript off,
+     and a little too much space is invisible where too little is not. */
+  scroll-padding-top:calc(var(--hdr-h,64px) + 18px)}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font:16px/1.65 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Inter,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  /* Reveal-on-scroll starts elements offset by a translate. Until they
+     reveal, a horizontally-offset full-width block sticks out past the right
+     edge and the page can be scrolled sideways - briefly, but on a phone that
+     is exactly the kind of jitter that feels broken. clip rather than hidden:
+     hidden would turn body into a scroll container and break position:sticky. */
+  overflow-x:clip}
+img,svg,video{max-width:100%;height:auto;display:block}
+a{color:var(--brand)}
+:where(a,button,input,select,textarea,[tabindex]):focus-visible{
+  outline:2px solid var(--brand);outline-offset:3px;border-radius:2px}
+
+.skip{position:absolute;left:12px;top:-64px;z-index:100;background:var(--ink);color:#fff;
+  padding:12px 20px;border-radius:0 0 var(--r-sm) var(--r-sm);font-weight:600;text-decoration:none;
+  transition:top var(--dur-fast) var(--ease-out)}
+.skip:focus{top:0}
+main:focus{outline:none}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- 2. layout ------------------------------------------------------ */
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(20px,5vw,40px)}
+.wrap.narrow{max-width:760px}
+.wrap.wide{max-width:1320px}
+.section{padding-block:clamp(56px,9vw,110px)}
+.section.tight{padding-block:clamp(40px,6vw,72px)}
+.section.alt{background:var(--paper-alt)}
+.section.dark{background:var(--ground);color:var(--on-ground)}
+.section.dark p{color:var(--on-ground-mut)}
+.section.dark .eyebrow{color:var(--on-ground-fnt)}
+
+.grid{display:grid;gap:clamp(16px,2.4vw,26px)}
+.grid.c2{grid-template-columns:repeat(2,1fr)}
+.grid.c3{grid-template-columns:repeat(3,1fr)}
+.grid.c4{grid-template-columns:repeat(4,1fr)}
+.grid.auto{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(28px,5vw,72px);align-items:center}
+.split.copy-right{grid-template-columns:.95fr 1.05fr}
+@media(max-width:860px){
+  .grid.c3,.grid.c4{grid-template-columns:repeat(2,1fr)}
+  .split,.split.copy-right{grid-template-columns:1fr}
+}
+@media(max-width:560px){.grid.c2,.grid.c3,.grid.c4{grid-template-columns:1fr}}
+
+/* ---------- 3. typography -------------------------------------------------- */
+.eyebrow{font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--ink-45);margin:0 0 14px;display:block}
+h1,h2,h3,h4{margin:0;letter-spacing:-.03em;font-weight:600;text-wrap:balance;line-height:1.12}
+h1{font-size:clamp(32px,5.4vw,58px)}
+h2{font-size:clamp(26px,3.8vw,42px)}
+h3{font-size:clamp(18px,2.2vw,22px);letter-spacing:-.02em;line-height:1.3}
+h4{font-size:16.5px;letter-spacing:-.015em;line-height:1.35}
+p{margin:0;color:var(--ink-55);max-width:66ch}
+.lede{font-size:clamp(17px,2vw,20px);line-height:1.55;color:var(--ink-60);max-width:58ch}
+.stack{display:grid;gap:18px;align-content:start}
+.stack.tight{gap:10px}
+.measure{max-width:62ch}
+
+/* ---------- 4. buttons ----------------------------------------------------- */
+.btn{display:inline-flex;align-items:center;gap:.7em;padding:.95em 1.8em;border-radius:var(--r-sm);
+  font:600 15px/1 inherit;text-decoration:none;cursor:pointer;border:1px solid transparent;
+  transition:background var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out),
+             border-color var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out),
+             box-shadow var(--dur-fast) var(--ease-out)}
+.btn:hover{transform:translateY(-1px)}
+.btn.primary{background:var(--ink);color:#fff}
+.btn.primary:hover{background:var(--brand);box-shadow:0 10px 26px color-mix(in srgb,var(--brand) 28%,transparent)}
+.btn.ghost{border-color:var(--line-2);color:var(--ink);background:var(--surface)}
+.btn.ghost:hover{border-color:var(--brand);color:var(--brand)}
+.btn.on-dark{background:#fff;color:var(--ink)}
+.btn.on-dark:hover{background:var(--brand-light);color:var(--ink)}
+.btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform var(--dur) var(--ease-out)}
+.btn:hover svg{transform:translateX(4px)}
+
+/* min-height, because a 14.5px line box lands at 23.99px and this is a
+   standalone call to action rather than a link inside a sentence - so the
+   WCAG 2.2 SC 2.5.8 inline-text exception does not rescue it. Found 21 Aug
+   2026 on a sweep of the trade template; it was under-sized on both. */
+.arrow-link{display:inline-flex;align-items:center;gap:.55em;color:var(--brand);text-decoration:none;
+  font-weight:550;font-size:14.5px;min-height:24px}
+.arrow-link svg{width:14px;height:10px;stroke:currentColor;fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round;transition:transform var(--dur) var(--ease-out)}
+.arrow-link:hover svg{transform:translateX(5px)}
+
+/* ---------- 5. cards ------------------------------------------------------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  padding:clamp(20px,2.6vw,28px);display:grid;gap:10px;align-content:start;position:relative;
+  overflow:hidden;text-decoration:none;color:inherit;
+  transition:transform var(--dur) var(--ease-out),box-shadow var(--dur) var(--ease-out),
+             border-color var(--dur) var(--ease-out)}
+a.card:hover{transform:translateY(-5px);border-color:var(--line-2);
+  box-shadow:0 18px 44px color-mix(in srgb,var(--ink) 9%,transparent)}
+a.card::before{content:"";position:absolute;inset:0 0 auto;height:2px;
+  background:linear-gradient(90deg,var(--brand),var(--good));
+  transform:scaleX(0);transform-origin:left;transition:transform var(--dur-slow) var(--ease-out)}
+a.card:hover::before{transform:scaleX(1)}
+.card .ico{width:42px;height:42px;border-radius:11px;background:var(--brand-wash);display:grid;
+  place-items:center;transition:transform var(--dur) var(--ease-spring),background var(--dur-fast)}
+a.card:hover .ico{transform:scale(1.06) rotate(-4deg)}
+.card .ico svg{width:21px;height:21px;stroke:var(--brand);fill:none;stroke-width:1.7;
+  stroke-linecap:round;stroke-linejoin:round}
+.card p{font-size:14.5px}
+
+/* ---------- 6. header ------------------------------------------------------ */
+.hdr{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--paper) 82%,transparent);
+  border-bottom:1px solid transparent;
+  transition:padding var(--dur) var(--ease-out),background var(--dur),
+             border-color var(--dur),box-shadow var(--dur)}
+.hdr .inner{display:flex;align-items:center;gap:26px;padding-block:22px}
+.hdr.stuck{background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(14px);
+  border-bottom-color:var(--line);box-shadow:0 6px 24px color-mix(in srgb,var(--ink) 5%,transparent)}
+.hdr.stuck .inner{padding-block:13px}
+.brand{font-weight:650;letter-spacing:-.025em;font-size:19px;color:var(--ink);text-decoration:none;
+  transition:font-size var(--dur) var(--ease-out)}
+.hdr.stuck .brand{font-size:17px}
+.nav{display:flex;gap:26px;margin-left:auto;align-items:center}
+.nav a{color:var(--ink-55);text-decoration:none;font-size:14.5px;position:relative;
+  /* 6px each side takes a 14.5px line from 20px to 24px, the SC 2.5.8 floor.
+     The underline pseudo-element is positioned from the bottom, so it follows. */
+  padding-block:6px;display:inline-block}
+.nav a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1.5px;background:currentColor;
+  transform:scaleX(0);transform-origin:right;transition:transform var(--dur) var(--ease-out)}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1);transform-origin:left}
+.nav a[aria-current]{color:var(--brand)}
+/* 44px, not the 24px WCAG 2.2 SC 2.5.8 asks for: this is the only way to
+   reach the navigation on a phone, and it used to be 26x17. The bars stay
+   26x17 - the target grows around them via padding, so nothing moves. */
+.burger{display:none;width:44px;height:44px;position:relative;border:0;background:0;
+  cursor:pointer;padding:13.5px 9px;margin-left:auto;box-sizing:border-box}
+/* The bars are matched on ANY child, not on `i`. The adviser template writes
+   them as <i>, the other five write <span>, and this rule used to say
+   `.burger i` - so on trade, venue, b2b, art and one-page the button was a
+   correctly sized, keyboard-reachable, correctly labelled 44x44 area with
+   nothing drawn in it. An invisible menu button, on mobile, on every page of
+   five of the six templates.
+
+   It passed every check the library has, which is the interesting part: the
+   mobile check measures the tap target, the keyboard check tabs to it, and
+   both were satisfied by a button that rendered nothing. Nothing here asserts
+   that a control can be SEEN. Found on 11 Sep 2026 by looking at a phone-width
+   screenshot of a demo site and noticing the header had no menu on it. */
+.burger > i, .burger > span{position:absolute;left:9px;height:1.6px;width:26px;
+  background:var(--ink);
+  transition:transform var(--dur) var(--ease-out),opacity var(--dur-fast)}
+.burger > :first-child{top:13.5px}
+.burger > :nth-child(2){top:21.2px}
+.burger > :nth-child(3){top:28.9px}
+/* Two-bar variant takes the OUTER positions rather than the top two, so the
+   bounding box stays the 26x17 the comment above promises and the open-state
+   cross below is the same pair of transforms for both variants. */
+.burger > :nth-child(2):last-child{top:28.9px}
+body.menu-open .burger > :first-child{transform:translateY(7.7px) rotate(45deg)}
+body.menu-open .burger > :nth-child(2):not(:last-child){opacity:0}
+body.menu-open .burger > :nth-child(2):last-child,
+body.menu-open .burger > :nth-child(3){transform:translateY(-7.7px) rotate(-45deg)}
+/* The open menu is a full-screen panel on var(--ground), which is dark. The
+   bars are var(--ink), which is also dark - so the close control became an
+   almost invisible cross on a dark field the moment it was needed. Found in
+   the same screenshot as the bug above, immediately after fixing it. */
+body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-ground)}
+@media(max-width:820px){
+  .burger{display:block}
+  .nav{position:fixed;inset:0;background:var(--ground);flex-direction:column;justify-content:center;
+    gap:8px;margin:0;clip-path:circle(0% at calc(100% - 40px) 34px);
+    transition:clip-path .7s var(--ease-inout)}
+  body.menu-open .nav{clip-path:circle(150% at calc(100% - 40px) 34px)}
+  .nav a{color:var(--on-ground);font-size:clamp(24px,7vw,38px);font-weight:600;letter-spacing:-.03em;
+    opacity:0;transform:translateY(14px);transition:opacity .4s var(--ease-out),transform .5s var(--ease-out)}
+  body.menu-open .nav a{opacity:1;transform:none}
+  body.menu-open .nav a:nth-child(1){transition-delay:.16s}
+  body.menu-open .nav a:nth-child(2){transition-delay:.22s}
+  body.menu-open .nav a:nth-child(3){transition-delay:.28s}
+  body.menu-open .nav a:nth-child(4){transition-delay:.34s}
+  body.menu-open .nav a:nth-child(5){transition-delay:.40s}
+  .nav .btn{font-size:16px}
+}
+
+/* ---------- 7. footer ------------------------------------------------------ */
+.ftr{background:var(--ground);color:var(--on-ground);padding-top:64px;font-size:15px}
+.ftr .cols{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:clamp(24px,4vw,56px);
+  padding-bottom:44px}
+@media(max-width:860px){.ftr .cols{grid-template-columns:1fr 1fr;gap:32px}}
+@media(max-width:520px){.ftr .cols{grid-template-columns:1fr}}
+.ftr h4{font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--on-ground-fnt);margin:0 0 16px}
+.ftr ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
+/* Footer links sit in a stacked column, so the SC 2.5.8 inline-text exception
+   does not apply to them - they were 20px tall. inline-block plus padding
+   rather than a height, so a link that wraps to two lines still grows. */
+.ftr a{color:var(--on-ground-mut);text-decoration:none;font-size:14.5px;
+  display:inline-block;padding-block:3px;min-height:24px;
+  transition:color var(--dur-fast) var(--ease-out)}
+.ftr a:hover{color:var(--on-ground)}
+.ftr .blurb{color:var(--on-ground-mut);font-size:14px;max-width:34ch}
+.ftr .reg{border-top:1px solid var(--line-dark);padding-block:24px;color:var(--on-ground-fnt);
+  font-size:12.5px;line-height:1.65;display:grid;gap:11px}
+.ftr .reg p{color:inherit;max-width:88ch}
+.ftr .reg strong{color:var(--on-ground-mut)}
+.ftr .bar{border-top:1px solid var(--line-dark);padding-block:20px 26px;display:flex;
+  justify-content:space-between;gap:18px;flex-wrap:wrap;color:var(--on-ground-fnt);font-size:13px}
+.ftr .bar nav{display:flex;gap:20px;flex-wrap:wrap}
+
+/* ---------- 8. forms ------------------------------------------------------- */
+.field{position:relative}
+.field input,.field textarea,.field select{width:100%;padding:22px 14px 9px;border:1px solid var(--line-2);
+  border-radius:var(--r-sm);background:var(--surface);font:15px/1.4 inherit;color:var(--ink);outline:0;
+  transition:border-color var(--dur-fast),box-shadow var(--dur-fast)}
+.field textarea{min-height:120px;resize:vertical}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--brand);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--brand) 13%,transparent)}
+.field label{position:absolute;left:14px;top:15px;color:var(--ink-40);font-size:15px;pointer-events:none;
+  transform-origin:left top;transition:transform .28s var(--ease-out),color .28s}
+.field input:focus+label,.field input:not(:placeholder-shown)+label,
+.field textarea:focus+label,.field textarea:not(:placeholder-shown)+label{
+  transform:translateY(-9px) scale(.76);color:var(--brand)}
+.field .err{display:flex;align-items:center;gap:7px;color:#c0392b;font-size:13px;
+  max-height:0;opacity:0;overflow:hidden;transition:max-height .35s var(--ease-out),opacity .3s}
+.field.bad .err{max-height:40px;opacity:1;margin-top:6px}
+.field.bad input,.field.bad textarea{border-color:#d94a4a;
+  box-shadow:0 0 0 3px color-mix(in srgb,#d94a4a 13%,transparent)}
+
+/* consent checkbox is required but sits outside .field - it needs its own
+   invalid state, otherwise the only failing control gives no feedback */
+.consent.bad{color:#c0392b}
+.consent.bad input{outline:2px solid #d94a4a;outline-offset:2px}
+
+/* ---------- 9. reveal system (SCR-REV-001) --------------------------------- */
+[data-reveal]{opacity:0;transition:opacity var(--dur-slow) var(--ease-out),
+  transform var(--dur-slow) var(--ease-out);transition-delay:var(--d,0ms);will-change:opacity,transform}
+[data-reveal="up"]{transform:translateY(30px)}
+[data-reveal="left"]{transform:translateX(34px)}
+[data-reveal="right"]{transform:translateX(-34px)}
+[data-reveal="scale"]{transform:scale(.95)}
+[data-reveal].in{opacity:1;transform:none}
+
+/* ---------- 10. utilities --------------------------------------------------- */
+.center{text-align:center;margin-inline:auto}
+.stat b{display:block;font-size:clamp(28px,5vw,48px);font-weight:600;letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;color:var(--brand)}
+.stat span{color:var(--ink-45);font-size:13.5px;display:block;margin-top:4px}
+.pill{display:inline-block;font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
+  letter-spacing:.12em;text-transform:uppercase;padding:6px 11px;border-radius:var(--r-pill);
+  background:var(--brand-wash);color:var(--brand)}
+.rule{border:0;border-top:1px solid var(--line);margin-block:clamp(30px,5vw,56px)}
+
+/* ---------- 11. page furniture ---------------------------------------------
+   Promoted out of _templates-trade/trade.css on 21 August 2026, when a third
+   and fourth vertical were built. trade.css states the rule about itself: "if
+   a rule in it would also suit a third vertical, it belongs upstream in
+   site.css instead" - and none of what follows says anything about driveways.
+
+   What stayed behind is the ochre palette, the photographic hero and the
+   stats band: the things that make it a groundworks site rather than a site.
+   -------------------------------------------------------------------------- */
+
+.card-pad{padding:clamp(18px,2.6vw,24px)}
+.card-pad h3{margin:0 0 12px;font-size:15px;letter-spacing:-.01em}
+.mt{margin-top:16px}
+
+/* No photographs ship with this library - licensing is the hard rule, and
+   stock imagery is exactly where it goes wrong. This is a deliberate stand-in
+   at a real 3:2 so dropping a photograph in does not move the layout. Replace
+   the whole .ph-photo element with <img width height loading="lazy">. */
+.ph-photo{position:absolute;inset:0;display:grid;place-items:center;
+  background:
+    repeating-linear-gradient(38deg,rgba(255,255,255,.028) 0 14px,transparent 14px 34px),
+    linear-gradient(150deg,color-mix(in srgb,var(--brand) 34%,#2A2621),#1A1815);
+  /* 12px is the library's floor for readable body text on a phone; 11px was
+     under it even for a placeholder label. */
+  color:rgba(255,255,255,.34);font:600 12px/1 ui-monospace,Consolas,monospace;
+  letter-spacing:.16em;text-transform:uppercase;text-align:center;padding:0 20px}
+
+.steps{counter-reset:s}
+.step{display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;padding-block:24px;
+  /* minmax(0,1fr), not 1fr: a grid track has a min-content floor by default,
+     so the text column refuses to shrink and pushes the row past the edge of a
+     375px phone. Same trap the advisory template documents. */
+  border-top:1px solid var(--line)}
+.step:last-child{border-bottom:1px solid var(--line)}
+.step .n{counter-increment:s;font:600 12px/1 ui-monospace,Consolas,monospace;
+  color:var(--brand);padding-top:6px;letter-spacing:.1em}
+.step .n::before{content:"0" counter(s)}
+.step h3{margin:0 0 5px;font-size:17px}
+.step p{margin:0;color:var(--ink-60,#5b6a79);max-width:52ch}
+
+.quote{font-size:clamp(19px,2.8vw,27px);line-height:1.45;letter-spacing:-.02em;
+  color:var(--ink);max-width:26ch;font-weight:500;margin:0}
+.attrib{margin-top:14px;font-size:13.5px;color:var(--ink-45,#7d8b9a)}
+
+.btn-lg{padding:15px 30px;font-size:16px}
+.btn-sm{padding:8px 15px;font-size:13.5px}
+
+.section-tight{padding-block:clamp(34px,5vw,54px)}
+.narrow{max-width:760px}
+
+.crumbs{padding-block:18px;font-size:13.5px;color:var(--ink-45,#7d8b9a);
+  display:flex;gap:8px;flex-wrap:wrap}
+.crumbs a{color:var(--ink-60,#5b6a79);text-decoration:none}
+.crumbs a:hover{color:var(--brand);text-decoration:underline}
+.crumbs [aria-current]{color:var(--ink,#0f1720);font-weight:600}
+
+/* Prose beside a sticky rail. minmax(0,1fr) on the text column for the same
+   reason as .step: a grid track's default min-content floor refuses to shrink
+   and shoves the row past the edge of a phone. */
+.prose-split{display:grid;gap:clamp(28px,4vw,48px);
+  grid-template-columns:minmax(0,1fr) minmax(0,320px);align-items:start}
+@media (max-width:860px){.prose-split{grid-template-columns:minmax(0,1fr)}}
+.prose{min-width:0;max-width:68ch}
+.prose h2{margin:34px 0 10px;font-size:clamp(20px,2.4vw,25px);letter-spacing:-.02em}
+.prose h2:first-child{margin-top:0}
+.prose p{margin:0 0 14px;line-height:1.7;color:var(--ink-60,#5b6a79)}
+.prose strong{color:var(--ink,#0f1720)}
+.prose-aside{min-width:0;display:grid;gap:16px;position:sticky;top:88px}
+@media (max-width:860px){.prose-aside{position:static}}
+
+.dl{margin:0;font-size:14px}
+.dl > div{display:flex;justify-content:space-between;gap:14px;padding:7px 0;
+  border-top:1px solid var(--line,#e6ecf3)}
+.dl > div:first-child{border-top:0}
+.dl dt{margin:0;color:var(--ink-60,#5b6a79)}
+.dl dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+
+/* .card .fine as well as .fine: section 5 sets `.card p{font-size:14.5px}`,
+   which is one class plus one type and therefore beats a bare `.fine`. Small
+   print inside a card - which is where small print lives - was rendering at
+   14.5px, and had been since the rule was written. Specificity, not file
+   order: moving the rule between files could never have fixed it. */
+.fine,.card .fine{font-size:12.5px;line-height:1.6;color:var(--ink-45,#7d8b9a);margin:12px 0 0}
+.big-link{margin:0 0 6px;font-size:clamp(21px,3vw,27px);font-weight:650;letter-spacing:-.02em}
+.big-link a{color:var(--brand);text-decoration:none}
+.big-link a:hover{text-decoration:underline}
+
+/* ---- tap targets ----------------------------------------------------
+   WCAG 2.2 SC 2.5.8 wants 24px. Its exception is for a link inside a
+   sentence; neither a breadcrumb trail nor a stacked block of contact
+   details is a sentence, so both need padding rather than the exemption.
+
+   Note the deliberate exception: the quote wizard's choice cards hide their
+   radio inputs at 1x1 and use the label as the target. An automated sweep
+   flags those inputs, and it is wrong to - the real target is the card,
+   which is comfortably over 44px. */
+.crumbs a,.crumbs [aria-current]{display:inline-block;padding-block:3px;min-height:24px}
+.big-link a{display:inline-block;padding-block:2px;min-height:24px}
+.card-pad a{display:inline-block;padding-block:3px;min-height:24px}
+/* Band modifiers. .section-alt is the same thing as .section.alt above,
+   arrived at twice by two authors - .section.alt is the one to keep, and
+   .section-alt stays only because three templates now use it. Unify when
+   something else takes you through those files. */
+.section-alt{background:var(--paper-alt)}
+.section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;
+  flex-wrap:wrap;margin-bottom:26px}
+.cta-band{background:var(--brand-wash)}
+.center-x{margin-inline:auto}
+/* A dense data table: capacities in a venue, tolerances in a machine shop,
+   a price list anywhere. Promoted out of _templates-venue/venue.css when the
+   B2B template needed the same thing, and renamed off ".cap" so the next
+   vertical does not have to wonder whose it is.
+
+   min-width plus a scrolling wrapper, deliberately: a table of numbers that
+   reflows on a phone becomes unreadable, and one that widens the page makes
+   the whole document scroll sideways. Neither is acceptable, so the table
+   scrolls inside its own box and the page does not move. */
+.dtable{width:100%;border-collapse:collapse;font-size:14.5px;min-width:460px}
+.dtable th,.dtable td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.dtable thead th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink-45);border-bottom-width:2px}
+.dtable tbody th{font-weight:650}
+.dtable td{font-variant-numeric:tabular-nums}
+.dtable-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important;scroll-behavior:auto!important}
+  [data-reveal]{opacity:1!important;transform:none!important}
+}

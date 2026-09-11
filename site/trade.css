@@ -1,0 +1,63 @@
+/* Stonemoor Groundworks — page styles for the trade variant.
+   ---------------------------------------------------------------------------
+   Everything structural comes from ../_templates/site.css, unchanged. This file
+   holds only what a trade site needs that an advisory site does not, which
+   turned out to be very little: a photographic hero instead of a drawn one, a
+   placeholder treatment for images the library cannot ship, and a few bands.
+
+   That shortness is the point, and it got shorter on 21 Aug 2026: when the
+   third and fourth verticals were built, everything here that was not about
+   groundworks moved up into site.css. What is left is a palette, a hero and a
+   stats band - about 60 lines. If anything you add here would also suit
+   another vertical, it belongs upstream instead. */
+
+:root{
+  /* The whole re-brand. A dug-earth ochre against slate - warm, and nothing
+     like the blue an advisory firm uses. */
+  --brand:#B4610F;
+  --brand-light:#E8913F;
+  --brand-wash:#FDF3E9;
+  --ink:#1C1A17;
+  --ground-3:#221F1B;
+}
+
+/* ---- hero ---------------------------------------------------------- */
+.hero{position:relative;min-height:clamp(520px,84vh,780px);display:grid;align-items:end;
+  background:var(--ground-3);color:var(--on-ground);overflow:hidden}
+.hero-media{position:absolute;inset:0}
+.hero-media::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(to top,
+    color-mix(in srgb,var(--ground-3) 92%,transparent) 12%,
+    color-mix(in srgb,var(--ground-3) 55%,transparent) 52%,
+    color-mix(in srgb,var(--ground-3) 30%,transparent))}
+.hero .inner{position:relative;z-index:2;padding-block:clamp(48px,9vh,88px)}
+.hero h1{color:var(--on-ground);max-width:16ch}
+.hero .lede{color:var(--on-ground-mut);margin-block:16px 28px;max-width:46ch}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero .eyebrow{color:var(--brand-light)}
+.hero .line{display:block;overflow:hidden;padding-bottom:.06em}
+.hero .line span{display:block;transform:translateY(115%);
+  animation:rise .95s var(--ease-out) forwards;animation-delay:var(--d,0ms)}
+@keyframes rise{to{transform:translateY(0)}}
+
+/* ---- trust strip ----------------------------------------------------
+   DELETED 21 Aug 2026. This was a slim dark band under the hero holding
+   four unexplained phrases - "Checkatrade vetted", "£5m public liability" -
+   with no issuer, no number and nothing to check. It was hand-rolled here
+   because no component existed for it; UI-ACR-001 now does the job properly
+   and the home page inlines it from the catalogue like everything else.
+
+   Worth keeping the lesson rather than just the space: a bespoke band in a
+   template's local CSS is usually a component the library has not been
+   written yet, and it will be copied into the next vertical before anybody
+   notices. */
+
+.stats{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))}
+.stat{min-width:0}
+.stat b{display:block;font-size:clamp(30px,4.6vw,44px);font-weight:650;letter-spacing:-.03em;
+  color:var(--brand);font-variant-numeric:tabular-nums;line-height:1}
+.stat span{display:block;margin-top:6px;font-size:13.5px;color:var(--ink-60,#5b6a79)}
+
+@media (prefers-reduced-motion:reduce){
+  .hero .line span{animation:none;transform:none}
+}

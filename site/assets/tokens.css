@@ -1,0 +1,123 @@
+/* ============================================================================
+   MOTION LIBRARY - DESIGN TOKENS
+   ----------------------------------------------------------------------------
+   One file. Change it, and every component in the library rebrands.
+
+   HOW TO USE ON A CLIENT SITE
+   1. Copy this file into the project.
+   2. Override only what the brand actually changes - usually --brand and --ink:
+
+        :root{ --brand:#7A2E4E; --brand-light:#C46B93; --ink:#1A1418; }
+
+   3. Paste any component from the library. It picks the new palette up
+      immediately, because every component reads these variables.
+
+   Every component also carries the original value as a var() fallback -
+   var(--brand, #1f6feb) - so a component still renders correctly if this file
+   is missing. Nothing breaks; it just stops being themeable.
+   ========================================================================== */
+
+:root{
+
+  /* --- BRAND ---------------------------------------------------------------
+     --brand is the one value most client work changes. The lighter steps are
+     for dark grounds, where the base brand is usually too dark to read. */
+  --brand:        #1f6feb;   /* primary accent, CTAs, links, active states     */
+  --brand-2:      #3f8ef0;   /* secondary step, gradients, second data series  */
+  --brand-light:  #4f9dff;   /* brand on dark grounds                          */
+  --brand-pale:   #8fb8f5;   /* third data series, de-emphasised brand         */
+  --brand-wash:   #eef4fd;   /* faint brand tint - icon tiles, hover surfaces  */
+
+  /* --- DERIVED TINTS -------------------------------------------------------
+     Computed from the tokens above, so they follow a rebrand automatically.
+     Used by the mesh-gradient background and other soft, atmospheric fills. */
+  --brand-tint:   color-mix(in srgb, var(--brand)  46%, #fff);
+  --good-tint:    color-mix(in srgb, var(--good)   46%, #fff);
+  --violet-tint:  color-mix(in srgb, var(--violet) 42%, #fff);
+  --warn-tint:    color-mix(in srgb, var(--warn)   40%, #fff);
+
+  /* --- SEMANTIC ------------------------------------------------------------
+     Deliberately separate from --brand, so a rebrand never turns a positive
+     figure into a warning colour. */
+  --good:         #25b798;   /* growth, success, positive figures              */
+  --good-deep:    #1f9d6d;   /* success on light grounds, tick marks           */
+  --warn:         #f0993f;   /* shortfall, attention, drawdown                 */
+  --violet:       #7b61ff;   /* fourth series, tertiary accent                 */
+
+  /* --- INK RAMP (text on light grounds) ------------------------------------
+     A single ramp, darkest to lightest. Named by weight, not by role, so the
+     same token works for body copy in one component and a caption in another. */
+  --ink:          #0f1720;   /* headings, primary text, dark ground            */
+  --ink-60:       #4b5a68;
+  --ink-55:       #5b6b7c;   /* standard secondary text                        */
+  --ink-50:       #6b7887;
+  --ink-45:       #7d8b9a;   /* captions, supporting copy                      */
+  --ink-40:       #8b97a5;
+  --ink-35:       #9aa8b6;   /* labels, axis text                              */
+  --ink-30:       #a4b0bc;   /* faintest legible text                          */
+
+  /* --- GROUNDS -------------------------------------------------------------- */
+  --paper:        #fbfcfd;   /* default page ground                            */
+  --surface:      #ffffff;   /* cards and panels sitting on --paper            */
+  --paper-alt:    #f6f8fb;   /* alternating section ground                     */
+  --ground:       #0f1720;   /* dark section ground                            */
+  --ground-2:     #0d141c;   /* deeper dark ground                             */
+  --ground-3:     #0b1017;   /* deepest - hero and full-bleed panels           */
+
+  /* --- TEXT ON DARK GROUNDS ------------------------------------------------- */
+  --on-ground:      #eaf1f8; /* primary text on a dark ground                  */
+  --on-ground-mut:  #93a5b8; /* secondary text on a dark ground                */
+  --on-ground-mut2: #9fb0c2;
+  --on-ground-fnt:  #7d8b9a; /* faint text on a dark ground                    */
+
+  /* --- LINES AND EDGES ------------------------------------------------------ */
+  --line:         #e6ecf3;   /* standard border                                */
+  --line-2:       #dde4ec;   /* input borders, slightly stronger               */
+  --line-3:       #e8edf2;
+  --line-4:       #dbe5f0;   /* chart tracks, faint fills                      */
+  --line-soft:    #eef2f6;   /* internal dividers                              */
+  --line-dark:    #223041;   /* borders on dark grounds                        */
+
+  /* --- MOTION --------------------------------------------------------------
+     Shared easings are what make separately-authored components feel like one
+     system. Change these and the whole library changes character. */
+  --ease-out:     cubic-bezier(.16,1,.3,1);      /* default - decisive, settled */
+  --ease-inout:   cubic-bezier(.76,0,.24,1);     /* curtains, wipes, masks      */
+  --ease-spring:  cubic-bezier(.68,-.3,.27,1.35);/* dots, toggles, pops         */
+  --dur-fast:     .3s;
+  --dur:          .45s;
+  --dur-slow:     .8s;
+
+  /* --- SHAPE ---------------------------------------------------------------- */
+  --r-sm:         6px;
+  --r:            12px;
+  --r-lg:         16px;
+  --r-pill:       999px;
+}
+
+/* ---------------------------------------------------------------------------
+   OPTIONAL: dark-mode token flip.
+   The library's components are individually light- or dark-grounded by design,
+   so this is opt-in rather than automatic. Add data-theme="dark" to <html> if
+   the client site has a dark mode.
+   ------------------------------------------------------------------------- */
+:root[data-theme="dark"]{
+  --paper:      #0f1720;
+  --surface:    #161d26;
+  --paper-alt:  #131a23;
+  --ink:        #eaf1f8;
+  --ink-60:     #c3ced9;
+  --ink-55:     #aab7c4;
+  --ink-50:     #9aa8b6;
+  --ink-45:     #8b97a5;
+  --ink-40:     #7d8b9a;
+  --ink-35:     #6b7887;
+  --ink-30:     #5b6b7c;
+  --line:       #243040;
+  --line-2:     #2b3848;
+  --line-3:     #223041;
+  --line-4:     #1d2836;
+  --line-soft:  #1b2532;
+  --brand:      #4f9dff;
+  --brand-wash: #16243a;
+}

@@ -1,0 +1,17 @@
+{
+  "_comment": "Client copy, keyed by page. NOTHING READS THIS YET, and that is deliberate - see the module docstring. Fill it in as the site is built so that a later rebuild has somewhere to take the words from.",
+  "business": {
+    "name": "Stonemoor Groundworks",
+    "telephone": "",
+    "email": "",
+    "address": "",
+    "company_number": ""
+  },
+  "pages": {
+    "case-study.html": {},
+    "contact.html": {},
+    "index.html": {},
+    "service.html": {},
+    "work.html": {}
+  }
+}
