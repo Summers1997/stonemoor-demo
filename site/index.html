@@ -479,7 +479,15 @@
     </div>
   </div>
 
-  <form class="psc-form" id="pscForm" novalidate>
+  <!-- method="post" even though this form is handled entirely in JavaScript
+     and never submits. A form with no method defaults to GET, so the one
+     time the script does not run - a JS error, a slow network, a blocked
+     bundle - the browser puts every field the visitor typed into the URL,
+     where it reaches browser history, the Referer header and every server
+     log on the way. POST is the difference between a harmless reload and a
+     personal-data leak nobody would ever see happen. Flagged by the Push
+     Pipeline on four forms, 11 Sep 2026. -->
+<form method="post" class="psc-form" id="pscForm" novalidate>
     <div class="fld">
       <label for="pscIn">Postcode or town</label>
       <input id="pscIn" name="area" type="text" autocomplete="postal-code"
@@ -1616,7 +1624,15 @@
 
     <div class="ask-chips" id="askChips"></div>
 
-    <form class="ask-form" id="askForm" hidden>
+    <!-- method="post" even though this form is handled entirely in JavaScript
+     and never submits. A form with no method defaults to GET, so the one
+     time the script does not run - a JS error, a slow network, a blocked
+     bundle - the browser puts every field the visitor typed into the URL,
+     where it reaches browser history, the Referer header and every server
+     log on the way. POST is the difference between a harmless reload and a
+     personal-data leak nobody would ever see happen. Flagged by the Push
+     Pipeline on four forms, 11 Sep 2026. -->
+<form method="post" class="ask-form" id="askForm" hidden>
       <label class="ask-sr" for="askIn">Ask a question</label>
       <input class="ask-in" id="askIn" type="text" autocomplete="off"
              placeholder="Ask about prices, areas, timings&hellip;">
