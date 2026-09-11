@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects. Published root, beside _headers.
+#
+# NO CATCH-ALL. `/*  /index.html  200` is for a client-side routed app; on a
+# multi-page static site it answers every mistyped URL with the homepage at
+# status 200, so a dead internal link never fails a test and search engines
+# index the homepage under every wrong address. Let 404.html do its job.
+#
+# Old URLs from the site being replaced - one line each, 301 keeps the
+# ranking a 404 throws away. Gather them BEFORE the old site comes down;
+# afterwards they are guesswork.
+# /services.html    /service.html    301
