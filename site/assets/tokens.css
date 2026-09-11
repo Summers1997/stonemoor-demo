@@ -44,10 +44,27 @@
 
   /* --- SEMANTIC ------------------------------------------------------------
      Deliberately separate from --brand, so a rebrand never turns a positive
-     figure into a warning colour. */
-  --good:         #25b798;   /* growth, success, positive figures              */
-  --good-deep:    #1f9d6d;   /* success on light grounds, tick marks           */
-  --warn:         #f0993f;   /* shortfall, attention, drawdown                 */
+     figure into a warning colour.
+
+     THE THREE FILL TOKENS ARE NOT TEXT COLOURS. As text on a light ground --warn
+     measures 2.11:1 and --good-deep 3.23:1. They were being used for words -
+     status pills, verdict lines, the bold lead of 40 "the trap:" paragraphs -
+     and SEO-MTA-001 gave the game away by writing `var(--warn,#b7791f)`: a
+     dark amber fallback against a bright amber token, the same collision as
+     --ground-2. Use --warn-ink and --good-ink for anything anybody reads, and
+     keep these for bars, marks, borders and series. 11 Sep 2026. */
+  --good:         #25b798;   /* growth, success, positive figures - FILL       */
+  --good-deep:    #1f9d6d;   /* success on light grounds, tick marks - FILL    */
+  --good-ink:     #10593E;   /* 7.83 the same green as WORDS                   */
+  --warn:         #f0993f;   /* shortfall, attention, drawdown - FILL          */
+  --warn-ink:     #96590A;   /* 5.29 the same amber as WORDS                   */
+  /* There was no red here at all, and three components had invented one -
+     `var(--danger,#c0392b)` and `var(--success,#1e8e5a)` name tokens this
+     file has never defined, so they ALWAYS used their fallback and were
+     silently immune to a rebrand. #c0392b happens to measure 5.11, so it
+     reads; that was luck, not design. Added rather than aliased, and the
+     components now use the real names. 11 Sep 2026. */
+  --bad:          #c0392b;   /* 5.11 error, refusal, negative - fill AND text  */
   --violet:       #7b61ff;   /* fourth series, tertiary accent                 */
 
   /* --- INK RAMP (text on light grounds) ------------------------------------
@@ -89,11 +106,20 @@
   --ground-2:     #0d141c;   /* DEEPER DARK ground - see the note above        */
   --ground-3:     #0b1017;   /* deepest - hero and full-bleed panels           */
 
-  /* --- TEXT ON DARK GROUNDS ------------------------------------------------- */
-  --on-ground:      #eaf1f8; /* primary text on a dark ground                  */
-  --on-ground-mut:  #93a5b8; /* secondary text on a dark ground                */
-  --on-ground-mut2: #9fb0c2;
-  --on-ground-fnt:  #67727e; /* faint text on a dark ground                    */
+  /* --- TEXT ON DARK GROUNDS -------------------------------------------------
+     Ratios are against --ground #0f1720, the LIGHTEST of the three darks and
+     therefore the hardest. */
+  --on-ground:      #eaf1f8; /* 15.06  primary text on a dark ground           */
+  --on-ground-mut:  #93a5b8; /*  7.14  secondary text on a dark ground         */
+  --on-ground-mut2: #9fb0c2; /*  8.13                                          */
+  /* #67727e measured 3.68 on --ground and 3.89 on --ground-3: a token whose
+     documented role - "faint text on a dark ground" - it could not perform on
+     any ground the system defines. 39 elements in the adviser template alone,
+     including the whole footer and every regulatory line. It shared its hex
+     with --ink-45, which is a LIGHT-ground token, and the two had silently
+     been treated as interchangeable. #7B8794 is 4.93 on --ground, still
+     visibly fainter than --on-ground-mut at 7.14. 11 Sep 2026. */
+  --on-ground-fnt:  #7B8794; /*  4.93  faint text on a dark ground             */
 
   /* --- LINES AND EDGES ------------------------------------------------------ */
   --line:         #e6ecf3;   /* standard border                                */
@@ -135,6 +161,8 @@
   --ink-55:     #aab7c4;
   --ink-50:     #9aa8b6;
   --ink-45:     #8b97a5;
+  /* Same rule as the light ramp: the bottom three are 3.46, 3.22 and 3.10
+     against --surface and are NOT text colours in this theme either. */
   --ink-40:     #67727e;
   --ink-35:     #616d7b;
   --ink-30:     #5b6b7c;

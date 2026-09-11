@@ -109,7 +109,7 @@
    Delete any entry the client cannot evidence. There is no version of this
    component that is safe to fill with aspirational memberships.                */
 
-.acr{--acr-accent:var(--brand,#1f6feb);
+.acr{--acr-accent:var(--brand,#1D69DF);
   container-type:inline-size}
 
 .acr-head{max-width:60ch;margin-bottom:clamp(20px,3vw,30px)}
@@ -136,7 +136,7 @@
    not need to hear it twice. */
 .acr-mark{width:52px;height:52px;flex:0 0 auto;border-radius:10px;
   display:grid;place-items:center;
-  background:color-mix(in srgb,var(--acr-accent) 10%,transparent);
+  background:color-mix(in srgb,var(--acr-accent) 6%,transparent);
   color:var(--acr-accent);
   font:650 15px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
   letter-spacing:.04em;border:1px solid color-mix(in srgb,var(--acr-accent) 22%,transparent)}
@@ -148,7 +148,7 @@
 .acr-meta{margin:0 0 12px;font-size:13px;border-top:1px solid var(--line,#e6ecf3)}
 .acr-meta > div{display:flex;justify-content:space-between;gap:12px;padding:6px 0;
   border-bottom:1px solid var(--line,#e6ecf3)}
-.acr-meta dt{margin:0;color:var(--ink-45,#67727e)}
+.acr-meta dt{margin:0;color:var(--ink-45,#636E7A)}
 .acr-meta dd{margin:0;font-weight:600;text-align:right;min-width:0;
   overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
 
@@ -172,7 +172,7 @@
 /* The line that keeps the panel honest. It is part of the component, not a
    caption somebody might delete. */
 .acr-foot{margin:clamp(18px,2.6vw,24px) 0 0;font-size:12.5px;line-height:1.6;
-  color:var(--ink-45,#67727e);max-width:70ch}
+  color:var(--ink-45,#636E7A);max-width:70ch}
 
 @container (max-width:380px){
   .acr-i{grid-template-columns:minmax(0,1fr);gap:12px}
@@ -396,16 +396,16 @@
   border-radius:var(--r-lg,16px);padding:clamp(22px,4vw,32px);position:relative;overflow:hidden}
 .psc::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:130px;
   background:radial-gradient(60% 100% at 50% 0,
-    color-mix(in srgb,var(--brand,#1f6feb) 10%,transparent),transparent 70%);
+    color-mix(in srgb,var(--brand,#1D69DF) 10%,transparent),transparent 70%);
   pointer-events:none}
 
 .psc-hd{display:flex;align-items:flex-start;gap:14px;margin:0 0 20px;position:relative}
 .psc-hd .ic{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
   background:var(--brand-wash,#eef4fd)}
-.psc-hd .ic svg{width:19px;height:19px;fill:none;stroke:var(--brand,#1f6feb);stroke-width:1.8;
+.psc-hd .ic svg{width:19px;height:19px;fill:none;stroke:var(--brand,#1D69DF);stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
 .psc-hd h2{margin:0 0 4px;font-size:20px;font-weight:600;letter-spacing:-.018em}
-.psc-hd p{margin:0;font-size:14px;color:var(--ink-45,#67727e)}
+.psc-hd p{margin:0;font-size:14px;color:var(--ink-45,#636E7A)}
 
 .psc-form{display:flex;gap:10px;flex-wrap:wrap;position:relative}
 .psc-form .fld{flex:1 1 200px;min-width:0}
@@ -413,16 +413,16 @@
 .psc-form input{width:100%;min-width:0;font:inherit;font-size:16px;padding:12px 14px;
   border:1px solid var(--line,#e6ecf3);border-radius:var(--r,10px);background:var(--paper,#fbfcfd);
   color:inherit;text-transform:uppercase}
-.psc-form input::placeholder{text-transform:none;color:var(--ink-35,#9aa8b6)}
-.psc-form input:focus-visible{outline:2px solid var(--brand,#1f6feb);outline-offset:2px;
-  border-color:var(--brand,#1f6feb)}
+.psc-form input::placeholder{text-transform:none;color:var(--ink-45,#636E7A)}
+.psc-form input:focus-visible{outline:2px solid var(--brand,#1D69DF);outline-offset:2px;
+  border-color:var(--brand,#1D69DF)}
 .psc-go{align-self:flex-end;font:inherit;font-weight:600;font-size:15px;padding:12px 22px;
-  min-height:46px;border:0;border-radius:var(--r,10px);background:var(--brand,#1f6feb);color:#fff;
+  min-height:46px;border:0;border-radius:var(--r,10px);background:var(--brand,#1D69DF);color:#fff;
   cursor:pointer;transition:filter var(--dur-fast,.16s) var(--ease-out,ease)}
 .psc-go:hover{filter:brightness(1.08)}
 .psc-go:focus-visible{outline:2px solid var(--ink,#0f1720);outline-offset:2px}
 
-.psc-hint{margin:10px 0 0;font-size:12.5px;color:var(--ink-45,#67727e)}
+.psc-hint{margin:10px 0 0;font-size:12.5px;color:var(--ink-45,#636E7A)}
 
 /* The result. Three states, each with its own colour, icon and next step.
    It is a live region, so a screen reader hears the answer without hunting. */
@@ -440,13 +440,13 @@
 .psc-res a{color:inherit;font-weight:600}
 
 .psc-res.yes{background:var(--good-tint,#eaf7ef);border-color:color-mix(in srgb,var(--good,#1f9254) 30%,transparent);
-  color:var(--good-deep,#12572f)}
+  color:var(--good-ink,#10593E)}
 .psc-res.yes .mk{background:var(--good,#1f9254)}
 .psc-res.maybe{background:var(--warn-tint,#fdf4e5);border-color:color-mix(in srgb,var(--warn,#b7791f) 32%,transparent);
   color:#6b4708}
 .psc-res.maybe .mk{background:var(--warn,#b7791f)}
 .psc-res.no{background:var(--paper-alt,#f6f8fb);border-color:var(--line,#e6ecf3);color:var(--ink,#0f1720)}
-.psc-res.no .mk{background:var(--ink-45,#67727e)}
+.psc-res.no .mk{background:var(--ink-45,#636E7A)}
 
 .psc-list{margin:9px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .psc-list li{font-size:12.5px;font-weight:600;padding:3px 9px;border-radius:var(--r-pill,999px);
@@ -456,7 +456,7 @@
 /* 12px, not 11.5px: the library floor for text a visitor actually reads,
    and this is a heading rather than a decorative glyph. */
 .psc-all h3{margin:0 0 9px;font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45,#67727e)}
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45,#636E7A)}
 .psc-all ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .psc-all li{font-size:13px;padding:4px 10px;border-radius:var(--r-pill,999px);
   background:var(--paper-alt,#f6f8fb);color:var(--ink-60,#5b6a79)}
@@ -780,9 +780,9 @@
 .gal-chip .n{font-weight:400;opacity:.7;margin-left:5px;font-variant-numeric:tabular-nums}
 .gal-chip:hover{border-color:var(--ink-35,#9aa8b6)}
 .gal-chip[aria-pressed="true"]{background:var(--ink,#0f1720);border-color:var(--ink,#0f1720);color:#fff}
-.gal-chip:focus-visible{outline:2px solid var(--brand,#1f6feb);outline-offset:2px}
+.gal-chip:focus-visible{outline:2px solid var(--brand,#1D69DF);outline-offset:2px}
 
-.gal-count{margin-left:auto;font-size:13px;color:var(--ink-45,#67727e);
+.gal-count{margin-left:auto;font-size:13px;color:var(--ink-45,#636E7A);
   font-variant-numeric:tabular-nums}
 
 .gal-grid{display:grid;gap:14px;
@@ -795,14 +795,14 @@
   height:100%;transition:transform var(--dur-fast,.18s) var(--ease-out,ease),
                          box-shadow var(--dur-fast,.18s) var(--ease-out,ease)}
 .gal-t:hover{transform:translateY(-3px);box-shadow:0 14px 28px -18px rgba(16,32,48,.55)}
-.gal-t:focus-visible{outline:2px solid var(--brand,#1f6feb);outline-offset:2px}
+.gal-t:focus-visible{outline:2px solid var(--brand,#1D69DF);outline-offset:2px}
 
 /* The placeholder. 3:2, which is what a phone camera held sideways gives you,
    so real photographs drop in without the grid moving. */
 .gal-ph{aspect-ratio:3/2;width:100%;display:block;position:relative;overflow:hidden;
   background:linear-gradient(135deg,
-    color-mix(in srgb,var(--brand,#1f6feb) 22%,var(--paper-alt,#f6f8fb)),
-    color-mix(in srgb,var(--brand,#1f6feb) 6%,var(--paper-alt,#f6f8fb)))}
+    color-mix(in srgb,var(--brand,#1D69DF) 22%,var(--paper-alt,#f6f8fb)),
+    color-mix(in srgb,var(--brand,#1D69DF) 6%,var(--paper-alt,#f6f8fb)))}
 .gal-ph::after{content:"";position:absolute;inset:0;opacity:.5;
   background-image:repeating-linear-gradient(var(--a,45deg),
     rgba(255,255,255,.16) 0 8px, transparent 8px 18px)}
@@ -810,12 +810,12 @@
 
 .gal-cap{padding:13px 15px 15px}
 .gal-cap b{display:block;font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.35}
-.gal-cap span{display:block;font-size:13.5px;color:var(--ink-45,#67727e);margin-top:3px}
+.gal-cap span{display:block;font-size:13.5px;color:var(--ink-45,#636E7A);margin-top:3px}
 
 .gal-none{margin:0;padding:44px 20px;text-align:center;border:1px dashed var(--line,#e6ecf3);
-  border-radius:var(--r,10px);color:var(--ink-45,#67727e);font-size:14.5px}
+  border-radius:var(--r,10px);color:var(--ink-45,#636E7A);font-size:14.5px}
 .gal-none button{font:inherit;font-weight:700;background:none;border:0;padding:0;
-  color:var(--brand,#1f6feb);cursor:pointer;text-decoration:underline}
+  color:var(--brand,#1D69DF);cursor:pointer;text-decoration:underline}
 
 @media (prefers-reduced-motion:reduce){
   .gal-t,.gal-chip{transition:none}
@@ -1058,17 +1058,17 @@
 .hrs-now{display:flex;align-items:center;gap:11px;margin:0 0 18px;padding:0 0 16px;
   border-bottom:1px solid var(--line,#e6ecf3)}
 .hrs-dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%;position:relative;
-  background:var(--ink-45,#67727e)}
+  background:var(--ink-45,#636E7A)}
 .hrs-dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;
   border:2px solid currentColor;opacity:0}
-.hrs[data-state="open"] .hrs-dot{background:var(--good,#1f9254);color:var(--good,#1f9254)}
+.hrs[data-state="open"] .hrs-dot{background:var(--good,#1f9254);color:var(--good-ink,#10593E)}
 .hrs[data-state="open"] .hrs-dot::after{animation:hrs-ping 2.4s ease-out infinite}
 .hrs[data-state="soon"] .hrs-dot{background:var(--warn,#b7791f)}
 @keyframes hrs-ping{0%{opacity:.55;transform:scale(.7)}70%,100%{opacity:0;transform:scale(1.5)}}
 
 .hrs-txt b{display:block;font-size:16.5px;font-weight:600;letter-spacing:-.012em;line-height:1.3}
-.hrs-txt span{display:block;font-size:13.5px;color:var(--ink-45,#67727e);margin-top:2px}
-.hrs[data-state="open"] .hrs-txt b{color:var(--good-deep,#12572f)}
+.hrs-txt span{display:block;font-size:13.5px;color:var(--ink-45,#636E7A);margin-top:2px}
+.hrs[data-state="open"] .hrs-txt b{color:var(--good-ink,#10593E)}
 
 .hrs-tbl{margin:0;font-size:14.5px}
 .hrs-tbl > div{display:flex;justify-content:space-between;gap:16px;align-items:baseline;
@@ -1076,16 +1076,16 @@
 .hrs-tbl dt{margin:0;color:var(--ink-60,#5b6a79)}
 .hrs-tbl dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;min-width:0}
 .hrs-tbl .today dt,.hrs-tbl .today dd{font-weight:700;color:var(--ink,#0f1720)}
-.hrs-tbl .shut dd{color:var(--ink-45,#67727e)}
+.hrs-tbl .shut dd{color:var(--ink-45,#636E7A)}
 .hrs-tbl .ovr dd::after{content:" \00b7 bank holiday";font-size:12px;font-weight:400;
-  color:var(--ink-45,#67727e)}
+  color:var(--ink-45,#636E7A)}
 
 .hrs-em{margin:18px 0 0;padding:13px 15px;border-radius:var(--r,10px);
   background:var(--brand-wash,#eef4fd);display:flex;gap:11px;align-items:center;
   font-size:14px}
-.hrs-em svg{flex:0 0 auto;width:18px;height:18px;fill:none;stroke:var(--brand,#1f6feb);
+.hrs-em svg{flex:0 0 auto;width:18px;height:18px;fill:none;stroke:var(--brand,#1D69DF);
   stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.hrs-em a{color:var(--brand,#1f6feb);font-weight:700;text-decoration:none}
+.hrs-em a{color:var(--brand,#1D69DF);font-weight:700;text-decoration:none}
 .hrs-em a:hover{text-decoration:underline}
 
 @media (prefers-reduced-motion:reduce){
@@ -1492,7 +1492,7 @@
        lifts itself clear rather than landing on top of the call button, which
        is the one control the site cannot afford to cover.                     */
 
-.ask{--ask-accent:var(--brand,#1f6feb);
+.ask{--ask-accent:var(--brand,#1D69DF);
   /* Cleared by JS when IND-ACT-001 is on the page. Not a guess at its height:
      the bar is measured, because it is 56px on one breakpoint and 64px on
      another and a hardcoded number is wrong on one of them. */
@@ -1530,9 +1530,9 @@
 .ask-hd-t b{display:block;font-size:15px;letter-spacing:-.01em}
 /* The disclosure. Permanent, in the header, and not a greeting that scrolls
    away after four messages. */
-.ask-bot{display:block;font-size:12px;color:var(--ink-45,#67727e);margin-top:2px}
+.ask-bot{display:block;font-size:12px;color:var(--ink-45,#636E7A);margin-top:2px}
 .ask-x{flex:0 0 auto;width:32px;height:32px;border:0;background:0;cursor:pointer;
-  border-radius:8px;color:var(--ink-45,#67727e);font-size:18px;line-height:1}
+  border-radius:8px;color:var(--ink-45,#636E7A);font-size:18px;line-height:1}
 .ask-x:hover{background:var(--paper-alt,#f4f6f9);color:var(--ink,#0f1720)}
 .ask-x:focus-visible{outline:2px solid var(--ask-accent);outline-offset:2px}
 
@@ -1569,7 +1569,7 @@
   border-radius:var(--r,10px);background:var(--ask-accent);color:#fff;font:650 14px/1 inherit}
 .ask-send:focus-visible{outline:2px solid var(--ask-accent);outline-offset:2px}
 
-.ask-ft{padding:0 14px 12px;font-size:11.5px;line-height:1.5;color:var(--ink-45,#67727e);
+.ask-ft{padding:0 14px 12px;font-size:11.5px;line-height:1.5;color:var(--ink-45,#636E7A);
   flex:0 0 auto}
 .ask-ft a{color:inherit}
 
@@ -2267,7 +2267,7 @@ var KB = [
   stroke-linecap:round;stroke-linejoin:round}
 .iab a:focus-visible{outline:2px solid var(--ink,#0f1720);outline-offset:2px}
 
-.iab .a-call{background:var(--brand,#1f6feb);color:#fff}
+.iab .a-call{background:var(--brand,#1D69DF);color:#fff}
 .iab .a-call svg{stroke:#fff}
 .iab .a-wa{background:var(--paper-alt,#f6f8fb);color:var(--ink,#0f1720);
   border-color:var(--line,#e6ecf3)}

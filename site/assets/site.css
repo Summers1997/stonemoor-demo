@@ -274,7 +274,16 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
   padding-bottom:44px}
 @media(max-width:860px){.ftr .cols{grid-template-columns:1fr 1fr;gap:32px}}
 @media(max-width:520px){.ftr .cols{grid-template-columns:1fr}}
-.ftr h4{font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.16em;
+/* h3 AND h4. This rule named only h4, and every template except the adviser
+   one writes its footer column headings as <h3> - so on five of the six they
+   fell through to the global h3 rule and rendered at 22px sans-serif where a
+   12px uppercase mono label was intended. Visible on the live demo site and
+   caught on 11 Sep 2026 by reading a computed style, not by any check: it is
+   not an accessibility failure, just wrong, and nothing in the repo looks for
+   wrong. Exactly the burger bug again - a stylesheet naming one element and
+   the markup using another. The adviser template moved to <h3> at the same
+   time, because <h4> after an <h2> skips a level. */
+.ftr h3,.ftr h4{font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.16em;
   text-transform:uppercase;color:var(--on-ground-fnt);margin:0 0 16px}
 .ftr ul{list-style:none;margin:0;padding:0;display:grid;gap:11px}
 /* Footer links sit in a stacked column, so the SC 2.5.8 inline-text exception
@@ -385,7 +394,7 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
 
 .quote{font-size:clamp(19px,2.8vw,27px);line-height:1.45;letter-spacing:-.02em;
   color:var(--ink);max-width:26ch;font-weight:500;margin:0}
-.attrib{margin-top:14px;font-size:13.5px;color:var(--ink-45,#67727e)}
+.attrib{margin-top:14px;font-size:13.5px;color:var(--ink-45,#636E7A)}
 
 .btn-lg{padding:15px 30px;font-size:16px}
 .btn-sm{padding:8px 15px;font-size:13.5px}
@@ -393,7 +402,7 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
 .section-tight{padding-block:clamp(34px,5vw,54px)}
 .narrow{max-width:760px}
 
-.crumbs{padding-block:18px;font-size:13.5px;color:var(--ink-45,#67727e);
+.crumbs{padding-block:18px;font-size:13.5px;color:var(--ink-45,#636E7A);
   display:flex;gap:8px;flex-wrap:wrap}
 .crumbs a{color:var(--ink-60,#5b6a79);text-decoration:none}
 .crumbs a:hover{color:var(--brand);text-decoration:underline}
@@ -425,7 +434,7 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
    print inside a card - which is where small print lives - was rendering at
    14.5px, and had been since the rule was written. Specificity, not file
    order: moving the rule between files could never have fixed it. */
-.fine,.card .fine{font-size:12.5px;line-height:1.6;color:var(--ink-45,#67727e);margin:12px 0 0}
+.fine,.card .fine{font-size:12.5px;line-height:1.6;color:var(--ink-45,#636E7A);margin:12px 0 0}
 .big-link{margin:0 0 6px;font-size:clamp(21px,3vw,27px);font-weight:650;letter-spacing:-.02em}
 .big-link a{color:var(--brand);text-decoration:none}
 .big-link a:hover{text-decoration:underline}

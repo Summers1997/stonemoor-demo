@@ -89,17 +89,17 @@
 .hrs-now{display:flex;align-items:center;gap:11px;margin:0 0 18px;padding:0 0 16px;
   border-bottom:1px solid var(--line,#e6ecf3)}
 .hrs-dot{flex:0 0 auto;width:10px;height:10px;border-radius:50%;position:relative;
-  background:var(--ink-45,#67727e)}
+  background:var(--ink-45,#636E7A)}
 .hrs-dot::after{content:"";position:absolute;inset:-5px;border-radius:50%;
   border:2px solid currentColor;opacity:0}
-.hrs[data-state="open"] .hrs-dot{background:var(--good,#1f9254);color:var(--good,#1f9254)}
+.hrs[data-state="open"] .hrs-dot{background:var(--good,#1f9254);color:var(--good-ink,#10593E)}
 .hrs[data-state="open"] .hrs-dot::after{animation:hrs-ping 2.4s ease-out infinite}
 .hrs[data-state="soon"] .hrs-dot{background:var(--warn,#b7791f)}
 @keyframes hrs-ping{0%{opacity:.55;transform:scale(.7)}70%,100%{opacity:0;transform:scale(1.5)}}
 
 .hrs-txt b{display:block;font-size:16.5px;font-weight:600;letter-spacing:-.012em;line-height:1.3}
-.hrs-txt span{display:block;font-size:13.5px;color:var(--ink-45,#67727e);margin-top:2px}
-.hrs[data-state="open"] .hrs-txt b{color:var(--good-deep,#12572f)}
+.hrs-txt span{display:block;font-size:13.5px;color:var(--ink-45,#636E7A);margin-top:2px}
+.hrs[data-state="open"] .hrs-txt b{color:var(--good-ink,#10593E)}
 
 .hrs-tbl{margin:0;font-size:14.5px}
 .hrs-tbl > div{display:flex;justify-content:space-between;gap:16px;align-items:baseline;
@@ -107,16 +107,16 @@
 .hrs-tbl dt{margin:0;color:var(--ink-60,#5b6a79)}
 .hrs-tbl dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;min-width:0}
 .hrs-tbl .today dt,.hrs-tbl .today dd{font-weight:700;color:var(--ink,#0f1720)}
-.hrs-tbl .shut dd{color:var(--ink-45,#67727e)}
+.hrs-tbl .shut dd{color:var(--ink-45,#636E7A)}
 .hrs-tbl .ovr dd::after{content:" \00b7 bank holiday";font-size:12px;font-weight:400;
-  color:var(--ink-45,#67727e)}
+  color:var(--ink-45,#636E7A)}
 
 .hrs-em{margin:18px 0 0;padding:13px 15px;border-radius:var(--r,10px);
   background:var(--brand-wash,#eef4fd);display:flex;gap:11px;align-items:center;
   font-size:14px}
-.hrs-em svg{flex:0 0 auto;width:18px;height:18px;fill:none;stroke:var(--brand,#1f6feb);
+.hrs-em svg{flex:0 0 auto;width:18px;height:18px;fill:none;stroke:var(--brand,#1D69DF);
   stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
-.hrs-em a{color:var(--brand,#1f6feb);font-weight:700;text-decoration:none}
+.hrs-em a{color:var(--brand,#1D69DF);font-weight:700;text-decoration:none}
 .hrs-em a:hover{text-decoration:underline}
 
 @media (prefers-reduced-motion:reduce){
@@ -475,16 +475,16 @@
   border-radius:var(--r-lg,16px);padding:clamp(24px,4vw,34px);position:relative;overflow:hidden}
 .cbk::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:130px;
   background:radial-gradient(60% 100% at 50% 0,
-    color-mix(in srgb,var(--brand,#1f6feb) 10%,transparent),transparent 70%);
+    color-mix(in srgb,var(--brand,#1D69DF) 10%,transparent),transparent 70%);
   pointer-events:none}
 
 .head{display:flex;align-items:flex-start;gap:14px;margin:0 0 22px;position:relative}
 .head .ic{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
   background:var(--brand-wash,#eef4fd)}
-.head .ic svg{width:19px;height:19px;fill:none;stroke:var(--brand,#1f6feb);stroke-width:1.8;
+.head .ic svg{width:19px;height:19px;fill:none;stroke:var(--brand,#1D69DF);stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
 .head h2{margin:0 0 4px;font-size:20px;font-weight:600;letter-spacing:-.018em}
-.head p{margin:0;font-size:14px;color:var(--ink-45,#67727e)}
+.head p{margin:0;font-size:14px;color:var(--ink-45,#636E7A)}
 
 .row{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));
   position:relative}
@@ -497,8 +497,8 @@
   outline:none;
   transition:border-color .2s var(--ease-out,cubic-bezier(.16,1,.3,1)),
              box-shadow .2s var(--ease-out,cubic-bezier(.16,1,.3,1))}
-.f input:focus{border-color:var(--brand,#1f6feb);background:var(--surface,#fff);
-  box-shadow:0 0 0 3px color-mix(in srgb,var(--brand,#1f6feb) 16%,transparent)}
+.f input:focus{border-color:var(--brand,#1D69DF);background:var(--surface,#fff);
+  box-shadow:0 0 0 3px color-mix(in srgb,var(--brand,#1D69DF) 16%,transparent)}
 .f.bad input{border-color:var(--danger,#c0392b)}
 .f .err{display:none;margin:6px 0 0;font-size:13px;font-weight:500;color:var(--danger,#c0392b)}
 .f.bad .err{display:block}
@@ -514,9 +514,9 @@ legend{font-size:13.5px;font-weight:600;margin-bottom:9px;color:var(--ink-70,#4a
              color .2s var(--ease-out,cubic-bezier(.16,1,.3,1))}
 .slots input{position:absolute;opacity:0;width:100%;height:100%;left:0;top:0;margin:0;
   cursor:pointer}
-.slots label:has(input:checked){border-color:var(--brand,#1f6feb);
-  background:var(--brand-wash,#eef4fd);color:var(--brand,#1f6feb);font-weight:600}
-.slots label:has(input:focus-visible){outline:2px solid var(--brand,#1f6feb);outline-offset:2px}
+.slots label:has(input:checked){border-color:var(--brand,#1D69DF);
+  background:var(--brand-wash,#eef4fd);color:var(--brand,#1D69DF);font-weight:600}
+.slots label:has(input:focus-visible){outline:2px solid var(--brand,#1D69DF);outline-offset:2px}
 /* Disabled, not removed. A slot that vanishes makes people think it is broken. */
 .slots label:has(input:disabled){opacity:.45;cursor:not-allowed;
   text-decoration:line-through;text-decoration-thickness:1px}
@@ -524,21 +524,21 @@ legend{font-size:13.5px;font-weight:600;margin-bottom:9px;color:var(--ink-70,#4a
 
 .closed{display:none;margin:14px 0 0;padding:12px 15px;border-radius:10px;font-size:13.5px;
   background:color-mix(in srgb,var(--warn,#f0993f) 12%,transparent);
-  color:var(--warn,#b7791f);position:relative}
+  color:var(--warn-ink,#96590A);position:relative}
 .closed.on{display:block}
 
 button.go{display:inline-flex;align-items:center;justify-content:center;gap:9px;width:100%;
   min-height:50px;margin-top:22px;border:0;border-radius:10px;cursor:pointer;
-  background:var(--brand,#1f6feb);color:var(--on-brand,#fff);font:600 15.5px/1 inherit;
+  background:var(--brand,#1D69DF);color:var(--on-brand,#fff);font:600 15.5px/1 inherit;
   position:relative;
   transition:filter .25s var(--ease-out,cubic-bezier(.16,1,.3,1))}
 button.go:hover:not(:disabled){filter:brightness(1.08)}
 button.go:disabled{opacity:.6;cursor:progress}
-button.go:focus-visible{outline:2px solid var(--brand,#1f6feb);outline-offset:3px}
+button.go:focus-visible{outline:2px solid var(--brand,#1D69DF);outline-offset:3px}
 button.go svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;
   stroke-linecap:round;stroke-linejoin:round}
 
-.fine{margin:13px 0 0;font-size:12px;color:var(--ink-35,#9aa8b6);position:relative;
+.fine{margin:13px 0 0;font-size:12px;color:var(--ink-45,#636E7A);position:relative;
   text-align:center;max-width:50ch;margin-left:auto;margin-right:auto}
 
 .trap{position:absolute!important;left:-9999px!important;width:1px!important;
@@ -813,16 +813,16 @@ form.gone{display:none}
   border-radius:var(--r-lg,16px);padding:clamp(22px,4vw,32px);position:relative;overflow:hidden}
 .psc::before{content:"";position:absolute;inset:-40% -10% auto -10%;height:130px;
   background:radial-gradient(60% 100% at 50% 0,
-    color-mix(in srgb,var(--brand,#1f6feb) 10%,transparent),transparent 70%);
+    color-mix(in srgb,var(--brand,#1D69DF) 10%,transparent),transparent 70%);
   pointer-events:none}
 
 .psc-hd{display:flex;align-items:flex-start;gap:14px;margin:0 0 20px;position:relative}
 .psc-hd .ic{flex:0 0 auto;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
   background:var(--brand-wash,#eef4fd)}
-.psc-hd .ic svg{width:19px;height:19px;fill:none;stroke:var(--brand,#1f6feb);stroke-width:1.8;
+.psc-hd .ic svg{width:19px;height:19px;fill:none;stroke:var(--brand,#1D69DF);stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round}
 .psc-hd h2{margin:0 0 4px;font-size:20px;font-weight:600;letter-spacing:-.018em}
-.psc-hd p{margin:0;font-size:14px;color:var(--ink-45,#67727e)}
+.psc-hd p{margin:0;font-size:14px;color:var(--ink-45,#636E7A)}
 
 .psc-form{display:flex;gap:10px;flex-wrap:wrap;position:relative}
 .psc-form .fld{flex:1 1 200px;min-width:0}
@@ -830,16 +830,16 @@ form.gone{display:none}
 .psc-form input{width:100%;min-width:0;font:inherit;font-size:16px;padding:12px 14px;
   border:1px solid var(--line,#e6ecf3);border-radius:var(--r,10px);background:var(--paper,#fbfcfd);
   color:inherit;text-transform:uppercase}
-.psc-form input::placeholder{text-transform:none;color:var(--ink-35,#9aa8b6)}
-.psc-form input:focus-visible{outline:2px solid var(--brand,#1f6feb);outline-offset:2px;
-  border-color:var(--brand,#1f6feb)}
+.psc-form input::placeholder{text-transform:none;color:var(--ink-45,#636E7A)}
+.psc-form input:focus-visible{outline:2px solid var(--brand,#1D69DF);outline-offset:2px;
+  border-color:var(--brand,#1D69DF)}
 .psc-go{align-self:flex-end;font:inherit;font-weight:600;font-size:15px;padding:12px 22px;
-  min-height:46px;border:0;border-radius:var(--r,10px);background:var(--brand,#1f6feb);color:#fff;
+  min-height:46px;border:0;border-radius:var(--r,10px);background:var(--brand,#1D69DF);color:#fff;
   cursor:pointer;transition:filter var(--dur-fast,.16s) var(--ease-out,ease)}
 .psc-go:hover{filter:brightness(1.08)}
 .psc-go:focus-visible{outline:2px solid var(--ink,#0f1720);outline-offset:2px}
 
-.psc-hint{margin:10px 0 0;font-size:12.5px;color:var(--ink-45,#67727e)}
+.psc-hint{margin:10px 0 0;font-size:12.5px;color:var(--ink-45,#636E7A)}
 
 /* The result. Three states, each with its own colour, icon and next step.
    It is a live region, so a screen reader hears the answer without hunting. */
@@ -857,13 +857,13 @@ form.gone{display:none}
 .psc-res a{color:inherit;font-weight:600}
 
 .psc-res.yes{background:var(--good-tint,#eaf7ef);border-color:color-mix(in srgb,var(--good,#1f9254) 30%,transparent);
-  color:var(--good-deep,#12572f)}
+  color:var(--good-ink,#10593E)}
 .psc-res.yes .mk{background:var(--good,#1f9254)}
 .psc-res.maybe{background:var(--warn-tint,#fdf4e5);border-color:color-mix(in srgb,var(--warn,#b7791f) 32%,transparent);
   color:#6b4708}
 .psc-res.maybe .mk{background:var(--warn,#b7791f)}
 .psc-res.no{background:var(--paper-alt,#f6f8fb);border-color:var(--line,#e6ecf3);color:var(--ink,#0f1720)}
-.psc-res.no .mk{background:var(--ink-45,#67727e)}
+.psc-res.no .mk{background:var(--ink-45,#636E7A)}
 
 .psc-list{margin:9px 0 0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .psc-list li{font-size:12.5px;font-weight:600;padding:3px 9px;border-radius:var(--r-pill,999px);
@@ -873,7 +873,7 @@ form.gone{display:none}
 /* 12px, not 11.5px: the library floor for text a visitor actually reads,
    and this is a heading rather than a decorative glyph. */
 .psc-all h3{margin:0 0 9px;font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45,#67727e)}
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink-45,#636E7A)}
 .psc-all ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
 .psc-all li{font-size:13px;padding:4px 10px;border-radius:var(--r-pill,999px);
   background:var(--paper-alt,#f6f8fb);color:var(--ink-60,#5b6a79)}
@@ -1217,7 +1217,7 @@ form.gone{display:none}
        lifts itself clear rather than landing on top of the call button, which
        is the one control the site cannot afford to cover.                     */
 
-.ask{--ask-accent:var(--brand,#1f6feb);
+.ask{--ask-accent:var(--brand,#1D69DF);
   /* Cleared by JS when IND-ACT-001 is on the page. Not a guess at its height:
      the bar is measured, because it is 56px on one breakpoint and 64px on
      another and a hardcoded number is wrong on one of them. */
@@ -1255,9 +1255,9 @@ form.gone{display:none}
 .ask-hd-t b{display:block;font-size:15px;letter-spacing:-.01em}
 /* The disclosure. Permanent, in the header, and not a greeting that scrolls
    away after four messages. */
-.ask-bot{display:block;font-size:12px;color:var(--ink-45,#67727e);margin-top:2px}
+.ask-bot{display:block;font-size:12px;color:var(--ink-45,#636E7A);margin-top:2px}
 .ask-x{flex:0 0 auto;width:32px;height:32px;border:0;background:0;cursor:pointer;
-  border-radius:8px;color:var(--ink-45,#67727e);font-size:18px;line-height:1}
+  border-radius:8px;color:var(--ink-45,#636E7A);font-size:18px;line-height:1}
 .ask-x:hover{background:var(--paper-alt,#f4f6f9);color:var(--ink,#0f1720)}
 .ask-x:focus-visible{outline:2px solid var(--ask-accent);outline-offset:2px}
 
@@ -1294,7 +1294,7 @@ form.gone{display:none}
   border-radius:var(--r,10px);background:var(--ask-accent);color:#fff;font:650 14px/1 inherit}
 .ask-send:focus-visible{outline:2px solid var(--ask-accent);outline-offset:2px}
 
-.ask-ft{padding:0 14px 12px;font-size:11.5px;line-height:1.5;color:var(--ink-45,#67727e);
+.ask-ft{padding:0 14px 12px;font-size:11.5px;line-height:1.5;color:var(--ink-45,#636E7A);
   flex:0 0 auto}
 .ask-ft a{color:inherit}
 
@@ -1992,7 +1992,7 @@ var KB = [
   stroke-linecap:round;stroke-linejoin:round}
 .iab a:focus-visible{outline:2px solid var(--ink,#0f1720);outline-offset:2px}
 
-.iab .a-call{background:var(--brand,#1f6feb);color:#fff}
+.iab .a-call{background:var(--brand,#1D69DF);color:#fff}
 .iab .a-call svg{stroke:#fff}
 .iab .a-wa{background:var(--paper-alt,#f6f8fb);color:var(--ink,#0f1720);
   border-color:var(--line,#e6ecf3)}

@@ -13,16 +13,16 @@
     "work.html"
   ],
   "components": {
-    "IND-ACT-001": "83a78adf1f5dba2b",
-    "IND-GAL-001": "a5572d1bd8db6bf5",
-    "IND-HRS-001": "69447ad7ec191d8d",
-    "IND-PST-001": "b59a3123bb74acbd",
-    "IND-WIZ-001": "760e2d4a27300b60",
-    "UI-ACR-001": "90e2319b701ff5a6",
-    "UI-ASK-001": "9fa618fd9aad5471",
-    "UI-CAS-001": "73bec623fd6d14b4",
-    "UI-CBK-001": "f73bc2baed22198a",
-    "UI-GTD-001": "7a04b3091afc3caa"
+    "IND-ACT-001": "dec2471150c5078c",
+    "IND-GAL-001": "6cfb03a56df265c2",
+    "IND-HRS-001": "0b3dbb73dabb5dfe",
+    "IND-PST-001": "7ddbd3524cee04ac",
+    "IND-WIZ-001": "283f9240338fd0e3",
+    "UI-ACR-001": "5a495ec96fe9ff45",
+    "UI-ASK-001": "529910d3e384d3e9",
+    "UI-CAS-001": "8e9e6f8a190afa8a",
+    "UI-CBK-001": "3464b952ff8542ce",
+    "UI-GTD-001": "3e370a63a973f617"
   },
   "allow_past_dates": [
     "2026-05-14"
@@ -96,12 +96,29 @@
       ],
       "library_commit": "8d3edbb9bd9c956b7809ffb907d2f4e7bf72f666",
       "from_project_commit": "b8582cb"
+    },
+    {
+      "date": "2026-09-11",
+      "components": [
+        "IND-ACT-001",
+        "IND-GAL-001",
+        "IND-HRS-001",
+        "IND-PST-001",
+        "IND-WIZ-001",
+        "UI-ACR-001",
+        "UI-ASK-001",
+        "UI-CAS-001",
+        "UI-CBK-001",
+        "UI-GTD-001"
+      ],
+      "library_commit": "5b8d4084fd3f83e0e9b2c48b075fc8b72544bf79",
+      "from_project_commit": "893ed6b"
     }
   ],
   "assets": {
-    "assets/site.css": "a60ecdbc26301816",
+    "assets/site.css": "cfe8a4e34e5ddf09",
     "assets/site.js": "6eb03c1b9a3396ea",
-    "assets/tokens.css": "db35e4178bc2abc5",
+    "assets/tokens.css": "2c1101718594cdd5",
     "trade.css": "ccbc0928a439fec5"
   }
 }
