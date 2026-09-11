@@ -24,7 +24,7 @@ environments:
 routes:
   - /case-study.html
   - /contact.html
-  - /index.html
+  - /
   - /service.html
   - /work.html
 
