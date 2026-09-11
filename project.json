@@ -15,7 +15,7 @@
   "components": {
     "IND-ACT-001": "3409f3e2c837ed2b",
     "IND-GAL-001": "10856297c54e1447",
-    "IND-HRS-001": "2e9cbe8b570c6983",
+    "IND-HRS-001": "420bb8850c78ce70",
     "IND-PST-001": "4db58233b6727311",
     "IND-WIZ-001": "e12ab9fc4c1b5e86",
     "UI-ACR-001": "e83a83326fbf13a4",
@@ -34,15 +34,5 @@
     "hello@example.co.uk": "Deliberate. RFC 2606 reserves example.co.uk for exactly this, so the address cannot reach a real person. A plausible invented domain could belong to somebody. Replace with the real address on a client site, and with the demo's own domain the day this is deployed.",
     "example.co.uk": "Same as above - the domain half of the reserved fictional address.",
     "ph-photo": "Honest. This site has no photographs because the library ships none and will not use stock. The hero is a CSS stand-in at the true aspect ratio, so real pictures drop in without moving the layout. On a client site this must become a real <img> with width, height and loading."
-  },
-  "updates": [
-    {
-      "date": "2026-09-11",
-      "components": [
-        "IND-HRS-001"
-      ],
-      "library_commit": "96eb271ebbf889e8c2347dfd129799fa1c7509e7",
-      "from_project_commit": "3ffa9c7"
-    }
-  ]
+  }
 }
