@@ -14,11 +14,17 @@
 :root{
   /* The whole re-brand. A dug-earth ochre against slate - warm, and nothing
      like the blue an advisory firm uses. */
-  /* #B4610F measured 4.39:1 on --paper - just under the 4.5:1 AA floor
-     for normal text, found by axe-core on the active nav link. Darkened
-     2% to clear it. The other five templates' accents were checked at
-     the same time and all pass. */
-  --brand:#B05F0F;
+  /* #B4610F measured 4.39:1 on --paper and was darkened to #B05F0F to clear
+     4.5:1. That fix was measured on the wrong ground. --paper #fbfcfd is the
+     LIGHTEST surface the system has; this template invented --brand-wash
+     #FDF3E9, a cream band, and #B05F0F sits at 4.27:1 on it - and at 4.40:1
+     on --paper-alt, which every template has. axe-core found it on the
+     tel: link in the opening-hours band on 11 Sep 2026.
+     #A5590E is the same hue at 94% and clears every light ground the system
+     defines: 4.75 on --brand-wash, 4.89 on --paper-alt, 5.07 on --paper.
+     The rule this cost twice: measure a light-ground colour against the
+     DARKEST light ground in the system, never the lightest. */
+  --brand:#A5590E;
   --brand-light:#E8913F;
   --brand-wash:#FDF3E9;
   --ink:#1C1A17;

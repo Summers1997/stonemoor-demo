@@ -22,7 +22,13 @@
   /* --- BRAND ---------------------------------------------------------------
      --brand is the one value most client work changes. The lighter steps are
      for dark grounds, where the base brand is usually too dark to read. */
-  --brand:        #1f6feb;   /* primary accent, CTAs, links, active states     */
+  /* #1f6feb measured 4.51:1 on --paper and 4.36:1 on --paper-alt: a pass on
+     the lightest ground in the system and a fail on the one directly beside
+     it. This is the library default and every component's fallback, so the
+     fail was everywhere and had never been measured. #1D69DF is the same hue
+     at 95% - 4.77 on --paper-alt, 5.07 on --surface. On dark grounds use
+     --brand-light, which is what it is for. 11 Sep 2026. */
+  --brand:        #1D69DF;   /* primary accent, CTAs, links, active states     */
   --brand-2:      #3f8ef0;   /* secondary step, gradients, second data series  */
   --brand-light:  #4f9dff;   /* brand on dark grounds                          */
   --brand-pale:   #8fb8f5;   /* third data series, de-emphasised brand         */
@@ -46,22 +52,41 @@
 
   /* --- INK RAMP (text on light grounds) ------------------------------------
      A single ramp, darkest to lightest. Named by weight, not by role, so the
-     same token works for body copy in one component and a caption in another. */
-  --ink:          #0f1720;   /* headings, primary text, dark ground            */
-  --ink-60:       #4b5a68;
-  --ink-55:       #5b6b7c;   /* standard secondary text                        */
-  --ink-50:       #616d7b;
-  --ink-45:       #67727e;   /* captions, supporting copy                      */
-  --ink-40:       #8b97a5;
-  --ink-35:       #9aa8b6;   /* labels, axis text                              */
-  --ink-30:       #a4b0bc;   /* faintest legible text                          */
+     same token works for body copy in one component and a caption in another.
+
+     Ratios below are against --paper-alt #f6f8fb, the DARKEST light ground the
+     system defines. Measure here, not against --paper: the two differ by
+     enough to turn a pass into a fail, which is how three separate accent
+     colours shipped failing in this repo.
+
+     THE BOTTOM THREE STEPS ARE NOT TEXT COLOURS. --ink-40, -35 and -30 sit at
+     2.79, 2.28 and 2.07 - below even the 3:1 large-text floor, let alone 4.5.
+     Their old role names ("labels, axis text", "faintest legible text") said
+     otherwise and were wrong. They are re-labelled rather than re-coloured
+     because re-colouring the light end of a ramp changes the appearance of
+     every chart in the library, and that is a design decision rather than a
+     defect fix. Use --ink-45 or darker for anything a visitor must read. */
+  --ink:          #0f1720;   /* 16.96  headings, primary text, dark ground     */
+  --ink-60:       #4b5a68;   /*  6.66                                          */
+  --ink-55:       #5b6b7c;   /*  5.14  standard secondary text                 */
+  --ink-50:       #616d7b;   /*  4.96                                          */
+  --ink-45:       #636E7A;   /*  4.88  captions - the LIGHTEST legible step    */
+  --ink-40:       #8b97a5;   /*  2.79  NOT TEXT - hairlines, decorative fills  */
+  --ink-35:       #9aa8b6;   /*  2.28  NOT TEXT                                */
+  --ink-30:       #a4b0bc;   /*  2.07  NOT TEXT                                */
 
   /* --- GROUNDS -------------------------------------------------------------- */
   --paper:        #fbfcfd;   /* default page ground                            */
   --surface:      #ffffff;   /* cards and panels sitting on --paper            */
   --paper-alt:    #f6f8fb;   /* alternating section ground                     */
+  /* THESE THREE ARE DARK. --ground-2 is a DEEPER DARK, not a second light
+     tint, and on 11 Sep 2026 eight components had assumed the opposite -
+     `var(--ground-2,#f2f5f8)`, a light fallback, paired with dark ink. Their
+     own demo pages never load this file, so the fallback applied and they
+     looked right; on any real site they rendered dark ink on a dark ground at
+     1.06:1. If you want a light tint, the token is --paper-alt. */
   --ground:       #0f1720;   /* dark section ground                            */
-  --ground-2:     #0d141c;   /* deeper dark ground                             */
+  --ground-2:     #0d141c;   /* DEEPER DARK ground - see the note above        */
   --ground-3:     #0b1017;   /* deepest - hero and full-bleed panels           */
 
   /* --- TEXT ON DARK GROUNDS ------------------------------------------------- */

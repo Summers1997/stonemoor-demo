@@ -1,7 +1,7 @@
 {
-  "_comment": "Override only what the brand actually changes. Re-run new_project.py --force, or just regenerate assets/brand.css from this.",
+  "_comment": "Override only what the brand actually changes. Re-run new_project.py --force, or just regenerate assets/brand.css from this. --brand was #B05F0F until 11 Sep 2026, when axe-core measured it at 4.27:1 on --brand-wash and the template corrected it to #A5590E. This is a demo site, so the template's value was simply taken; on a real client's site the colour is theirs and the conversation is 'your accent fails the contrast floor on your own cream band', not a silent edit.",
   "tokens": {
-    "--brand": "#B05F0F",
+    "--brand": "#A5590E",
     "--brand-2": "#3f8ef0",
     "--brand-light": "#E8913F",
     "--brand-pale": "#8fb8f5",

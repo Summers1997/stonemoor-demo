@@ -5,7 +5,7 @@
        python _tools/new_project.py --rebrand <project>
    which touches nothing else. */
 :root{
-  --brand      : #B05F0F;
+  --brand      : #A5590E;
   --brand-2    : #3f8ef0;
   --brand-light: #E8913F;
   --brand-pale : #8fb8f5;
