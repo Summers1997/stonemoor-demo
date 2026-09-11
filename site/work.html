@@ -1558,7 +1558,12 @@ var KB = [
 }
 </style>
 
-<div class="iab" id="iab" role="group" aria-label="Contact us">
+<!-- role="complementary" rather than "group": a group is not a landmark, so
+     everything in this bar counted as content outside any landmark - 10 axe
+     "region" findings on a five-page site, all of them this one element and
+     one demo banner. A persistent contact bar is complementary content: it
+     is related to the page without being part of it. 11 Sep 2026. -->
+<div class="iab" id="iab" role="complementary" aria-label="Contact us">
   <a class="a-call" href="tel:+441632960422">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.3a12 12 0 0 0 6.2 6.2l1.3-2 4 1.5v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.5 5.7 2 2 0 0 1 6.5 3.5Z"/></svg>
     <span>Call us</span>
