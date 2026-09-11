@@ -139,6 +139,26 @@ p{margin:0;color:var(--body-text);max-width:66ch}
 .btn.ghost:hover{border-color:var(--brand);color:var(--brand)}
 .btn.on-dark{background:#fff;color:var(--ink)}
 .btn.on-dark:hover{background:var(--brand-light);color:var(--ink)}
+
+/* A .btn WITH NO VARIANT CLASS has no colour of its own, so it falls through
+   to `a{color:var(--brand)}` at the top of this file. On a light ground that
+   is correct and passes. On a dark one it is the brand accent on near-black -
+   3.5:1 for the trade palette, under the 4.5:1 floor - and the trade hero has
+   two of them.
+
+   :not() rather than a blanket override, so .primary, .ghost and .on-dark
+   keep the colours they deliberately set. */
+.hero .btn:not(.primary):not(.ghost):not(.on-dark),
+.section.dark .btn:not(.primary):not(.ghost):not(.on-dark),
+.ftr .btn:not(.primary):not(.ghost):not(.on-dark){color:var(--on-ground)}
+
+/* `btn-ghost`, hyphenated, is used in the trade hero and IS NOT A CLASS THIS
+   FILE DEFINES - the variant is `.btn.ghost`. So that button had no ghost
+   styling at all and nobody noticed, because an unstyled .btn still looks
+   like a button. Aliased rather than edited out of the template: the markup
+   reads naturally and someone will write it again. */
+.btn.btn-ghost{border-color:var(--line-2);color:var(--ink);background:var(--surface)}
+.btn.btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
 .btn svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:1.8;
   stroke-linecap:round;stroke-linejoin:round;
   transition:transform var(--dur) var(--ease-out)}
