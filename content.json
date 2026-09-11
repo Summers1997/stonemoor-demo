@@ -1,11 +1,18 @@
 {
-  "_comment": "Client copy, keyed by page. NOTHING READS THIS YET, and that is deliberate - see the module docstring. Fill it in as the site is built so that a later rebuild has somewhere to take the words from.",
+  "_comment": "The client's own details. apply_content.py writes these into the site, and must be re-run after every re-inline.",
   "business": {
     "name": "Stonemoor Groundworks",
-    "telephone": "",
-    "email": "",
-    "address": "",
-    "company_number": ""
+    "name_first": "Stonemoor",
+    "telephone_display": "01632 960421",
+    "telephone_tel": "+441632960421",
+    "emergency_display": "01632 960422",
+    "emergency_tel": "+441632960422",
+    "email": "hello@example.co.uk",
+    "address": "Brimsmore Yard, Yeovil, Somerset BA21 3AA",
+    "postcode": "BA21 3AA",
+    "company_number": "",
+    "waste_licence": "",
+    "vat_number": ""
   },
   "pages": {
     "case-study.html": {},
