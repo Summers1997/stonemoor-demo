@@ -1,0 +1,58 @@
+# -----------------------------------------------------------------------------------------
+# PROCESSOR REGISTRY (Phase 8)
+#
+# Every third party that receives data from this site. A host observed at runtime that is not
+# listed here blocks deployment (PROC-UNKNOWN-001) — the fix is to investigate and record it, or
+# remove it, never to widen a filter.
+#
+# THE POINT WORTH REPEATING: an approved provider does not mean every implementation is approved.
+# Record what this site is allowed to use the provider for, and what it is not.
+# -----------------------------------------------------------------------------------------
+schema_version: 1
+
+# This site's own hosts. Anything not listed here and not matched below is a third party.
+first_party_hosts: []
+
+# Hosts deliberately treated as non-processors, each with a written reason and a name against it.
+# This exists so that ignoring something is visible and attributable rather than a quiet omission.
+acknowledged_non_processors: []
+#  - host: example-cdn.test
+#    reason: Serves only our own static assets from our account; receives no personal data beyond
+#      connection metadata inherent in delivery, which is covered by the hosting entry.
+#    recorded_by: Name
+#    date: 2026-01-01
+
+processors: []
+#  - id: example-provider
+#    provider: Example Provider Ltd
+#    service: Transactional email
+#    purpose: Delivers contact form notifications to the client's inbox.
+#    hosts:
+#      - example-provider.com
+#    data_categories:
+#      - name
+#      - email
+#      - free_text_message
+#    # processor | controller | joint_controller | independent_controller | undetermined
+#    controller_status: processor
+#    subprocessors_reviewed: true
+#    dpa_in_place: true
+#    dpa_reference: Example Provider DPA v3, countersigned 2026-01-15
+#    # uk_only | uk_adequacy_regulations | idta | uk_addendum_to_eu_sccs | uk_us_data_bridge |
+#    # other_mechanism | undetermined
+#    transfer_status: uk_only
+#    hosting_locations:
+#      - UK
+#    security_review_date: 2026-01-10
+#    privacy_documentation_url: https://example-provider.com/privacy
+#    approved_use_cases:
+#      - Delivering contact form notifications
+#    prohibited_use_cases:
+#      - Marketing sends
+#      - Contact list enrichment
+#    requires_consent: false
+#    reviewed_by: Name
+#    review_date: 2026-01-15
+#    next_review_date: 2027-01-15
+#    review_evidence: compliance/evidence/processors/example-provider-2026-01-15.md
+#    client_owned: false

@@ -1,0 +1,58 @@
+# -----------------------------------------------------------------------------------------
+# AGENCY POLICY (category 2).
+#
+# This file says how strict the agency chooses to be. It never states what the law requires —
+# that lives in the rule packs and is attributed to the regulator or legislation that says it.
+# Loosening anything here is a deliberate, recorded reduction in the agency's own control set.
+# -----------------------------------------------------------------------------------------
+schema_version: 1
+policy_version: "1.0.0"
+
+# Findings at or above this severity block deployment unless a valid exception exists.
+# May be made stricter (MEDIUM). May not be set to LOW or INFORMATIONAL.
+blocking_threshold: HIGH
+
+# A BLOCKER represents a risk the agency has decided it will not ship. Enabling waivers
+# requires naming the roles permitted to grant one.
+allow_blocker_waiver: false
+blocker_waiver_approver_roles: []
+
+# Every exception expires. No exception may run longer than this.
+max_exception_days: 90
+
+# An unresolved REVIEW_REQUIRED on a mandatory control blocks deployment. Turning this off
+# means shipping with known unanswered legal questions.
+review_required_blocks: true
+
+always_enabled_packs:
+  - uk-web-baseline
+
+# Packs listed here are switched off. Every report states which packs were disabled, so a
+# reduction in coverage is visible rather than invisible.
+disabled_packs: []
+
+# Environments where the gate is enforced rather than merely reported.
+#
+# `ci` is deliberately absent. The gate's decision includes approvals, and an approval names the
+# commit it approves — on a pull request that commit is not the one that will be released. With
+# client sign-off required, enforcing in `ci` denies every pull request for a missing approval that
+# cannot be obtained at that point, and a gate that fails every run for an unfixable reason is one
+# people learn to bypass.
+#
+# To fail a pull request on a real defect instead, use `compliance run --fail-on BLOCKER`, which
+# exits non-zero on open findings at or above a severity without invoking the release gate.
+gate_enforced_in:
+  - staging
+  - production
+
+evidence:
+  # Seven years, aligned to the usual professional-indemnity and limitation horizon. Confirm
+  # with the agency's insurer and solicitor before relying on this figure.
+  retention_days: 2555
+  redact_by_default: true
+  # Storing full request bodies would turn the compliance system into a privacy risk.
+  store_request_bodies: false
+
+approvals:
+  client_signoff_required: true
+  specialist_signoff_required_for_regulated: true

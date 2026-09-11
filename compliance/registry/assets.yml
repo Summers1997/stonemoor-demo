@@ -1,0 +1,45 @@
+# Asset licence registry (Phase 22).
+#
+# Where every image on the site came from, under what licence, and who recorded it.
+#
+# This file is the answer to a letter that may arrive years from now. Stock-image licensing demands
+# are one of the commonest unexpected costs a small agency meets: an image is dropped into a build
+# from a search result or a client's folder, nobody writes down where it came from, and the demand
+# has to be answered by producing a licence for a file nobody remembers adding.
+#
+# The pipeline cannot verify a licence. It reports which assets have no record at all — which is
+# exactly the set that cannot be defended. Record each asset as it is added; reconstructing the list
+# afterwards is the part that does not work.
+
+schema_version: 1
+
+# Blanket coverage for a directory, where a single statement genuinely accounts for everything in it
+# — a folder of photographs the client shot themselves, for instance. It still has to name who said
+# so and when, because that is the part that has to stand up later.
+covered_prefixes: []
+#  - prefix: "/images/client-photography/"
+#    licence_type: client_owned
+#    source: "Photographed by the client, supplied on 2026-04-02"
+#    permitted_use: "Website use, unrestricted"
+#    recorded_by: "Agency build lead"
+#    recorded_on: "2026-04-02"
+
+assets: []
+#  - path: "/images/hero.jpg"          # matched by suffix; a build content hash is tolerated
+#    description: "Drainage channel along a driveway"
+#    licence_type: stock_licence       # client_owned | agency_owned | commissioned | stock_licence |
+#                                      # royalty_free_licence | rights_managed_licence | open_licence |
+#                                      # public_domain | ai_generated | unknown
+#    source: "Example Stock Library"
+#    licence_reference: "ORD-2026-11934"   # required for any licensed asset
+#    licence_evidence: "compliance/evidence/licences/ORD-2026-11934.pdf"
+#    permitted_use: "Web use, commercial, no redistribution"
+#    attribution_required: false
+#    attribution_text: null
+#    depicts_identifiable_person: false   # a stock licence covers the photographer, not the subject
+#    model_release_held: false
+#    ai_generated: false
+#    ai_tool: null
+#    recorded_by: "Agency build lead"
+#    recorded_on: "2026-04-02"
+#    expires_on: null

@@ -1,0 +1,119 @@
+# -----------------------------------------------------------------------------------------
+# CLIENT COMPLIANCE INTAKE (Phase 2)
+#
+# This file decides which controls apply to the website. Answering it inaccurately does not
+# make the pipeline pass — it makes the pipeline test the wrong things.
+#
+# Answer from what the site WILL do, not what it does today. Anything set to false here is a
+# control that will not run, and every false answer is recorded in the evidence pack.
+#
+# Rules of thumb:
+#   - "we might add it later" -> false now, and re-run intake when it is added
+#   - "it is only a contact form" -> contact_forms true AND the data categories it can receive
+#   - free-text boxes receive far more than they ask for; if you have one, set
+#     personal_data.free_text_messages to true
+# -----------------------------------------------------------------------------------------
+schema_version: 1
+client_id: stonemoor-groundworks
+
+business:
+  legal_name: Stonemoor Groundworks
+  trading_name: Stonemoor Groundworks
+  # sole_trader | partnership | llp | limited_company | plc | charity | cic | other
+  legal_structure: sole_trader
+  company_number: null
+  registered_office: Brimsmore Yard, Yeovil, Somerset BA21 3AA
+  registration_jurisdiction: England and Wales
+  vat_registered: false
+  vat_number: null
+  sector: Groundworks and landscaping
+  # consumers | businesses | both
+  target_customers: consumers
+  countries_served:
+    - UK
+
+features:
+  brochure: true
+  contact_forms: true
+  newsletter: false
+  user_accounts: false
+  authentication: false
+  customer_portal: false
+  ecommerce: false
+  subscriptions: false
+  payments: false
+  appointment_booking: false
+  file_uploads: false
+  chatbot: false
+  ai_assistant: false
+  analytics: false
+  advertising: false
+  remarketing: false
+  social_embeds: false
+  video_embeds: false
+  maps: false
+  reviews: false
+  comments: false
+  cookies: false
+  local_storage: false
+  session_storage: false
+
+# What the website can COLLECT OR RECEIVE — including data a visitor volunteers unprompted.
+personal_data:
+  names: false
+  emails: false
+  telephone_numbers: false
+  addresses: false
+  ip_addresses: false
+  online_identifiers: false
+  financial_information: false
+  payment_information: false
+  health_information: false
+  childrens_information: false
+  special_category: false
+  criminal_offence: false
+  location: false
+  uploaded_documents: false
+  free_text_messages: false
+
+marketing:
+  email_marketing: false
+  sms: false
+  telephone: false
+  retargeting: false
+  advertising_pixels: false
+  profiling: false
+  lead_scoring: false
+  crm_integration: false
+  newsletter: false
+
+ai:
+  ai_generated_images: false
+  ai_generated_video: false
+  ai_generated_people: false
+  ai_generated_testimonials: false
+  ai_generated_case_studies: false
+  ai_generated_product_examples: false
+  customer_facing_chatbot: false
+  agentic_actions: false
+  recommendations: false
+  personalisation: false
+  ai_generated_content: false
+
+regulated:
+  fca: false
+  healthcare: false
+  legal_services: false
+  children: false
+  gambling: false
+  alcohol: false
+  credit: false
+  insurance: false
+  mortgages: false
+  investments: false
+  pensions: false
+  other_regulated: false
+
+notes: ""
+completed_by: Name of the person who completed this intake
+completed_on: 2026-01-01

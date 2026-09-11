@@ -1,0 +1,87 @@
+# -----------------------------------------------------------------------------------------
+# SITE PROFILE — the technical half of the intake.
+#
+# Discovery will verify these values against the repository and the running site. Where the
+# declared value and the observed value disagree, the observation wins and the discrepancy is
+# reported: the pipeline inspects the project rather than trusting documentation.
+# -----------------------------------------------------------------------------------------
+schema_version: 1
+site_id: stonemoor-groundworks-www
+client_id: stonemoor-groundworks
+repository: (local only - not pushed yet)
+
+framework: null
+# npm | pnpm | yarn | bun | none
+package_manager: none
+hosting_provider: cloudflare-pages
+cdn_provider: null
+
+environments:
+  staging_url: null
+  production_url: null
+
+# Routes the runtime suite must exercise. Discovery adds more; it never removes these.
+routes:
+  - /case-study.html
+  - /contact.html
+  - /index.html
+  - /service.html
+  - /work.html
+
+# Routes carrying the site's privacy information. Leave empty to let discovery search for it
+# (declared route, then privacy-looking links, then conventional paths). Declare one when the site
+# uses an unusual path.
+privacy_routes: []   # no policy pages yet - demo site
+
+# Submitting forms during a run reaches whatever the form posts to — often a real inbox or CRM.
+# It is therefore off by default. When off, the controls that need a submission (persistence,
+# caching, error leakage) report a required manual test rather than passing.
+form_submission_authorised: false
+form_submission_authorised_by: null
+form_submission_authorised_on: null
+
+# Selectors for the site's own consent mechanism. Without these, the accept and reject states
+# cannot be exercised and the runtime control reports them as unverified rather than clean.
+consent_selectors:
+  accept_all: null
+  reject_all: null
+
+# Active security testing against production requires explicit written authorisation from
+# whoever owns the infrastructure. Without it, DAST runs against staging only.
+production_dast_authorised: false
+production_dast_authorised_by: null
+production_dast_authorised_on: null
+
+# ---------------------------------------------------------------------------------------------
+# The authenticated area, if the site has one.
+#
+# `authorised: false` is the default and should stay false until somebody has decided otherwise.
+# Logging in creates a session against a real system: on a staging environment wired to real
+# services it can create records, fire notifications, consume a licence seat, or trip a lockout
+# that a person then has to clear.
+#
+# While it is false, the pipeline still checks everything about the login page that can be read
+# without signing in — field types, autocomplete, length caps — and reports the session and logout
+# controls as requiring a recorded manual test. Never as passing.
+#
+# There is deliberately no field for a password. `password_env` names an environment variable
+# instead, because a credential committed to a client repository is a real exposed secret, and this
+# same pipeline treats that as a BLOCKER. The account must be a synthetic one created for testing;
+# nothing here can tell one login from another, so that is on you.
+# ---------------------------------------------------------------------------------------------
+authentication:
+  authorised: false
+  authorised_by: null
+  authorised_on: null
+  # Where the sign-in form lives. Leave null if the site has no login area: a route named here that
+  # does not serve is reported as a configuration error, not as "no login found".
+  login_route: null
+  username_selector: null
+  password_selector: null
+  submit_selector: null
+  # A selector present only once signed in, so a successful login is verified rather than assumed.
+  success_selector: null
+  logout_route: null
+  username: null
+  password_env: null
+  authenticated_routes: []
