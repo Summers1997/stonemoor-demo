@@ -148,9 +148,9 @@ p{margin:0;color:var(--body-text);max-width:66ch}
 
    :not() rather than a blanket override, so .primary, .ghost and .on-dark
    keep the colours they deliberately set. */
-.hero .btn:not(.primary):not(.ghost):not(.on-dark),
-.section.dark .btn:not(.primary):not(.ghost):not(.on-dark),
-.ftr .btn:not(.primary):not(.ghost):not(.on-dark){color:var(--on-ground)}
+.hero .btn:not(.primary):not(.ghost):not(.btn-ghost):not(.on-dark),
+.section.dark .btn:not(.primary):not(.ghost):not(.btn-ghost):not(.on-dark),
+.ftr .btn:not(.primary):not(.ghost):not(.btn-ghost):not(.on-dark){color:var(--on-ground)}
 
 /* `btn-ghost`, hyphenated, is used in the trade hero and IS NOT A CLASS THIS
    FILE DEFINES - the variant is `.btn.ghost`. So that button had no ghost
