@@ -5,6 +5,7 @@ window.DEMOS = [
 "../site/case-study.html",
 "../site/contact.html",
 "../site/index.html",
+"../site/privacy.html",
 "../site/service.html",
 "../site/work.html"
 ];
@@ -27,6 +28,13 @@ window.REVEAL_TARGETS = [
  {
   "id": "page:index",
   "p": "../site/index.html",
+  "sel": "[data-reveal]",
+  "cls": "in",
+  "mode": "all"
+ },
+ {
+  "id": "page:privacy",
+  "p": "../site/privacy.html",
   "sel": "[data-reveal]",
   "cls": "in",
   "mode": "all"
