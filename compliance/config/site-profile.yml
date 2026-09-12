@@ -27,11 +27,13 @@ routes:
   - /
   - /service.html
   - /work.html
+  - /privacy.html
 
 # Routes carrying the site's privacy information. Leave empty to let discovery search for it
 # (declared route, then privacy-looking links, then conventional paths). Declare one when the site
 # uses an unusual path.
-privacy_routes: []   # no policy pages yet - demo site
+privacy_routes:
+  - /privacy.html
 
 # Submitting forms during a run reaches whatever the form posts to — often a real inbox or CRM.
 # It is therefore off by default. When off, the controls that need a submission (persistence,

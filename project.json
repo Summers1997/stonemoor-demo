@@ -9,6 +9,7 @@
     "case-study.html",
     "contact.html",
     "index.html",
+    "privacy.html",
     "service.html",
     "work.html"
   ],
@@ -33,7 +34,8 @@
   "allow_strings": {
     "hello@example.co.uk": "Deliberate. RFC 2606 reserves example.co.uk for exactly this, so the address cannot reach a real person. A plausible invented domain could belong to somebody. Replace with the real address on a client site, and with the demo's own domain the day this is deployed.",
     "example.co.uk": "Same as above - the domain half of the reserved fictional address.",
-    "ph-photo": "Honest. This site has no photographs because the library ships none and will not use stock. The hero is a CSS stand-in at the true aspect ratio, so real pictures drop in without moving the layout. On a client site this must become a real <img> with width, height and loading."
+    "ph-photo": "Honest. This site has no photographs because the library ships none and will not use stock. The hero is a CSS stand-in at the true aspect ratio, so real pictures drop in without moving the layout. On a client site this must become a real <img> with width, height and loading.",
+    "privacy@example.co.uk": "Deliberate. RFC 2606 reserves example.co.uk so it can never reach a real inbox, which is what you want on a demonstration site. Same reason as hello@example.co.uk above. On a real client this is a live address and somebody has to monitor it - a privacy notice naming an unmonitored inbox is worse than one naming the general one."
   },
   "updates": [
     {

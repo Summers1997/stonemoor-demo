@@ -60,12 +60,12 @@ features:
 
 # What the website can COLLECT OR RECEIVE — including data a visitor volunteers unprompted.
 personal_data:
-  names: false
-  emails: false
-  telephone_numbers: false
-  addresses: false
-  ip_addresses: false
-  online_identifiers: false
+  names: true
+  emails: true
+  telephone_numbers: true
+  addresses: true
+  ip_addresses: true
+  online_identifiers: true
   financial_information: false
   payment_information: false
   health_information: false
@@ -74,7 +74,7 @@ personal_data:
   criminal_offence: false
   location: false
   uploaded_documents: false
-  free_text_messages: false
+  free_text_messages: true
 
 marketing:
   email_marketing: false

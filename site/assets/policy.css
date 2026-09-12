@@ -1,0 +1,236 @@
+/* The .ph and .buildnote rules were deleted on delivery, which is step 5
+   of 15-Legal-and-Policy/README.md. They exist to make an unanswered
+   placeholder impossible to miss while drafting; once the document is
+   finished, keeping them means a placeholder added LATER would render as
+   ordinary text and nobody would ever see it. */
+/* _theme/doc.css, copied flat into the project the same way tokens.css is.
+   policy.css in the library is only an @import pointer at it. */
+/* ============================================================================
+   policy.css — shared stylesheet for every document in 15-Legal-and-Policy
+   ----------------------------------------------------------------------------
+   Themed entirely through _theme/tokens.css, so a policy page inherits the
+   client's brand exactly like the rest of the site. Load tokens.css first.
+
+   Long-form legal text has one job: to be read and understood. So this is
+   deliberately quiet — a single measured column, generous leading, a clear
+   heading hierarchy, and a sticky contents rail on wide screens.
+   ========================================================================= */
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  background:var(--paper,#fbfcfd);
+  color:var(--ink,#0f1720);
+  font:17px/1.75 ui-serif,Georgia,"Times New Roman",serif;
+  -webkit-text-size-adjust:100%;
+}
+
+/* ---------------------------------------------------------------- layout */
+.doc{
+  max-width:1080px;
+  margin:0 auto;
+  padding:56px 26px 96px;
+  display:grid;
+  gap:48px;
+  /* minmax(0,1fr), not 1fr. A grid item defaults to min-width:auto, so it
+     refuses to shrink below its widest child - and the widest child here is a
+     table with min-width:520px. On a 375px phone that pushed the whole column
+     to 522px and scrolled the page sideways. minmax(0,...) lets it shrink; the
+     table then scrolls inside its own .tw container, which is the point of it. */
+  grid-template-columns:minmax(0,1fr);
+}
+.doc > *{min-width:0}
+@media (min-width:960px){
+  .doc{grid-template-columns:230px minmax(0,1fr);gap:56px;padding-top:76px}
+  .doc > header{grid-column:1/-1}
+}
+
+/* ---------------------------------------------------------------- masthead */
+.doc > header{border-bottom:1px solid var(--line,#e6ecf3);padding-bottom:30px}
+.eyebrow{
+  font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--brand,#1D69DF);margin:0 0 14px;display:block;
+}
+h1{
+  font:600 clamp(30px,4.6vw,44px)/1.12 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif;
+  margin:0 0 16px;letter-spacing:-.02em;text-wrap:balance;
+}
+.meta{
+  display:flex;flex-wrap:wrap;gap:8px 26px;margin:0;
+  font:14px/1.5 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif;
+  color:var(--ink-45,#7d8b9a);
+}
+.meta b{color:var(--ink-70,#4a5866);font-weight:600}
+
+/* ---------------------------------------------------------------- contents */
+.toc{
+  font:14px/1.55 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif;
+  align-self:start;
+}
+@media (min-width:960px){.toc{position:sticky;top:32px;max-height:calc(100vh - 64px);overflow:auto}}
+.toc h2{
+  font:600 12px/1 ui-monospace,SFMono-Regular,Consolas,monospace;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--ink-45,#636E7A);
+  margin:0 0 14px;
+}
+.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc}
+.toc li{counter-increment:toc;margin-bottom:2px}
+.toc a{
+  display:flex;gap:10px;padding:5px 8px 5px 6px;border-radius:6px;
+  color:var(--ink-70,#4a5866);text-decoration:none;
+  transition:background .18s ease,color .18s ease;
+}
+.toc a::before{
+  content:counter(toc);color:var(--ink-45,#636E7A);
+  font:600 12px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;
+  flex:0 0 16px;text-align:right;
+}
+.toc a:hover{background:var(--ink-05,#f1f5f9);color:var(--brand,#1D69DF)}
+.toc a:focus-visible{outline:2px solid var(--brand,#1D69DF);outline-offset:2px}
+
+/* ---------------------------------------------------------------- prose */
+.body{max-width:68ch}
+.body section{scroll-margin-top:26px;margin-bottom:44px}
+h2{
+  font:600 clamp(20px,2.4vw,25px)/1.28 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif;
+  margin:0 0 16px;letter-spacing:-.012em;text-wrap:balance;
+}
+h3{
+  font:600 17px/1.4 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif;
+  margin:28px 0 10px;
+}
+p{margin:0 0 16px}
+.body ul,.body ol{margin:0 0 18px;padding-left:22px}
+.body li{margin-bottom:8px}
+.body li::marker{color:var(--ink-45,#636E7A)}
+a{color:var(--brand,#1D69DF);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--brand,#1D69DF);outline-offset:2px;border-radius:2px}
+strong{font-weight:600}
+
+/* ---------------------------------------------------------------- tables */
+.tw{overflow-x:auto;margin:0 0 22px;border:1px solid var(--line,#e6ecf3);
+    border-radius:var(--r,12px);background:var(--surface,#fff)}
+table{border-collapse:collapse;width:100%;min-width:520px;
+  font:15px/1.55 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif}
+th,td{text-align:left;padding:12px 15px;border-bottom:1px solid var(--line,#e6ecf3);
+  vertical-align:top}
+th{font-weight:600;font-size:12.5px;letter-spacing:.02em;text-transform:uppercase;
+  color:var(--ink-45,#7d8b9a);background:var(--ink-05,#f1f5f9)}
+tr:last-child td{border-bottom:0}
+
+/* ---------------------------------------------------------------- callouts */
+.note,.warn{
+  border-radius:var(--r,12px);padding:18px 20px;margin:0 0 24px;
+  font:15px/1.65 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif;
+}
+.note{background:var(--ink-05,#f1f5f9);border:1px solid var(--line,#e6ecf3)}
+.warn{background:color-mix(in srgb,var(--warn,#b7791f) 8%,transparent);
+      border:1px solid color-mix(in srgb,var(--warn,#b7791f) 30%,transparent)}
+.note p:last-child,.warn p:last-child{margin-bottom:0}
+.note h3,.warn h3{margin-top:0}
+
+/* ---------------------------------------------------------------- footer */
+.doc > footer{
+  grid-column:1/-1;border-top:1px solid var(--line,#e6ecf3);
+  padding-top:26px;margin-top:8px;
+  font:14px/1.6 ui-sans-serif,system-ui,"Segoe UI",Inter,sans-serif;
+  color:var(--ink-45,#7d8b9a);
+}
+
+/* ============================================================================
+   PRINT  (DOC-PRN-001)
+   ----------------------------------------------------------------------------
+   Clients print these documents. A privacy notice or a terms of business is
+   read on paper more often than anything else on an adviser site, and it is
+   frequently the version that ends up in a file - so the printed output is a
+   real deliverable, not an afterthought.
+
+   What this fixes, in order of how often it bites:
+
+     1. LINK TARGETS VANISH ON PAPER. "See our privacy notice" is useless in
+        print. Every external href is expanded after the link text. Internal
+        anchors and mailto/tel links are NOT expanded, because "#section-4"
+        after every cross-reference is noise.
+     2. PAGE BREAKS LAND BADLY. A heading alone at the foot of a page, or a
+        table split across two, makes a document look careless. break-after
+        and break-inside fix both.
+     3. DARK BANDS EAT TONER. Anything with a dark ground is forced to white
+        with black text.
+     4. INTERACTIVE FURNITURE PRINTS. Contents rails, buttons, and the build
+        note are screen-only and are removed.
+     5. PLACEHOLDERS GO INVISIBLE. The .ph highlight is a background colour,
+        which many browsers drop in print by default - so an unreplaced
+        placeholder would print as ordinary text and ship unnoticed. It is
+        given a border and a marker instead, so it is impossible to miss.
+
+   Units are pt, not px: print CSS is typeset, and 11pt is a real measurement
+   in a way that 15px is not.
+   ========================================================================= */
+@media print{
+
+  /* A4 with a proper margin, and the document title in the running head */
+  @page{
+    size:A4;
+    margin:18mm 16mm 20mm;
+  }
+
+  body{
+    background:#fff;
+    color:#000;
+    font:11pt/1.5 Georgia,"Times New Roman",serif;
+  }
+
+  .doc{display:block;padding:0;max-width:none;gap:0}
+
+  /* screen-only furniture */
+  .toc,nav[aria-label="Contents"],
+  button,.demo-btns,.hint,.lbl{display:none!important}
+
+  /* headings: never leave one stranded at the foot of a page */
+  h1,h2,h3,h4{
+    color:#000;
+    break-after:avoid-page;
+    page-break-after:avoid;          /* older engines */
+  }
+  h1{font-size:20pt;margin:0 0 6pt}
+  h2{font-size:14pt;margin:16pt 0 5pt;break-before:auto}
+  h3{font-size:12pt;margin:12pt 0 4pt}
+
+  p,li{orphans:3;widows:3}           /* no single line marooned across a break */
+
+  /* keep a table, a definition and a callout whole where it will fit */
+  table,figure,.snip,.callout,dl{break-inside:avoid;page-break-inside:avoid}
+  tr,li{break-inside:avoid}
+  thead{display:table-header-group}  /* repeat the header on every page */
+
+  table{width:100%;border-collapse:collapse;font-size:9.5pt}
+  th,td{border:1px solid #999;padding:4pt 6pt;text-align:left}
+  th{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+
+  /* dark bands would use a cartridge of toner */
+  [class*="dark"],[class*="ground"],.band,.hero{
+    background:#fff!important;color:#000!important}
+
+  /* expand real destinations, skip the ones that are noise on paper */
+  a{color:#000;text-decoration:underline}
+  a[href^="http"]::after{
+    content:" (" attr(href) ")";
+    font-size:8.5pt;
+    word-break:break-all;
+    color:#444;
+  }
+  a[href^="#"]::after,
+  a[href^="mailto:"]::after,
+  a[href^="tel:"]::after{content:""}
+
+  /* a printed document needs to say what it is and when it was current */
+  .doc > footer{
+    border-top:1pt solid #000;
+    margin-top:12pt;padding-top:8pt;
+    font-size:9pt;color:#000;
+  }
+
+  img,svg{max-width:100%!important;break-inside:avoid}
+}

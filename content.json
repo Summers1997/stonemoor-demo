@@ -17,7 +17,9 @@
     "insurer": "the insurer named on the live site",
     "guarantee_scheme": "the scheme named on the live site",
     "policy_number": "Shown on the live site",
-    "street": "Brimsmore Yard"
+    "street": "Brimsmore Yard",
+    "email_privacy": "privacy@example.co.uk",
+    "ico_registration": "not registered - Stonemoor Groundworks is not a real business"
   },
   "pages": {
     "case-study.html": {},
