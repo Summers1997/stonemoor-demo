@@ -1389,7 +1389,12 @@ var ASSIST = {
     quoteLabel: 'Get a written quote'
   },
 
-  privacy: '#privacy',
+  // A REAL PAGE, not an in-page anchor. This was '#privacy', which
+  // scrolls to nothing on every site that inlines this component -
+  // and the assistant's own footer advertises it as the privacy
+  // notice, right under a line about what it does with a
+  // transcript. A dead link there is worse than no link. 12 Sep 2026.
+  privacy: 'privacy.html',
 
   /* MODE 3 ONLY. The URL of an endpoint THE CLIENT OWNS, which holds the API
      key server-side and talks to the model. Null means unwired, and the
