@@ -139,12 +139,19 @@
       "components": [],
       "library_commit": "862ec69a5c58d46d7539d386fa9feda442175183",
       "from_project_commit": "3338177"
+    },
+    {
+      "date": "2026-09-19",
+      "components": [],
+      "library_commit": "6828c8808e4dc3da8c3e2ca4b4d3ea712f29a9e2",
+      "from_project_commit": "8f20c81"
     }
   ],
   "assets": {
     "assets/site.css": "34f2469babcc3a96",
     "assets/site.js": "7ce889e4b20777bc",
     "assets/tokens.css": "4162ca2d3c1ebd10",
-    "trade.css": "944bc6a323453912"
+    "trade.css": "944bc6a323453912",
+    "assets/noscript.css": "012613698485135e"
   }
 }
