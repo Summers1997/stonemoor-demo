@@ -243,5 +243,106 @@
       }
     ],
     "result": "pass"
+  },
+  {
+    "date": "2026-09-19T21:48:44+00:00",
+    "tier": 0,
+    "library_commit": "862ec69",
+    "steps": [
+      {
+        "step": "content",
+        "tool": "apply_content.py",
+        "tool_sha": "de5db88914ac",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "csp",
+        "tool": "csp_hashes.py",
+        "tool_sha": "59fcf20e4019",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "targets",
+        "tool": "make_targets.py",
+        "tool_sha": "538be16c7628",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "origins",
+        "tool": "check_origins.py",
+        "tool_sha": "a4abf90b1203",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "check",
+        "tool": "check_project.py",
+        "tool_sha": "669adbbaed7a",
+        "exit": 1,
+        "result": "fail"
+      }
+    ],
+    "result": "fail"
+  },
+  {
+    "date": "2026-09-19T21:48:57+00:00",
+    "tier": 0,
+    "library_commit": "862ec69",
+    "steps": [
+      {
+        "step": "content",
+        "tool": "apply_content.py",
+        "tool_sha": "de5db88914ac",
+        "exit": 1,
+        "result": "fail"
+      }
+    ],
+    "result": "fail"
+  },
+  {
+    "date": "2026-09-19T21:49:08+00:00",
+    "tier": 0,
+    "library_commit": "862ec69",
+    "steps": [
+      {
+        "step": "content",
+        "tool": "apply_content.py",
+        "tool_sha": "de5db88914ac",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "csp",
+        "tool": "csp_hashes.py",
+        "tool_sha": "59fcf20e4019",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "targets",
+        "tool": "make_targets.py",
+        "tool_sha": "538be16c7628",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "origins",
+        "tool": "check_origins.py",
+        "tool_sha": "a4abf90b1203",
+        "exit": 0,
+        "result": "pass"
+      },
+      {
+        "step": "check",
+        "tool": "check_project.py",
+        "tool_sha": "669adbbaed7a",
+        "exit": 0,
+        "result": "pass"
+      }
+    ],
+    "result": "pass"
   }
 ]
