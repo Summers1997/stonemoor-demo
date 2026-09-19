@@ -22,11 +22,61 @@
     "ico_registration": "not registered - Stonemoor Groundworks is not a real business"
   },
   "pages": {
-    "case-study.html": {},
-    "contact.html": {},
-    "index.html": {},
-    "service.html": {},
-    "work.html": {}
+    "case-study.html": {
+      "h3.1": "On this site",
+      "h3.2": "Get hold of us",
+      "cta.1": "Ask for a quote",
+      "p.1": "Resin and block paving drives, and full garden builds, within about twenty miles of Yeovil.",
+      "p.2": "&copy; 2026 Stonemoor Groundworks. Waste carrier licence held; public liability insured. A demonstration site &mdash; not a trading business."
+    },
+    "contact.html": {
+      "h1.1": "Get hold of us",
+      "h2.1": "Straight through",
+      "h2.2": "Worth knowing before you ring"
+    },
+    "index.html": {
+      "h1.1": "<span class=\"line\"><span style=\"--d:0ms\">Drives and gardens</span></span>\n        <span class=\"line\"><span style=\"--d:90ms\">that stay right.</span></span>",
+      "lede.1": "Resin, block paving and full garden builds, within about twenty miles of Yeovil. Twenty-two years at it, no subcontractors, and a written quote with the materials named before anything is lifted.",
+      "h2.1": "Do we work where you are?",
+      "h2.2": "Drives we have finished near you",
+      "h2.3": "How a job runs, start to finish",
+      "h2.4": "Thinking about a new drive or garden?",
+      "h3.1": "We come and look",
+      "h3.2": "The quote comes in writing",
+      "h3.3": "We agree a start date",
+      "h3.4": "We clear up every evening",
+      "cta.2": "Ask for a free quote",
+      "cta.3": "See jobs we have finished",
+      "p.1": "Free, and no obligation. We come out and look before we price anything, and if we think the job is wrong for you we will say so.",
+      "p.2": "A written quote with the materials named, so you can hold it against anybody else's. Not a range, and not a figure said at the door.",
+      "p.3": "And we keep to it. Weather moves jobs sometimes; when it does you hear it from us before you hear it from anybody else.",
+      "p.4": "Waste goes away under our own carrier licence. The site is swept at the end of every day, not just at the end of the job."
+    },
+    "service.html": {
+      "h1.1": "What we lay, and what it costs",
+      "h2.1": "Resin bound gravel",
+      "h2.2": "Block paving on sand",
+      "h2.3": "Tarmac for long access",
+      "h2.4": "How long a drive takes",
+      "h2.5": "Jobs we turn down",
+      "h2.6": "Ask for a written quote",
+      "h3.1": "The short version",
+      "h3.2": "When we work",
+      "p.1": "Stone aggregate mixed with a clear resin and trowelled out over a solid base. Smooth, water goes through it, and it is the finish most people have in mind when they say they want a resin drive.",
+      "p.2": "<strong>It suits you if</strong> the base under your drive is still\n          sound, you have had enough of weeds and loose stone, and the\n          &pound;70&ndash;&pound;110 per square metre bracket is one you are happy with.",
+      "p.3": "<strong>It does not suit you if</strong> the base has broken up. Resin is\n          only as good as what sits under it, and laying it over a base that has\n          already gone is the commonest way this job is wasted. If yours needs\n          digging out we will tell you, and we will quote for that instead.",
+      "p.4": "Individual blocks laid on sand over a compacted sub-base. The most forgiving surface there is: if a service has to come up in five years, the blocks lift and go back and nobody can tell.",
+      "p.5": "Reckon on &pound;60&ndash;&pound;95 per square metre depending on the block. Allow for re-sanding the joints every few years &mdash; it is ten minutes with a brush, not a job.",
+      "p.6": "Cheapest per square metre and much the quickest to lay. Right for a long farm or field access, where getting a vehicle up it matters more than how it looks.",
+      "p.7": "A two-car drive is normally three to five working days: a day to dig out, a day for the sub-base, a day to lay, and a day either side for weather. The Sherborne drive took four.",
+      "p.8": "We will not lay a new surface over a base we do not trust, and we do not take on fencing or tree surgery &mdash; somebody who does it every week will do it better. If a job is really one for somebody closer to you, we will say that too."
+    },
+    "work.html": {
+      "h1.1": "Jobs we have finished round here",
+      "h2.1": "Can we come and see one?",
+      "h2.2": "Want something like this?",
+      "p.1": "<a class=\"arrow-link\" href=\"case-study.html\">Read one in full:\n        four days on a resin drive in Sherborne, over a base that had failed once</a>"
+    }
   },
   "_components_comment": "Client data inside components. null leaves the library's demo value in place and check_project.py keeps naming it. _tools/component-config.json says what each one means.",
   "components": {
