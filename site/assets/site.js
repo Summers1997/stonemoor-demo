@@ -88,6 +88,39 @@
     sweep();
   }
 
+  /* ---- 1b. in view, for devices with no pointer to hover with -------------
+     The cards answer a mouse in some detail - they lift, warm their border and
+     turn their icon. None of it has ever run on a phone, because all of it hangs
+     off :hover and a touchscreen has no hover to give. So the card nearest the
+     middle of the screen is marked, and site.css adds `.is-in-view` alongside
+     its existing :hover selectors. Scrolling becomes the pointer.
+
+     One observer rather than another scroll controller: this needs no position,
+     no easing and no per-frame work, only a band across the middle of the screen
+     and a class. rootMargin of -38% top and bottom is that band - roughly the
+     middle quarter, which on a phone is one card at a time.
+
+     Touch only. A mouse already has hover, and running both would mean cards
+     lighting up on their own while the pointer sits somewhere else. Reduced
+     motion stands it down entirely; the CSS leaves the cards at full strength
+     rather than permanently dimmed. */
+
+  var coarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+  if (coarse && !reduce && 'IntersectionObserver' in window) {
+    var inViewCards = document.querySelectorAll('a.card');
+
+    if (inViewCards.length) {
+      var inView = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          e.target.classList.toggle('is-in-view', e.isIntersecting);
+        });
+      }, { threshold: 0, rootMargin: '-38% 0px -38% 0px' });
+
+      Array.prototype.forEach.call(inViewCards, function (el) { inView.observe(el); });
+    }
+  }
+
   /* ---- 2. sticky header --------------------------------------------------- */
   var hdr = document.querySelector('.hdr');
   if (hdr) {

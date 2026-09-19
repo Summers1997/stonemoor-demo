@@ -333,7 +333,61 @@ body.menu-open .burger > i, body.menu-open .burger > span{background:var(--on-gr
 [data-reveal="left"]{transform:translateX(34px)}
 [data-reveal="right"]{transform:translateX(-34px)}
 [data-reveal="scale"]{transform:scale(.95)}
-[data-reveal].in{opacity:1;transform:none}
+[data-reveal].in{opacity:1;transform:none;will-change:auto}
+/* will-change:auto on arrival, not in a timeout. `will-change` is a standing
+   promise, not a hint for the length of a transition: left on, it keeps a
+   compositor layer alive for EVERY revealed element for as long as the page is
+   open. Measured before this line existed: 18 of 18 on insight.html, 27 on
+   index.html, all still holding a layer after everything had settled.
+   Declarative, so it cannot desynchronise the way a transitionend handler can
+   when a transition is interrupted. */
+
+
+/* ---------- 9b. press and in-view, for pointers that cannot hover ---------- *
+   Every interaction affordance above hangs off :hover, and a touchscreen has
+   none. Counted before this block existed: 15 :hover rules against 0 :active,
+   so a phone visitor got no acknowledgement of a tap on any card, button or
+   link, on any template - nothing at all until the next page arrived.
+
+   Scoped to coarse pointers so this is genuinely hover's opposite number rather
+   than a second effect layered on a mouse, which already has hover to answer it.
+
+   `scale`, never `transform`. `[data-reveal].in{transform:none}` above is
+   (0,2,0) and sits later in this file, so `.btn:active` - also (0,2,0) - would
+   lose the tie and the press would silently do nothing. No button carries
+   data-reveal today, which is the only reason that is a trap rather than a bug;
+   `scale` is its own property and composes instead of fighting. See
+   motion-failure-register entry 5. */
+
+@media (hover: none) and (pointer: coarse) {
+  .btn, a.card, .arrow-link, .nav a, .crumbs a, .ftr a {
+    transition: scale var(--dur-fast, .14s) var(--ease-out),
+                box-shadow var(--dur-fast, .14s) var(--ease-out),
+                opacity var(--dur-fast, .14s) var(--ease-out);
+  }
+
+  /* Small, because it is a confirmation rather than an animation and it has to
+     survive being seen on every single tap. */
+  .btn:active   { scale: .97; }
+  a.card:active { scale: .985; box-shadow: 0 4px 14px rgba(20,24,31,.06); }
+
+  /* A line of text that shrinks reads as a glitch rather than as a press, so
+     links dip instead of squeezing. */
+  .arrow-link:active, .nav a:active, .crumbs a:active, .ftr a:active,
+  .big-link a:active { opacity: .62; }
+
+  /* Scrolling becomes the pointer: site.js marks the card nearest the middle of
+     the screen, and these mirror the :hover states above rather than inventing
+     a second visual language. */
+  a.card.is-in-view          { transform: translateY(-5px); border-color: var(--line-2); }
+  a.card.is-in-view::before  { transform: scaleX(1); }
+  a.card.is-in-view .ico     { transform: scale(1.06) rotate(-4deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active, a.card:active { scale: none; }
+  a.card.is-in-view, a.card.is-in-view .ico { transform: none; }
+}
 
 /* ---------- 10. utilities --------------------------------------------------- */
 .center{text-align:center;margin-inline:auto}
