@@ -8,7 +8,7 @@
 schema_version: 1
 site_id: stonemoor-groundworks-www
 client_id: stonemoor-groundworks
-repository: (local only - not pushed yet)
+repository: https://github.com/Summers1997/stonemoor-demo
 
 framework: null
 # npm | pnpm | yarn | bun | none
@@ -18,7 +18,7 @@ cdn_provider: null
 
 environments:
   staging_url: null
-  production_url: null
+  production_url: https://stonemoor-demo.pages.dev
 
 # Routes the runtime suite must exercise. Discovery adds more; it never removes these.
 routes:
