@@ -1,2 +1,12 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.woff binary
+*.woff2 binary
+*.mp4 binary
 FRICTION-LOG.md merge=union
 verify/check-all.html -diff
