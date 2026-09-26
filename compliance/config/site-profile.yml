@@ -11,6 +11,9 @@ client_id: stonemoor-groundworks
 repository: https://github.com/Summers1997/stonemoor-demo
 
 framework: null
+# Cloudflare Pages publishes this directory; keeping discovery inside it prevents
+# working/project folders from being mistaken for public routes.
+web_root: site
 # npm | pnpm | yarn | bun | none
 package_manager: none
 hosting_provider: cloudflare-pages
