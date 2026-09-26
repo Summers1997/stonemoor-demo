@@ -2,6 +2,7 @@
 /* DEMOS is the client's PAGES here, not component demos: the console,
    CDN-failure, mobile and keyboard checks walk this list. */
 window.DEMOS = [
+"../site/404.html",
 "../site/case-study.html",
 "../site/contact.html",
 "../site/index.html",
@@ -11,6 +12,13 @@ window.DEMOS = [
 ];
 
 window.REVEAL_TARGETS = [
+ {
+  "id": "page:404",
+  "p": "../site/404.html",
+  "sel": "[data-reveal]",
+  "cls": "in",
+  "mode": "all"
+ },
  {
   "id": "page:case-study",
   "p": "../site/case-study.html",
